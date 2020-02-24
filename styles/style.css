@@ -30,6 +30,8 @@ li{
 }
 a{
     text-decoration: none;
+    color: rgba(68,117,255,1);
+
 }
 div#contenido{
     background-color: white;
@@ -60,6 +62,7 @@ div#contenido>ul>li{
     text-align: center;
     font-family: 'Barlow Semi Condensed';
     font-size: 2em;
+    
 }
 .texto{
     font-family: 'Sanchez';
@@ -71,4 +74,10 @@ div#contenido>ul>li{
 .img_centrada{
     text-align: center;
     padding: 15px 0px;
+}
+
+a.volver{
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: rgba(68,117,255,1);
 }
