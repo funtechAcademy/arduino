@@ -81,3 +81,23 @@ a.volver{
     font-size: 1.5em;
     color: rgba(68,117,255,1);
 }
+.advertencia{
+    color: tomato;
+    background-color: wheat;
+    margin: 25px;
+    padding: 20px;
+    border-radius: 10px;
+
+}
+.codigo{
+    font-family: 'Sanchez';
+    color: teal;
+    display: inline-block;
+    background-color: rgb(195, 243, 241);
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    width: fit-content;
+    margin-left: 50px;
+}
