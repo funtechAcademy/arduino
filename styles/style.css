@@ -101,3 +101,11 @@ a.volver{
     width: fit-content;
     margin-left: 50px;
 }
+div#contenido>h3{
+    margin: 0px;
+    padding: 30px;
+    margin-left: 15px;
+    font-size: 2em;
+    font-family: 'Barlow Semi Condensed';
+    color: rgba(68,117,255,1);
+}
