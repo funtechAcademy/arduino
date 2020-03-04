@@ -174,5 +174,16 @@ div#contenido>h3{
     visibility: hidden;
     transition: opacity 1s, visibility 0s 1s;
 }
-  
+
+.spining{
+    animation: rotation 1s infinite linear;
+}
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
   
