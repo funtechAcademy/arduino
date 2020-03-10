@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="styles/style.css">
     <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
-    <script src="js/scripts.js"></script> 
+    <script src="js/scripts.js"></script>
+    <script src="js/login.js"></script>
     <title>Indice</title>
 </head>
 <body>
@@ -19,9 +20,27 @@
         <h2>Índice de contenidos</h2>
 
         <!-- INICIO_LOADER -->
-        <div id="pageloader">
-                <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+        <div id="loginloader">
+                <!-- <img src="img/LogoOjo_FTA.png" class="spining" width="100px"> -->
+                <div class="caja_login">
+                    <table>
+                    <tr >
+                        <td class="td_login"><label for="usuario">Usuario</label></td>
+                        <td class="td_login"><input type="text" name="usuario" id="user" size="20"></td>
+                    </tr>
+                    <tr>
+                        <td class="td_login"><label for="password">Password</label></td>
+                        <td class="td_login"><input type="password" id="pass" size="20"></td>
+                    </tr>
+                </table>
+                <br>
+                <div class="botones">
+                    <button class="boton" id="login" >Login</button>
+                    <button class="boton" id="salir">Salir&nbsp;</button>
+                </div>
         </div>
+                </div>
+                
         <!-- FIN_LOADER -->
         
         <ul>
@@ -34,12 +53,12 @@
             <li><a href="leccion6.html">Lección: 6</a></li>
             <li><a href="leccion7.html">Lección: 7</a></li>
             <li><a href="leccion8.html">Lección: 8</a></li>
-            <li><a href="">Lección: 9</a></li>
-            <li><a href="">Lección: 10</a></li>
-            <li><a href="">Lección: 11</a></li>
+            <li><a href="leccion9.html">Lección: 9</a></li>
+            <li><a href="leccion10.html">Lección: 10</a></li>
+            <li><a href="leccion11.html">Lección: 11</a></li>
             <li><a href="">Lección: 12</a></li>
             <li><a href="">Lección: 13</a></li>
-            <li><a href="javascript:delay('leccion2.html')"</a></li>
+            <li><a href="">Lección: 14</a></li>
         </ul>
     </div>
 </body>

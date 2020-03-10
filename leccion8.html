@@ -7,17 +7,74 @@
     <link rel="stylesheet" href="styles/style.css">
     <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
     <script src="js/scripts.js"></script>
-    <title>Document</title>
+    <title>Lección 8 : Servomotores</title>
 </head>
 <body>
-    <div id="pageloader">
-        <div class="spinner">
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
-          </div>
+    <div id="cabecera">
+        <h1>Servomotor</h1>
     </div>
-    <p>Regular page contents underneath transition DIV- hidden by default.</p>
+    <!-- INICIO_LOADER -->
+    <div id="pageloader">
+        <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+    </div>
+    <!-- FIN_LOADER -->
+    <div id="contenido">
+        <h2>Objetivos</h2>
+        <p class="texto">
+            En esta Lección aprenderemos a utilizar y configurar un servomotor utilizando la placa de arduino, 
+            ademas veremos algunas diferentes utilidades que se le pueden dar a estos componentes electrónicos.
+        </p>
+        <h2>Materiales</h2>
+        <p class="texto">
+            (1) x Elegoo Uno R3 <br>
+            (1) x Servomotor (SG90)<br>
+            (3) x M M cables (cables macho a macho)
+        </p>
+        <h2>Introducción al componente</h2>
+        <p class="texto">
+            El servo es un tipo de motor eléctrico que sólo puede girar 180 grados, se controla
+            mediante el envío de impulsos eléctricos de la placa de arduino. Estos pulsos le dicen
+            al servo en que dirección debe moverse.
+            <br><br>
+            El Servomotor tiene tres cables, el marrón
+            es el cable a tierra y debe conectarse al puerto GND de la placa, el rojo es el cable de
+            corriente y debe conectarse al puerto de 5v y el naranja es el alambre de señal y
+            debe conectarse al puerto 9.
+            <br><br>
+            Algunas de las características de este servomotor SG90 son:<br><br>
+
+            - Cable Universal para conectores JR y FP<br>
+            - Longitud del cable: 25cm<br>
+            - Velocidad: 0,12 seg/60 grados (4.8V), 0.10 sec/60 grados (6.0V) (sin carga)<br>
+            - Puesto de par (4.8V): 1,6 kg/cm<br>
+            - Temperatura: -30 ~ 60' C<br>
+            - Voltaje de funcionamiento: 3.5 ~ 6V<br>
+            - Dimensión: 1.26 en x 1,18 en x 0,47 en (3,2 x 3 cm x 1.2 cm)<br>
+            - Peso: 4,73 onzas (134)
+        </p>
+        <p class="img_centrada"><img src="img/lec8/1.png" width="40%" alt=""></p>
+        <h2>Esquema eléctrico</h2>
+        <p class="img_centrada"><img src="img/lec8/2.png" width="60%" alt=""></p>
+        <h2>Diagrama ilustrativo</h2>
+        <p class="img_centrada"><img src="img/lec8/3.png" width="60%" alt=""></p>
+        <h2>Código</h2>
+        <p class="texto">
+            Una vez efectuado todo el cableado, descargaremos el <b>script</b> del siguiente este 
+            <a class="link_s" href="/scripts_arduino/8.ino">link</a> y lo cargaremos como hemos aprendido.
+            <br><br>
+            Antes de ejecutar este script, asegurate de se que ha instalado la biblioteca <b>servo</b>, de 
+            lo contrario, el código no funcionará. Puedes descargarlo desde este <a href="/scripts_arduino/Servo.zip" class="link_s">link</a>
+        </p>
+        <h2>Imagen de ejemplo</h2>
+        <p class="texto">
+            En la foto, el cable marrón del servo se adapta a través del cable negro, el rojo se adapta 
+            a través del cable rojo y el naranja se
+            adapta a través del cable amarillo.
+        </p>
+        <p class="img_centrada"><img src="img/lec8/4.png" width="60%" alt=""></p>
+        <a class="texto volver" href="index.html">Volver al índice</a>
+    </div>   
 </body>
 </html>
