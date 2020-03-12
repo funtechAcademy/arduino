@@ -274,6 +274,8 @@ border: 0px solid #000000;
 }
 .caja_login{
   padding: 45px;
+  /* background-image: url("../img/logoLogin.png"); */
+  background-size: 100%;
 
   border-radius: 15px 15px 15px 15px;
   -moz-border-radius: 15px 15px 15px 15px;

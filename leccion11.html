@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,8 +23,96 @@
     <div id="contenido">
         <h2>Objetivos</h2>
         <p class="texto">
-            
+            En esta lección, usted aprenderá cómo conectar y usar una pantalla LCD
+            alfanumérica. La pantalla tiene una retro iluminación LED.<br><br>
+            Puede ver los rectángulos para cada carácter en la pantalla
+            y los píxeles que componen cada carácter, la pantalla es blanca y azul, además está
+            diseñada para mostrar texto.<br><br>
+            En esta lección, se ejecutará el programa de ejemplo de Arduino para la biblioteca
+            de la LCD, pero en la siguiente lección, podremos mostrar en nuestra pantalla la temperatura mediante sensores.
         </p>
+        <h2>Materiales</h2>
+        <p class="texto">
+            (1) x Elegoo Uno R3<br>
+            (1) x Módulo LCD1602<br>
+            (1) x Potenciómetro (10k)<br>
+            (1) x Protoboard<br>
+            (16) x M-M cables (cables de macho a macho)<br>
+        </p>
+        <h2>Introducción al componente</h2>
+        <h3>Módulo LCD1602</h3>
+        <p class="texto">
+            LCD1602, o pantalla de cristal líquido de tipo 1602, es un tipo de módulo de matriz 
+            de puntos para mostrar letras, números y caracteres, etc. Se compone de posiciones 
+            de matriz de puntos de 5x7 o 5x11; cada posición puede mostrar un caracter.<br><br>
+
+            Hay un punto entre dos caracteres y un espacio entre líneas, separando así los caracteres 
+            y las líneas. El nombre de modelo 1602, significa que muestra 2 líneas de 16 caracteres.
+            En general, LCD1602 tiene puertos paralelos, es decir, controlaría varios pines al mismo tiempo. 
+            LCD1602 se puede clasificar en conexiones de ocho puertos y cuatro puertos.
+        </p>
+        <p class="img_centrada"><img src="img/lec11/1.png" width="50%"></p>
+        <h2>Esquema eléctrico</h2>
+        <p class="img_centrada"><img src="img/lec11/2.png" width="70%"></p>
+        <h2>Diagrama ilustrativo</h2>
+        <p class="img_centrada"><img src="img/lec11/3.png" width="60%"></p>
+        <p class="advertencia texto">
+            No lo olvides, el cable largo amarillo que conecta del potenciómetro
+            a la clavija 3 de la pantalla. El potenciómetro se utiliza para controlar el contraste de la pantalla.
+        </p>
+        <h2>Código</h2>
+        <p class="texto">
+            Antes de cargar el script, asegúrate de que esta instalada la biblioteca <b>LiquidCrystal</b>. El 
+            archivo puedes descargarlo desde <a href="/scripts_arduino/LiquidCrystal.zip" class="link_s">aquí</a><br><br>
+            Una vez efectuado todo el cableado, descargaremos el <b>script</b> del siguiente este 
+            <a class="link_s" href="/scripts_arduino/11.ino">link</a> y lo cargaremos como hemos aprendido.
+        </p>
+        <p class="texto">
+            Al subir el código a la placa Arduino, veremos que la pantalla muestra el mensaje <b>Hola, mundo</b>
+            , seguido de un número que cuenta de cero. Evaluemos el script:
+        </p>
+        <p class="codigo texto" style="margin-bottom: 28px;">
+            #include < LiquidCrystal.h >
+        </p>
+        <p class="texto">
+            Esto dice Arduino que queremos utilizar la biblioteca de <b>LiquidCrystal</b>.
+            A continuación tenemos la línea que teníamos que modificar. Esto define qué pines
+            de Arduino son para conectarse a que pines de la pantalla.
+        </p>
+        <p class="codigo texto" style="margin-bottom: 28px;">
+            LiquidCrystal lcd (7, 8, 9, 10, 11, 12);
+        </p>
+        <p class="texto">
+            Después de subir este código, asegúrese de que se enciende la retroiluminación y
+            ajustar el potenciómetro de toda la manera alrededor hasta que aparezca el mensaje
+            de texto
+            En la función de <b>configuración</b>, tenemos dos comandos:
+        </p>
+        <p class="codigo texto" style="margin-bottom: 28px;">
+            LCD.Begin (16, 2);<br>
+            LCD.Print ("Hola, mundo!");
+        </p>
+        <p class="texto">
+            La primera línea se indican cuántas columnas y filas tiene la
+            pantalla. La segunda línea muestra el mensaje que vemos en la primera línea de la 
+            pantalla.<br><br>
+
+            En la función de 'loop', aso tienen dos comandos:
+        </p>
+        <p class="codigo texto" style="margin-bottom: 28px;">
+            LCD.setCursor (0, 1);<br>
+            LCD.Print(Millis()/1000);
+        </p>
+        <p class="texto">
+            La primera línea establece la posición del cursor (donde aparecerá el siguiente texto)
+            columna 0 y fila 1. Los números de columna y fila comienzan en 0 en lugar de 1.<br><br>
+            
+            La segunda línea muestra el número de milisegundos desde que se restableció el
+            Arduino.
+        </p>
+        <h2>Imagen de ejemplo</h2>
+        <p class="img_centrada"><img src="img/lec11/4.png" width="60%" alt=""></p>
+        <a class="texto volver" href="index.html">Volver al índice</a>
     </div>
 </body>
 </html>
