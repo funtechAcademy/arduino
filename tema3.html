@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 3: LED RGB</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>LED RGB</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         Los LED RGB son una forma divertida y fácil para agregar color a nuestros proyectos. Puesto que es como
+         regular 3 LED en uno, además el uso y conexión no es muy diferente a lo visto anteriormente.
+         Vienen en 2 versiones: ánodo común o cátodo común.
+         <br><br>
+         Ánodo común utiliza 5V en el pin común, mientras que el cátodo común se conecta a tierra.
+         <br><br>
+         Como con cualquier LED, tenemos que conectar algunas resistencias en línea (3 total) así podremos limitar
+         la corriente absorbida.
+         <br><br>
+         En nuestro script, se comenzará con el LED en el estado de color rojo, después se pasará a color verde,
+         luego se pasa a color azul y finalmente se vuelve a poner en color rojo.
+      </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Protoboard<br>
+         &emsp;&emsp;(4) x M M cables (cables de puente de macho a macho)<br>
+         &emsp;&emsp;(1) x LED RGB<br>
+         &emsp;&emsp;(3) x Resistencias de 220 ohmios
+      </p>
+      <h2>Introducción a los componentes</h2>
+      <h3>Diodo LED RGB</h3>
+      <p class="texto">
+         A primera vista los LEDs RGB (rojo, verde y azul) parecen LEDs comunes, sin embargo, dentro hay realmente
+         tres LEDs, uno rojo, uno verde y uno azul.
+         <br><br>
+         Controlando el brillo de cada uno de los LEDs indivi  duales, podemos mezclar prácticamente cualquier color
+         que deseemos. Mezclamos colores del mismo modo que lo haríamos al mezclar pintura en una paleta, en este caso
+         ajustando el brillo de cada uno de los tres LEDs.
+         <br><br>
+         La manera difícil para hacer esto sería usar diferentes resistencias (o resistencias variables) como hicimos
+         con el LED en el tema 2, pero esto es un mucho trabajo. Afortunadamente para nosotros, arduino tiene una función
+         <b>analogWrite</b> que se pueden utilizar en los pines marcados con un <b>~</b>, en lo que podemos regular la
+         cantidad de energía apropiada para los LED.
+         <br><br>
+         El LED RGB tiene cuatro patillas conectoras, hay una patilla a la conexión positiva de cada uno de los LEDs
+         individuales y un patilla única que está conectada a los tres lados negativos de los LEDs.
+      </p>
+      <p class="img_centrada"><img src="img/tema3/3-1.png" width="50%" alt=""></p>
+      <p class="texto">
+         Su esquema eléctrico es este:</p>
+      <p class="img_centrada"><img src="img/tema3/3-2.png" width="50%" alt=""></p>
+      <p class="texto">
+         En las fotografías podemos ver 4 diodos LED, cada una de las patillas con colores verde, azul o rojo se llaman
+         ánodos y siempre se conectarán al polo positivo <strong>«+»</strong>. El cátodo va al polo negativo
+         <strong>«-»</strong> (tierra), si se conecta de una forma diferente el LED no se encenderá.
+         <br><br>
+         La conexión negativa del diodo LED es la patilla más larga de las cuatro patas y se conectará a la tierra.
+         Cada LED dentro del diodo, requiere su propia resistencia de 220&#8486; para prevenir demasiada corriente que
+         fluya a través de él. Los tres conductores del positivo de los LEDs (uno rojo, uno verde y uno azul) están
+         conectados a los pines de salida.
+      </p>
+      <h3>Formando colores</h3>
+      <p class="texto">
+         La razón por la que podemos mezclar cualquier color, es por que el ojo y el cerebro procesan las cantidades de
+         rojo, verde y azul, para luego convertirlas en un espectro de color.
+         <br><br>
+         En cierto modo, mediante el uso de los tres LEDs, estamos jugando un truco en el ojo. Esta misma idea se utiliza
+         en televisores, donde la pantalla LCD tiene puntos de color rojo, verde y azul que componen cada píxel.
+      </p>
+      <p class="img_centrada"><img src="img/tema3/3-3.png" width="50%" alt=""></p>
+      <p class="texto">
+         Si establece el brillo de los tres LEDs al mismo tiempo, el color generado de la luz será blanco. Si apagamos el
+         LED azul y dejamos sólo los LEDs rojo y verde con mismo brillo, la luz generada será amarilla. Y ai con el resto de
+         combinaciones.
+      </p>
+      <h3>Teoría PWM</h3>
+      <p class="texto">
+         Modulación de ancho de pulso (Pulse Width Modulation) es una técnica para el control de potencia, que utilizaremos
+         para controlar el brillo de cada uno de los LEDs. El siguiente diagrama muestra la señal de los PWM pins en la placa
+         de Arduino.
+      </p>
+      <p class="img_centrada"><img src="img/tema3/3-4.png" width="50%" alt=""></p>
+      <p class="texto">
+         Aproximadamente cada 1/500 de segundo, la salida PWM producirá un pulso (mostrado en la gráfica como un rectángulo).
+         La duración de este pulso es controlada por la función <strong>analogWrite</strong>. Así <strong>analogWrite(0)</strong>
+         no producirá ningún pulso y <strong>analogWrite(255)</strong> producirá un pulso continuo que dura toda la gráfica.
+         <br><br>
+         Si especificamos un valor en el <strong>analogWrite</strong> que está en algún lugar entre 0 y 255, se producirá
+         lo que conocemos como un tren de pulsos.
+      </p>
+      <h2>Conexión</h2>
+      <h3>Esquema eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema3/3-5.png" width="60%" alt=""></p>
+      <h3>Diagrama ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema3/3-6.png" width="60%" alt=""></p>
+      <h3>Código</h3>
+      <p class="texto">
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="/scripts_arduino/tema3.ino">link</a> y lo cargaremos como hemos aprendido.
+      </p>
+      <p class="img_centrada"><img src="img/tema3/3-7.png" width="70%" alt=""></p>
+      <h3>Entendiendo el código</h3>
+      <p class="texto">
+         En las primeras líneas del script especificamos qué <strong>pins</strong> van a corresponder a cada color.
+      </p>
+      <p class="codigo">
+         // Define Pins<br>
+         #define BLUE 3<br>
+         #define GREEN 5<br>
+         #define RED 6
+      </p>
+      <p class="texto">
+         El siguiente paso es la función <strong> void setup( )</strong>. Como aprendimos en lecciones anteriores,
+         la función <strong>setup</strong> solo se ejecutará una vez que el arduino se haya reseteado. Ahora se define
+         el uso de cada pin.
+      </p>
+      <p class="codigo">
+         void setup()<br>
+         {<br>
+             &emsp;&emsp;pinMode(RED, OUTPUT);<br>
+             &emsp;&emsp;pinMode(GREEN, OUTPUT);<br>
+             &emsp;&emsp;pinMode(BLUE, OUTPUT);<br>
+             &emsp;&emsp;digitalWrite(RED, HIGH);<br>
+             &emsp;&emsp;digitalWrite(GREEN, LOW);<br>
+             &emsp;&emsp;digitalWrite(BLUE, LOW);<br>
+         }
+      </p>
+      <p class="texto">
+         Por último se define la función <strong>loop( )</strong>
+      </p>
+      <p class="codigo">
+         redValue = 255; // choose a value between 1 and 255 to change the color.<br>
+         greenValue = 0;<br>
+         blueValue = 0;
+      </p>
+      <p class="texto">
+         Esta función tiene tres argumentos, uno para el brillo del LED rojo, otro para el verde y otro para el azul.
+         En cada caso, el número que pongamos estará en el rango 0 a 255, donde 0 significa apagado y 255 significa
+         brillo máximo.
+         <br><br>
+         La función <strong>analogWrite</strong> entonces, se usa para ajustar el brillo de cada LED. Si nos fijamos
+         en la función 'loop' se puede ver que se ajusta el valor para luz roja, verde y azul. También podemos ver
+         cómo se hace una pausa antes de saltar al siguiente color.
+      </p>
+      <p class="codigo">
+         #define delayTime 10 // fading time between colors<br>
+         Delay(delayTime);
+      </p>
+      <h2>Imagen de ejemplo</h2>
+      <p class="texto">
+         Deberíamos tener algo como esto, si no es así revisa los pasos anteriores.
+      </p>
+      <p class="img_centrada"><img src="img/tema3/3-8.png" width="70%" alt=""></p>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

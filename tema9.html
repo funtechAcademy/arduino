@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 9: Sensor Ultrasónico</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Sensor Ultrasónico</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         El sensor ultrasónico es un componente ideal para todo tipo de proyectos que necesitan medidas de distancia,
+         por ejemplo un robot que evita obstáculos.
+         <br><br>
+         En este tema aprenderemos a usar el módulo ultrasónico HC-SR04. Es barato y fácil de usar ya que vamos a
+         usar una biblioteca diseñada específicamente para estos sensores.
+      </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Módulo de sensor ultrasónico HC-SR04<br>
+         &emsp;&emsp;(4) x F M cables (cables de hembra a macho)
+      </p>
+      <h2>Introducción a los componentes</h2>
+      <h3>Sensor ultrasónico</h3>
+      <p class="texto">
+         El módulo HC-SR04 sensor ultrasónico proporciona una medición sin contacto de una distancia comprendida entre
+         2 y 400 cm. La precisión varía entorno a los  3 mm. Los módulos incluyen transmisores ultrasónicos, receptor
+         y circuito de control.<br><br>
+         El principio básico del trabajo que haremos es:<br><br>
+         &emsp;&emsp;1. Utilizando el disparador de ultrasonidos para lanzar una señal de nivel alto de al menos 10us.<br>
+         &emsp;&emsp;2. El Módulo envía una señal de 40 kHz y detecta si hay una señal que devuelve un pulso hacia atrás.<br>
+         &emsp;&emsp;3. Se calcula el tiempo que tarda en volver la señal para así poder calcular la distancia.
+      </p>
+      <p class="img_centrada"><img src="img/tema9/9-1.png" width="40%" alt=""></p>
+      <h2>Esquema eléctrico</h2>
+      <p class="img_centrada"><img src="img/tema9/9-2.png" width="60%" alt=""></p>
+      <h2>Diagrama ilustrativo</h2>
+      <p class="img_centrada"><img src="img/tema9/9-3.png" width="70%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Haremos uso de una biblioteca diseñada para estos sensores que hará nuestro código corto y sencillo.
+         Incluimos la biblioteca al principio de nuestro código, y luego mediante simples comandos podemos controlar
+         el comportamiento del sensor. El archivo lo descargaremos de
+         <a href="/scripts_arduino/librerias/tema9.zip" class="link_s">aquí</a>
+      </p>
+      <p class="texto">
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="/scripts_arduino/tema9.ino">enlace</a> y lo cargaremos como hemos aprendido.
+      </p>
+      <h2>Imagen de ejemplo</h2>
+      <p class="img_centrada"><img src="img/tema9/9-4.png" width="70%" alt=""></p>
+      <p class="texto">
+         Vamos ahora a abrir al monitor, para ver los datos que se van recogiendo. Para ello hacemos click en el botón
+         de <strong>Serial Monitor</strong> para encender el monitor serie.<br><br> Deberíamos tener algo como la
+         siguiente imagen.
+      </p>
+      <p class="img_centrada"><img src="img/tema9/9-5.png" width="50%" alt=""></p>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

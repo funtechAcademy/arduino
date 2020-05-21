@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 6: Zumbador pasivo</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Zumbador pasivo</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         En este tema, aprenderemos a cómo utilizar una señal acústica pasiva. El propósito del experimento es generar
+         ocho sonidos con una duración de 0,5 segundos cada uno: Do alto (523 Hz), Re (587 Hz), Mi (659 Hz),
+         Fa (698 Hz), Sol (784 Hz), La (880 Hz), Si (988 Hz) y hacer agudos (1047 Hz).
+      </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino <br>
+         &emsp;&emsp;(1) x Zumbador pasivo <br>
+         &emsp;&emsp;(2) x F M cables (cables de hembra a macho)
+      </p>
+      <h2>Introducción a los componentes</h2>
+      <h3>Zumbador pasivo</h3>
+      <p class="texto">
+         El principio de funcionamiento del zumbador pasivo se basa en utilizar la modulación por ancho de pulso (PWM)
+         para generar audio. Debido al cambio en la frecuencia de vibración, se pueden generar diferentes sonidos.
+         <br><br>
+         Por ejemplo, enviando un pulso de 523Hz, se puede generar un sonido alto y con un pulso de 587Hz, puede generar
+         un sonido de rango medio. Debemos tener cuidado de no utilizar la función <strong>analogWrite( )</strong> con la placa de
+         Arduino para generar un pulso de sonido, ya que la salida de pulso de analógico (de escritura) se fija a (500 Hz).
+      </p>
+      <p class="img_centrada"><img src="img/tema6/6-1.png" width="30%" alt=""></p>
+      <h2>Esquema eléctrico</h2>
+      <p class="img_centrada"><img src="img/tema6/6-2.png" width="70%" alt=""></p>
+      <h3>Diagrama ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema6/6-3.png" width="60%" alt=""></p>
+      <p class="texto">
+         El cableado del zumbador conectado a la placa Arduino será: rojo (positivo) al pin 8 y el cable negro (negativo) a la tierra.
+      </p>
+      <h2>Código</h2>
+      <p class="texto">
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="/scripts_arduino/tema6.ino">link</a> y lo cargaremos como hemos aprendido.
+         <br><br>
+         Necesitaremos una librería de C++ que descargaremos en este otro
+         <a class="link_s" href="/scripts_arduino/librerias/tema6.h">link</a>
+      </p>
+      <h2>Imagen de ejemplo</h2>
+      <p class="texto">
+         Si tenemos todo el cableado bien, deberíamos tener algo como en la imagen, de no ser asi debemos revisar los
+         apartados anteriores.
+      </p>
+      <p class="img_centrada"><img src="img/tema6/6-4.png" width="70%" alt=""></p>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>
