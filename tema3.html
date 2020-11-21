@@ -114,16 +114,15 @@
          Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
          <a class="link_s" href="scripts_arduino/tema3.ino">link</a> y lo cargaremos como hemos aprendido.
       </p>
-      <p class="img_centrada"><img src="img/tema3/3-7.png" width="70%" alt=""></p>
       <h3>Entendiendo el código</h3>
       <p class="texto">
          En las primeras líneas del script especificamos qué <strong>pins</strong> van a corresponder a cada color.
       </p>
       <p class="codigo">
-         // Define Pins<br>
-         #define BLUE 3<br>
-         #define GREEN 5<br>
-         #define RED 6
+         // Definimos los pins<br>
+         #define PinRojo 6<br>
+         #define PinAzul 5<br>
+         #define PinVerde 3
       </p>
       <p class="texto">
          El siguiente paso es la función <strong> void setup( )</strong>. Como aprendimos en lecciones anteriores,
@@ -133,21 +132,21 @@
       <p class="codigo">
          void setup()<br>
          {<br>
-             &emsp;&emsp;pinMode(RED, OUTPUT);<br>
-             &emsp;&emsp;pinMode(GREEN, OUTPUT);<br>
-             &emsp;&emsp;pinMode(BLUE, OUTPUT);<br>
-             &emsp;&emsp;digitalWrite(RED, HIGH);<br>
-             &emsp;&emsp;digitalWrite(GREEN, LOW);<br>
-             &emsp;&emsp;digitalWrite(BLUE, LOW);<br>
+            &emsp;&emsp;pinMode(led_rojo, OUTPUT);<br>
+            &emsp;&emsp;pinMode(led_verde, OUTPUT);<br>
+            &emsp;&emsp;pinMode(led_azul, OUTPUT);<br>
+            &emsp;&emsp;digitalWrite(led_rojo, HIGH);<br>
+            &emsp;&emsp;digitalWrite(led_verde, LOW);<br>
+            &emsp;&emsp;digitalWrite(led_azul, LOW);<br>
          }
       </p>
       <p class="texto">
          Por último se define la función <strong>loop( )</strong>
       </p>
       <p class="codigo">
-         redValue = 255; // elegir un valor entre 1 and 255 para cambiar el color.<br>
-         greenValue = 0;<br>
-         blueValue = 0;
+         ValorRojo = 255; // Elegimos un valor entre 1 y 255<br>
+         ValorVerde = 0;<br>
+         ValorAzul = 0;
       </p>
       <p class="texto">
          Esta función tiene tres argumentos, uno para el brillo del LED rojo, otro para el verde y otro para el azul.
@@ -159,14 +158,26 @@
          cómo se hace una pausa antes de saltar al siguiente color.
       </p>
       <p class="codigo">
-         #define delayTime 10 // tiempo de desvanecimiento entre colores<br>
-         Delay(delayTime);
+         #define TiempoEspera 10 // Tiempo de desvanecimiento entre colores<br>
+         delay(TiempoEspera);
       </p>
       <h2>Imagen de ejemplo</h2>
       <p class="texto">
          Deberíamos tener algo como esto, si no es así revisa los pasos anteriores.
       </p>
       <p class="img_centrada"><img src="img/tema3/3-8.png" width="70%" alt=""></p>
+
+      <h2>Retos</h2>
+      <p class="texto">
+         - En el ejemplo, llevamos el LED desde el color rojo al color azul. 
+         <br><br>
+         Ahora, además de llevar el LED desde el color rojo al azul, tenemos que pasar también por los colores que llevan del 
+         azul al verde y del verde otra vez al rojo.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="https://funtechacademy.github.io/arduino/pdf/3-1.pdf">Ejemplo de Solución</a>
+      </p>
+      <br><br>
       <a class="texto volver" href="index.html">Volver al índice</a>
    </div>
    <div id="pie">

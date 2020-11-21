@@ -1,83 +1,38 @@
-//www.elegoo.com
-//2016.12.8
-
-// Define Pins
-#define BLUE 3
-#define GREEN 5
-#define RED 6
+// Definimos los pins
+#define PinRojo 6    // Red
+#define PinVerde 5   // Green
+#define PinAzul 3    // Blue
 
 void setup()
 {
-pinMode(RED, OUTPUT);
-pinMode(GREEN, OUTPUT);
-pinMode(BLUE, OUTPUT);
-digitalWrite(RED, HIGH);
-digitalWrite(GREEN, LOW);
-digitalWrite(BLUE, LOW);
+   pinMode(PinRojo, OUTPUT);
+   pinMode(PinVerde, OUTPUT);
+   pinMode(PinAzul, OUTPUT);
+   digitalWrite(PinRojo, HIGH);
+   digitalWrite(PinVerde, LOW);
+   digitalWrite(PinAzul, LOW);
 }
 
-// define variables
-int redValue;
-int greenValue;
-int blueValue;
+// Se definen las variables
+int ValorRojo;
+int ValorVerde;
+int ValorAzul;
+int TiempoEspera = 10;
 
-// main loop
+#define TiempoEspera 10 // Tiempo de desvanecimiento entre colores
+
 void loop()
 {
-#define delayTime 10 // fading time between colors
+   ValorRojo = 255; // Elegimos un valor entre 1 y 255
+   ValorVerde = 0;
+   ValorAzul = 0;
 
-redValue = 255; // choose a value between 1 and 255 to change the color.
-greenValue = 0;
-blueValue = 0;
-
-// this is unnecessary as we've either turned on RED in SETUP
-// or in the previous loop ... regardless, this turns RED off
-// analogWrite(RED, 0);
-// delay(1000);
-
-for(int i = 0; i < 255; i += 1) // fades out red bring green full when i=255
-{
-redValue -= 1;
-greenValue += 1;
-// The following was reversed, counting in the wrong directions
-// analogWrite(RED, 255 - redValue);
-// analogWrite(GREEN, 255 - greenValue);
-analogWrite(RED, redValue);
-analogWrite(GREEN, greenValue);
-delay(delayTime);
+   for(int i = 0; i < 255; i += 1) // Se desvanece el rojo y aparece el verde completo cuando i = 255
+   {
+      ValorRojo -= 1;
+      ValorVerde += 1;
+      analogWrite(PinRojo, ValorRojo);
+      analogWrite(PinVerde, ValorVerde);
+      delay(TiempoEspera);
+   }
 }
-
-redValue = 0;
-greenValue = 255;
-blueValue = 0;
-
-for(int i = 0; i < 255; i += 1) // fades out green bring blue full when i=255
-{
-greenValue -= 1;
-blueValue += 1;
-// The following was reversed, counting in the wrong directions
-// analogWrite(GREEN, 255 - greenValue);
-// analogWrite(BLUE, 255 - blueValue);
-analogWrite(GREEN, greenValue);
-analogWrite(BLUE, blueValue);
-delay(delayTime);
-}
-
-redValue = 0;
-greenValue = 0;
-blueValue = 255;
-
-for(int i = 0; i < 255; i += 1) // fades out blue bring red full when i=255
-{
-// The following code has been rearranged to match the other two similar sections
-blueValue -= 1;
-redValue += 1;
-// The following was reversed, counting in the wrong directions
-// analogWrite(BLUE, 255 - blueValue);
-// analogWrite(RED, 255 - redValue);
-analogWrite(BLUE, blueValue);
-analogWrite(RED, redValue);
-delay(delayTime);
-}
-}
-
