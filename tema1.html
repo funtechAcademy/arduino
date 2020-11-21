@@ -46,8 +46,8 @@
          En este tema vamos a reprogramar la placa de Arduino con nuestra propia versión de Blink y luego cambiar 
          la tasa a la que parpadea.
          <br><br>
-         El IDE de Arduino incluye una gran colección de programas de ejemplo que se pueden cargar y usar. Esto incluye 
-         un directorio de ejemplo para hacer el parpadeo del LED de 'L'. 
+         El IDE de Arduino incluye una gran colección de programas de ejemplo que se pueden cargar y usar. Esto 
+         incluye un directorio de ejemplo para hacer el parpadeo del LED de 'L'. 
          <br><br>
          Cargar el ejemplo de 'Blink' que encontrarás en el sistema de menús del IDE bajo 
          <strong>archivo > ejemplos > 01 conceptos básicos > Blink</strong>.
@@ -59,11 +59,11 @@
       <p class="img_centrada"><img src="img/tema1/1-3.png" width="400px" alt=""></p>
       <p class="texto">
          Los scripts de ejemplo incluidos con el IDE de Arduino son de <strong>sólo lectura</strong>. Es decir, puedes 
-         subirlos a la placa de Arduino, pero si se cambia el contenido del script, no se puede guardar como el archivo 
-         mismo (sobrescribirlo).
+         subirlos a la placa de Arduino, pero si se cambia el contenido del script, no se puede guardar como el 
+         archivo mismo (sobrescribirlo).
          <br><br>
-         Puesto que vamos a cambiar este script, lo primero que tienes que hacer crear una copia para poder manipularla 
-         sin problemas.
+         Puesto que vamos a cambiar este script, lo primero que tienes que hacer crear una copia para poder 
+         manipularla sin problemas.
          <br><br>
          En el menú <strong>archivo</strong> en el IDE , selecciona 'Guardar como.' y guarda el programa con el nombre 
          'MyBlink'
@@ -76,20 +76,21 @@
       </p>
       <p class="img_centrada"><img src="img/tema1/1-6.png" width="400px" alt=""></p>
       <p class="texto">
-         Conectamos la placa de Arduino al ordenador con el cable USB y comprobamos que la <strong>Board Type</strong> y 
-         <strong>Puerto serie</strong> están ajustados correctamente.
+         Conectamos la placa de Arduino al ordenador con el cable USB y comprobamos que la <strong>Board Type</strong>
+         y <strong>Puerto serie</strong> están ajustados correctamente.
       </p>
       <p class="img_centrada"><img src="img/tema1/1-7.png" width="400px" alt=""></p>
       <p class="img_centrada"><img src="img/tema1/1-8.png" width="400px" alt=""></p>
       <p class="texto advertencia">
-         El tipo de tarjeta y puerto Serial aquí no son necesariamente la misma que se muestra en la imagen. Si usas 2560, 
-         entonces usted tendrá que elegir Mega 2560 como el tipo de Junta, otras opciones se pueden hacer de la misma 
-         manera. Y el puerto Serial para todo el mundo es diferente, a pesar de COM 26 elegido aquí, sería COM3 o COM4 
-         en su ordenador. Un puerto COM correcto se supone que es COMX (arduino XXX), que es por los criterios de
-         certificación.
+         El tipo de tarjeta y puerto Serial aquí no son necesariamente la misma que se muestra en la imagen. Si 
+         usas 2560, entonces tendrás que elegir Mega 2560 como el tipo de Junta, otras opciones se pueden hacer de la 
+         misma manera. Y el puerto Serial para todo el mundo es diferente, a pesar de COM 26 elegido aquí, sería COM3 
+         o COM4 en su ordenador. Un puerto COM correcto se supone que es COMX (arduino XXX), que es por los criterios 
+         de certificación.
       </p>
       <p class="texto">
-         Hacemos clic en el botón <strong>Subir</strong>. El segundo botón de la izquierda en la barra de herramientas.
+         Hacemos clic en el botón <strong>Subir</strong>. El segundo botón de la izquierda en la barra de 
+         herramientas.
       </p>
       <p class="img_centrada"><img src="img/tema1/1-9.png" alt=""></p>
       <p class="texto">
@@ -104,48 +105,46 @@
          <p class="codigo">int led = 13;</p>
       </p>
       <p class="texto">
-         Como explica el comentario sobre ella, se le esta dando un nombre al pin que el LED está conectado. Este pin es 
-         el numero 13 y es ese pin en la mayoría de modelos de arduino. A continuación, tenemos la función de 
-         <strong>configuración</strong>. Otra vez, como dice el comentario, este se ejecuta cuando se presiona el botón 
-         de reset. También se ejecuta cada vez que la placa se reinicia por alguna razón o después de que un programa se 
-         haya subido
+         Como explica el comentario sobre ella, se le esta dando un nombre al pin que el LED está conectado. Este pin 
+         es el numero 13 y es ese pin en la mayoría de modelos de arduino. A continuación, tenemos la función de 
+         <strong>configuración</strong>. Otra vez, como dice el comentario, este se ejecuta cuando se presiona el 
+         botón de reset. También se ejecuta cada vez que la placa se reinicia por alguna razón o después de que un 
+         programa se haya subido
       </p>
       <p class="codigo">
-         void setup(&nbsp;) {<br>
+         void setup(&nbsp;)<br> 
+         {<br>
          &emsp;&emsp;pinMode(led, OUTPUT); // Inicializa el pin digital como salida.<br>
          }
       </p>
       <p class="texto">
-         Cada script Arduino debe tener una función de <strong>configuración</strong>, y el lugar donde van las instrucciones 
-         es dentro de las llaves <strong>{</strong> y <strong>}</strong>.
+         Cada script Arduino debe tener una función de <strong>configuración</strong>, y el lugar donde van las 
+         instrucciones es dentro de las llaves <strong>{</strong> y <strong>}</strong>.
          <br><br>
-         En este caso, es un comando, que, como dice el comentario, le dice a la placa Arduino que vamos a utilizar el pin LED 
-         como salida.
+         En este caso, es un comando, que, como dice el comentario, le dice a la placa Arduino que vamos a utilizar el 
+         pin LED como salida.
          <br><br>
-         La función <strong>loop</strong>, después de que haya terminado de ejecutar sus comandos, empezar inmediatamente otra vez.
+         La función <strong>loop</strong>, después de que haya terminado de ejecutar sus comandos, empezar 
+         inmediatamente otra vez.
       </p>
       <p class="codigo">
-         void loop(&nbsp;) {<br>
-         &emsp;&emsp;digitalWrite(led, HIGH); // Encienda el LED (alto es el nivel de voltaje)<br>
-         &emsp;&emsp;delay(1000); // Espere un segundo<br>
-         &emsp;&emsp;digitalWrite(led, LOW); // Apagar el LED por lo que la tensión baja<br>
-         &emsp;&emsp;delay(1000); // Espere un segundo<br>
+         void loop(&nbsp;)<br>
+         {<br>
+         &emsp;&emsp;digitalWrite(led, HIGH); // Encienda el LED (nivel de voltaje alto)<br>
+         &emsp;&emsp;delay(1000); // Esperar un segundo<br>
+         &emsp;&emsp;digitalWrite(led, LOW); // Apagar el LED (nivel de tensión baja)<br>
+         &emsp;&emsp;delay(1000); // Esperar un segundo<br>
          }            
       </p>
       <p class="texto">
-         Dentro de la función del bucle, los comandos en primer lugar activan el pin del LED (alto), esperan un tiempo de 
-         1000 milisegundos (1 segundo), para a continuación apagar el LED y esperar otro segundo antes de volver a empezar 
-         el bucle.
-         <br><br>
-         Ahora como ejemplo vamos a ver que debemos cambiar para que la transición ente el encendido y el apagado sea mas rápido. 
-         ¿Se te ocurre cómo?
-         <br><br>
-         ¡Eso es!, cambiando el <strong>delay</strong>.
+         Dentro de la función del bucle, los comandos en primer lugar activan el pin del LED (HIGH), esperan un tiempo 
+         de 1000 milisegundos (1 segundo), para a continuación apagar el LED y esperar otro segundo antes de volver a 
+         empezar el bucle.
       </p>
-      <p class="img_centrada"><img src="img/tema1/1-11.png" width="500px" alt=""></p>
+      <h2>Ejercicios</h2>
       <p class="texto">
-         En el ejemplo de la imagen, hemos conseguido que el tiempo de retardo sea la mitad (500 milisegundos) por lo que con 
-         este mismo principio podemos acelerar o retrasar la transición entre el encendido y apagado.
+         Ahora vamos a ver que debemos cambiar para que la transición ente el encendido y el apagado sea mas rápida. 
+         ¿Se te ocurre cómo?
       </p>
         <a class="texto volver" href="index.html">Volver al índice</a>
    </div>

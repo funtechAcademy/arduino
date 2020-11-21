@@ -69,7 +69,7 @@
       </p>
       <p class="img_centrada"><img src="img/tema2/2-2.png" width="40%" alt=""></p>
       <p class="texto">
-         Si no utilizas un resistencia con un LED, entonces podría quemarse casi de inmediato, ya que como fluirá
+         Si no utilizas una resistencia con un LED, entonces podría quemarse casi de inmediato, ya que como fluirá
          demasiada corriente a través él se calentará y destruirá la soldadura donde se produce la luz.
          <br><br>
          Hay dos maneras de saber cual es el positivo o el negativo del LED. La primera es saber que la pata positiva
@@ -141,10 +141,50 @@
          positivo del LED y el otro lado del LED va a GND (tierra).
       </p>
       <h2>Imagen de ejemplo</h2>
-      <p class="texto">Más o menos deberíamos tener nuestro proyecto como se ve en la imagen, de lo contrario
-         revisa los pasos anteriores.
+      <p class="texto">
+         Más o menos deberíamos tener nuestro proyecto como se ve en la imagen, de lo contrario revisa los pasos 
+         anteriores.
       </p>
       <p class="img_centrada"><img src="img/tema2/2-7.png" width="70%" alt=""></p>
+      <h2>Retos</h2>
+      <p class="texto">
+         - Tenemos que realizar un semáforo, en el que tengamos un LED de color rojo, otro amarillo y otro verde. Se 
+           encendea el LED rojo durante dos segundos, después el amarillo durante un segundo y al final el de color
+           verde durante otros dos segundos y asi continuamente.
+      </p>
+      <p class="img_centrada"><img src="img/tema2/2-8.gif" width="20%" alt=""></p>
+      <br><br>
+      <p class="texto">
+         - Simularemos las luces del frontal del coche fantástico. Para ello utilizaremos 4 leds rojos y se irán 
+           alternando como en la imagen.
+      </p>
+      <p class="img_centrada"><img src="img/tema2/2-9.gif" width="40%" alt=""></p>
+         <br><br>
+      <p class="texto">
+         &emsp;En primer lugar, haremos parpadear a los LED en secuencia de uno en uno, utilizando sólo las funciones:
+      </p>
+      <p class="codigo">
+          digitalWrite(pinNum,HIGH/LOW)
+         <br>
+         y
+         <br>
+         delay(time)
+      </p>
+      <br>
+      <br>
+      <p class="texto">
+         &emsp;En segundo lugar, los haremos parpadear con menos líneas de código mediante la secuencia de control
+      </p>
+      <p class="codigo">
+         for([inicialización];[condición];[incremento])
+      </p>
+      <br>
+      <br>
+      <p class="texto">
+         &emsp;En último lugar, lo haremos para que los LEDs parpadeen de una forma más suave.
+      </p>
+      <br>
+      <br>
       <a class="texto volver" href="index.html">Volver al índice</a>
    </div>
    <div id="pie">
