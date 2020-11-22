@@ -152,10 +152,15 @@
          Esta función tiene tres argumentos, uno para el brillo del LED rojo, otro para el verde y otro para el azul.
          En cada caso, el número que pongamos estará en el rango 0 a 255, donde 0 significa apagado y 255 significa
          brillo máximo.
-         <br><br>
+      </p>
+      <p class="codigo">
+         analogWrite(PinRojo, ValorRojo);<br>
+         analogWrite(PinVerde, ValorVerde);
+      </p>
+      <p class="texto">
          La función <strong>analogWrite</strong> entonces, se usa para ajustar el brillo de cada LED. Si nos fijamos
-         en la función 'loop' se puede ver que se ajusta el valor para luz roja, verde y azul. También podemos ver
-         cómo se hace una pausa antes de saltar al siguiente color.
+         en la función 'loop' se puede ver que se ajusta el valor para luz roja. También podemos ver cómo se hace una 
+         pausa antes de saltar al siguiente color.
       </p>
       <p class="codigo">
          #define TiempoEspera 10 // Tiempo de desvanecimiento entre colores<br>
@@ -166,16 +171,17 @@
          Deberíamos tener algo como esto, si no es así revisa los pasos anteriores.
       </p>
       <p class="img_centrada"><img src="img/tema3/3-8.png" width="70%" alt=""></p>
-
       <h2>Retos</h2>
       <p class="texto">
-         - En el ejemplo, llevamos el LED desde el color rojo al color azul. 
+         &emsp;En este tema hemos visto como llevamos el LED desde el color rojo al color azul. 
          <br><br>
-         Ahora, además de llevar el LED desde el color rojo al azul, tenemos que pasar también por los colores que llevan del 
+         &emsp;Ahora, además de llevar el LED desde el color rojo al azul, tenemos que pasar también por los colores que llevan del 
          azul al verde y del verde otra vez al rojo.
       </p>
       <p class="texto">
-         <a class="link_b" href="https://funtechacademy.github.io/arduino/pdf/3-1.pdf">Ejemplo de Solución</a>
+         <a class="link_b" href="https://www.tinkercad.com/things/cSjvFAnbIpD-tema-3-ej-1-led-rgb" target="_blank">
+            Ejemplo de Solución
+         </a>
       </p>
       <br><br>
       <a class="texto volver" href="index.html">Volver al índice</a>

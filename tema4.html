@@ -71,8 +71,8 @@
          <strong>buttons</strong> como entradas, utilizando la palabra reservada <strong>INPUT_PULLUP</strong>.
       </p>
       <p class="codigo">
-         pinMode(buttonApin, INPUT_PULLUP);<br>
-         pinMode(buttonBpin, INPUT_PULLUP);
+         pinMode(PinBotonA, INPUT_PULLUP);<br>
+         pinMode(PinBotonB, INPUT_PULLUP);
       </p>
       <p class="texto">
          <br>
@@ -84,13 +84,16 @@
          botón, la lógica esta invertida. Nos encargaremos de esto en la función <strong>loop</strong>
       </p>
       <p class="codigo">
-         void loop() {<br>
-         &emsp;&emsp;if (digitalRead(buttonApin) == LOW) {<br>
-         &emsp;&emsp;&emsp;&emsp;digitalWrite(ledPin, HIGH);<br>
-         &emsp;&emsp;}<br>
-         &emsp;&emsp;if (digitalRead(buttonBpin) == LOW) {<br>
-         &emsp;&emsp;&emsp;&emsp;digitalWrite(ledPin, LOW);<br>
-         &emsp;&emsp;}<br>
+         void loop()<br>
+         {<br>
+           &emsp;if (digitalRead(PinBotonA) == LOW)<br>
+           &emsp;{<br>
+             &emsp;&emsp;digitalWrite(PinLed, HIGH);<br>
+           &emsp;}<br>
+           &emsp;if (digitalRead(PinBotonB) == LOW)<br>
+           &emsp;{<br>
+             &emsp;&emsp;digitalWrite(PinLed, LOW);<br>
+           &emsp;}<br>
          }
       </p>
       <p class="texto">
@@ -100,7 +103,7 @@
          <br><br>
          Recuerda que si se presiona el botón, la entrada correspondiente será baja, si el botón A es bajo, entonces
          un <strong>digitalWrite</strong> en el ledPin enciende, del mismo modo, si se presiona el botón B, un bajo se
-         escribe en el ledPin.
+         escribe en el PinLed.
       </p>
       <h3>Imagen de ejemplo</h3>
       <p class="texto">
@@ -108,10 +111,23 @@
          apartados anteriores.
       </p>
       <p class="img_centrada"><img src="img/tema4/4-4.png" width="70%" alt=""></p>
+      <h2>Retos</h2>
+      <p class="texto">
+         &emsp;Hemos visto como con dos botones, uno enciende el LED y otro lo apaga. 
+         <br><br>
+         &emsp;Ahora vamos a hacer lo mismo, pero con un solo botón. Si lo pulsamos una vez lo encendemos y si lo volvemos 
+         a pulsar, lo apagamos.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/5EXvqUNfHFu-tema-4-ej-1-boton-apagadoencendido" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <br><br>
       <a class="texto volver" href="index.html">Volver al índice</a>
    </div>
    <div id="pie">
       <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
-	</div>
+   </div>
 </body>
 </html>

@@ -1,27 +1,22 @@
-//www.elegoo.com
-//2016.12.08
-
-int ledPin = 5;
-int buttonApin = 9;
-int buttonBpin = 8;
-
-byte leds = 0;
+int PinLed = 5;
+int PinBotonA = 9;
+int PinBotonB = 8;
 
 void setup() 
 {
-  pinMode(ledPin, OUTPUT);
-  pinMode(buttonApin, INPUT_PULLUP);  
-  pinMode(buttonBpin, INPUT_PULLUP);  
+  pinMode(PinLed, OUTPUT);
+  pinMode(PinBotonA, INPUT_PULLUP);  
+  pinMode(PinBotonB, INPUT_PULLUP);  
 }
 
 void loop() 
 {
-  if (digitalRead(buttonApin) == LOW)
+  if (digitalRead(PinBotonA) == LOW)
   {
-    digitalWrite(ledPin, HIGH);
+    digitalWrite(PinLed, HIGH);
   }
-  if (digitalRead(buttonBpin) == LOW)
+  if (digitalRead(PinBotonB) == LOW)
   {
-    digitalWrite(ledPin, LOW);
+    digitalWrite(PinLed, LOW);
   }
 }
