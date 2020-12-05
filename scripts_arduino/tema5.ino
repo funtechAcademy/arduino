@@ -1,31 +1,33 @@
-//www.elegoo.com
-//2016.12.08
+// Fun Tech Academy 2020
 
-int buzzer = 12;//the pin of the active buzzer
+int zumbador = 12;//Pin del Zumbador Activo
+
 void setup()
 {
- pinMode(buzzer,OUTPUT);//initialize the buzzer pin as an output
+   // Inicializamos el pin del zumbador como salida
+    pinMode(zumbador,OUTPUT);
 }
+
 void loop()
 {
- unsigned char i;
- while(1)
- {
-   //output an frequency
-   for(i=0;i<80;i++)
+   unsigned char i;
+   while(1)
    {
-    digitalWrite(buzzer,HIGH);
-    delay(1);//wait for 1ms
-    digitalWrite(buzzer,LOW);
-    delay(1);//wait for 1ms
-    }
-    //output another frequency
-     for(i=0;i<100;i++)
+      // Generamos una frecuencia
+      for(i=0;i<80;i++)
       {
-        digitalWrite(buzzer,HIGH);
-        delay(2);//wait for 2ms
-        digitalWrite(buzzer,LOW);
-        delay(2);//wait for 2ms
+         digitalWrite(zumbador,HIGH);
+         delay(1); // Esperamos 1 milisegundo
+         digitalWrite(zumbador,LOW);
+         delay(1); // Esperamos 1 milisegundo
       }
-  }
-} 
+      // Generamos otra frecuencia
+      for(i=0;i<100;i++)
+      {
+         digitalWrite(zumbador,HIGH);
+         delay(2); // Esperamos 2 milisegundos
+         digitalWrite(zumbador,LOW);
+         delay(2); // Esperamos 2 milisegundos
+      }
+   }
+}

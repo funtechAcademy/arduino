@@ -1,3 +1,5 @@
+// Fun Tech Academy 2020
+
 // Definimos los pins
 #define PinRojo 6    // Red
 #define PinVerde 5   // Green
