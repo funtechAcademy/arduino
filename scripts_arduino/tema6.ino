@@ -1,26 +1,35 @@
-//www.elegoo.com
-//2016.12.08
+// Fun Tech Academy 2020
 
-#include "pitches.h"
+int melodia[] = 
+{
+   NOTA_C5, 
+   NOTA_D5, 
+   NOTA_E5, 
+   NOTA_F5, 
+   NOTA_G5, 
+   NOTA_A5, 
+   NOTA_B5, 
+   NOTA_C6
+};
+
+int duracion = 500; // 500 milisegundos
  
-// notes in the melody:
-int melody[] = {
-  NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_A5, NOTE_B5, NOTE_C6};
-int duration = 500;  // 500 miliseconds
- 
-void setup() {
- 
+void setup() 
+{
+   // No necesitamos asignar nada pero hay que declarar la función
 }
  
-void loop() {  
-  for (int thisNote = 0; thisNote < 8; thisNote++) {
-    // pin8 output the voice, every scale is 0.5 sencond
-    tone(8, melody[thisNote], duration);
+void loop() 
+{  
+   for (int TocarNota = 0; TocarNota < 8; TocarNota++) 
+   {
+      // El Pin 8 emite el sonido. Cada escala es de 0,5 segundos
+      tone(8, melodia[TocarNota], duracion);
      
-    // Output the voice after several minutes
-    delay(1000);
-  }
+      // Tiempo de espera entre nota y nota
+      delay(1000);
+   }
    
-  // restart after two seconds 
-  delay(2000);
+   // A los dos segundos volvemos a emitir las notas
+   delay(2000);
 }
