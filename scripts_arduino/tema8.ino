@@ -1,27 +1,22 @@
-//www.elegoo.com
-//2016.12.08
-#include <Servo.h>
+// Fun Tech Academy 2020
 
-Servo myservo;  // create servo object to control a servo
-// twelve servo objects can be created on most boards
+int duracion = 500; // 500 milisegundos
+long nota; // Nota generada por la salida del potenciómetro
+int PinZumbador = 10;//Pin del Zumbador Activo
 
-int pos = 0;    // variable to store the servo position
-
-void setup() {
-  Serial.begin(9600);
-  myservo.attach(9);  // attaches the servo on pin 9 to the servo object
+void setup() 
+{
+   //Inicializamos la comunicación serial
+   Serial.begin(9600); 
+   //Escribimos por el monitor serie mensaje de inicio
+   Serial.println("Valores del potenciometro");
 }
-
-void loop() {
-  for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
-    // in steps of 1 degree
-    myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15ms for the servo to reach the position
-  }
-  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
-    myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15ms for the servo to reach the position
-  }
  
+void loop() 
+{  
+  // Leemos la nota que va a sonar del Potenciómetro
+  nota = analogRead(A0);
+  tone(PinZumbador, nota, duracion);
+  Serial.print("La Nota es = ");
+  Serial.println(nota);
 }
-

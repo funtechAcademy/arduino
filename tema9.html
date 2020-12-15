@@ -9,11 +9,11 @@
    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
    <script src="js/scripts.js"></script>
-   <title>Tema 9: Sensor Ultrasónico</title>
+   <title>Tema 8: Servomotores</title>
 </head>
 <body>
    <div id="cabecera">
-      <h1>Sensor Ultrasónico</h1>
+      <h1>Servomotor</h1>
    </div>
    <!-- INICIO_LOADER -->
    <div id="pageloader">
@@ -23,54 +23,56 @@
    <div id="contenido">
       <h2>Objetivos</h2>
       <p class="texto">
-         El sensor ultrasónico es un componente ideal para todo tipo de proyectos que necesitan medidas de distancia,
-         por ejemplo un robot que evita obstáculos.
-         <br><br>
-         En este tema aprenderemos a usar el módulo ultrasónico HC-SR04. Es barato y fácil de usar ya que vamos a
-         usar una biblioteca diseñada específicamente para estos sensores.
+         En este tema aprenderemos a utilizar y configurar un servomotor utilizando la placa de arduino, además veremos
+         algunas diferentes utilidades que se le pueden dar a estos componentes electrónicos.
       </p>
       <h2>Materiales</h2>
       <p class="texto">
-         &emsp;&emsp;(1) x Placa Arduino<br>
-         &emsp;&emsp;(1) x Módulo de sensor ultrasónico HC-SR04<br>
-         &emsp;&emsp;(4) x F M cables (cables de hembra a macho)
+         &emsp;&emsp;(1) x Placa Arduino <br>
+         &emsp;&emsp;(1) x Servomotor (SG90)<br>
+         &emsp;&emsp;(3) x M M cables (cables macho a macho)
       </p>
       <h2>Introducción a los componentes</h2>
-      <h3>Sensor ultrasónico</h3>
+      <h2>Servomotor</h2>
       <p class="texto">
-         El módulo HC-SR04 sensor ultrasónico proporciona una medición sin contacto de una distancia comprendida entre
-         2 y 400 cm. La precisión varía entorno a los  3 mm. Los módulos incluyen transmisores ultrasónicos, receptor
-         y circuito de control.<br><br>
-         El principio básico del trabajo que haremos es:<br><br>
-         &emsp;&emsp;1. Utilizando el disparador de ultrasonidos para lanzar una señal de nivel alto de al menos 10us.<br>
-         &emsp;&emsp;2. El Módulo envía una señal de 40 kHz y detecta si hay una señal que devuelve un pulso hacia atrás.<br>
-         &emsp;&emsp;3. Se calcula el tiempo que tarda en volver la señal para así poder calcular la distancia.
+         El servo es un tipo de motor eléctrico que sólo puede girar 180 grados. Se controla mediante el envío de
+         impulsos eléctricos de la placa de Arduino. Estos pulsos le dicen al servo en que dirección debe moverse.
+         <br><br>
+         El Servomotor tiene tres cables, el marrón es el cable a tierra y debe conectarse al puerto GND de la placa,
+         el rojo es el cable de corriente y debe conectarse al puerto de 5v y el naranja es el alambre de señal y debe
+         conectarse al puerto 9.
+         <br><br>
+         Algunas de las características de este servomotor SG90 son:<br><br>
+         &emsp;&emsp;- Cable Universal para conectores JR y FP<br>
+         &emsp;&emsp;- Longitud del cable: 25cm<br>
+         &emsp;&emsp;- Velocidad: 0,12 segundos/60 grados (4.8V), 0.10 segundos/60 grados (6.0V) (sin carga)<br>
+         &emsp;&emsp;- Puesto de par (4.8V): 1,6 kg/cm<br>
+         &emsp;&emsp;- Temperatura: -30 ~ 60' C<br>
+         &emsp;&emsp;- Voltaje de funcionamiento: 3.5 ~ 6V<br>
+         &emsp;&emsp;- Dimensión: 3,2 x 3 cm x 1.2 cm)<br>
+         &emsp;&emsp;- Peso: 134 gr.
       </p>
-      <p class="img_centrada"><img src="img/tema9/9-1.png" width="40%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema9/9-1.png" width="30%" alt=""></p>
       <h2>Esquema eléctrico</h2>
       <p class="img_centrada"><img src="img/tema9/9-2.png" width="60%" alt=""></p>
       <h2>Diagrama ilustrativo</h2>
-      <p class="img_centrada"><img src="img/tema9/9-3.png" width="70%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema9/9-3.png" width="60%" alt=""></p>
       <h2>Código</h2>
       <p class="texto">
-         Haremos uso de una biblioteca diseñada para estos sensores que hará nuestro código corto y sencillo.
-         Incluimos la biblioteca al principio de nuestro código, y luego mediante simples comandos podemos controlar
-         el comportamiento del sensor. El archivo lo descargaremos de
-         <a class="link_s" download href="scripts_arduino/librerias/SR04.h">aquí</a>
-      </p>
-      <p class="texto">
-         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
-         <a class="link_s" href="scripts_arduino/tema9.ino">enlace</a> y lo cargaremos como hemos aprendido.
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente este
+         <a class="link_s" href="scripts_arduino/tema8.ino">link</a> y lo cargaremos como hemos aprendido.
+         <br><br>
+         Antes de ejecutar este script, asegúrate de que se ha instalado la biblioteca <strong>servo</strong>, de lo contrario,
+         el código no funcionará. Puedes descargarlo desde
+         este <a class="link_s" download href="scripts_arduino/librerias/servo.h">link</a>
       </p>
       <h2>Imagen de ejemplo</h2>
-      <p class="img_centrada"><img src="img/tema9/9-4.png" width="70%" alt=""></p>
       <p class="texto">
-         Vamos ahora a abrir al monitor, para ver los datos que se van recogiendo. Para ello hacemos click en el botón
-         de <strong>Serial Monitor</strong> para encender el monitor serie.<br><br> Deberíamos tener algo como la
-         siguiente imagen.
+         En la foto, el cable marrón del servo se adapta a través del cable negro, el rojo se adapta a través del cable
+         rojo y el naranja se adapta a través del cable amarillo.
       </p>
-      <p class="img_centrada"><img src="img/tema9/9-5.png" width="50%" alt=""></p>
-      <a class="texto volver" href="index.html">Volver al índice</a>
+      <p class="img_centrada"><img src="img/tema9/9-4.png" width="60%" alt=""></p>
+      <a class="texto volver" download href="index.html">Volver al índice</a>
    </div>
    <div id="pie">
       <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>

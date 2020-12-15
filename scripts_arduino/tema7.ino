@@ -1,26 +1,25 @@
-//www.elegoo.com
-//2016.12.08
-/*****************************************/
-const int ledPin = 13;//the led attach to
+// Fun Tech Academy 2020
+
+// Definimos los pines del sensor y el led
+#define SENSOR_PIN 2
+#define LED_PIN 13
 
 void setup()
-{ 
-  pinMode(ledPin,OUTPUT);//initialize the ledPin as an output
-  pinMode(2,INPUT);
-  digitalWrite(2, HIGH);
-} 
-/******************************************/
-void loop() 
-{  
-  int digitalVal = digitalRead(2);
-  if(HIGH == digitalVal)
-  {
-    digitalWrite(ledPin,LOW);//turn the led off
-  }
-  else
-  {
-    digitalWrite(ledPin,HIGH);//turn the led on 
-  }
+{
+   // Asignamos los sensores a sus pines correspondientes
+   pinMode(SENSOR_PIN, INPUT_PULLUP);
+   pinMode(LED_PIN, OUTPUT);
 }
-/**********************************************/
 
+void loop()
+{
+   // Dependiendo del valor del sensor de inclinacon, encendemos o apagamos el LED
+   if (digitalRead(SENSOR_PIN) == LOW)
+   {
+      digitalWrite(LED_PIN, HIGH);
+   }
+   else
+   {
+      digitalWrite(LED_PIN, LOW);
+   }
+}
