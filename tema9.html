@@ -9,7 +9,7 @@
    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
    <script src="js/scripts.js"></script>
-   <title>Tema 8: Servomotores</title>
+   <title>Tema 9: Servomotores</title>
 </head>
 <body>
    <div id="cabecera">
@@ -33,16 +33,32 @@
          &emsp;&emsp;(3) x M M cables (cables macho a macho)
       </p>
       <h2>Introducción a los componentes</h2>
-      <h2>Servomotor</h2>
+      <h3>Servomotor</h3>
       <p class="texto">
-         El servo es un tipo de motor eléctrico que sólo puede girar 180 grados. Se controla mediante el envío de
-         impulsos eléctricos de la placa de Arduino. Estos pulsos le dicen al servo en que dirección debe moverse.
+         El servo es un motor eléctrico pero con dos características especiales.
+         <br><br>
+         Por un lado, nos permite mantener una posición que indiquemos, siempre que esté dentro del rango de operación 
+         del propio dispositivo. Tenemos que tener en cuenta el ángulo de giro, que en este caso nos permite hacer un 
+         barrido entre -90º y 90º. Lo que viene a ser un ángulo de giro de 180º.
+         <br><br>
+         Por otro lado nos permite controlar la velocidad de giro, podemos hacer que antes de que se mueva a la 
+         siguiente posición espere un tiempo.
+         <br><br>
+         Se controla mediante el envío de impulsos eléctricos de la placa de Arduino. Estos pulsos le dicen al servo 
+         en que dirección debe moverse.
+         <br><br>
+         Estos motores funcionan con una señal PWM, con un pulso de trabajo entre 1 ms y 2 ms y con un periodo de 
+         20 ms (50 Hz). ¿Qué quiere decir todo esto? Este dato nos indica la velocidad máxima a la que podemos mover 
+         el servomotor con Arduino. Solo podremos cambiar de posición cada 20 ms. Esto dependerá del tipo y marca de 
+         nuestro servo.
          <br><br>
          El Servomotor tiene tres cables, el marrón es el cable a tierra y debe conectarse al puerto GND de la placa,
-         el rojo es el cable de corriente y debe conectarse al puerto de 5v y el naranja es el alambre de señal y debe
-         conectarse al puerto 9.
-         <br><br>
-         Algunas de las características de este servomotor SG90 son:<br><br>
+         el rojo es el cable de corriente y debe conectarse al puerto de 5v y el naranja es el cacle de señal y debe
+         conectarse un pin PWM (por ejemplo el 9).
+      </p>
+      <p class="img_centrada"><img src="img/tema9/9-1.jpg" width="50%" alt=""></p>
+      <p class="texto">
+         Algunas de las características de este servomotor SG90 que vamos a utilizar son:<br><br>
          &emsp;&emsp;- Cable Universal para conectores JR y FP<br>
          &emsp;&emsp;- Longitud del cable: 25cm<br>
          &emsp;&emsp;- Velocidad: 0,12 segundos/60 grados (4.8V), 0.10 segundos/60 grados (6.0V) (sin carga)<br>
@@ -52,26 +68,91 @@
          &emsp;&emsp;- Dimensión: 3,2 x 3 cm x 1.2 cm)<br>
          &emsp;&emsp;- Peso: 134 gr.
       </p>
-      <p class="img_centrada"><img src="img/tema9/9-1.png" width="30%" alt=""></p>
-      <h2>Esquema eléctrico</h2>
-      <p class="img_centrada"><img src="img/tema9/9-2.png" width="60%" alt=""></p>
-      <h2>Diagrama ilustrativo</h2>
-      <p class="img_centrada"><img src="img/tema9/9-3.png" width="60%" alt=""></p>
-      <h2>Código</h2>
-      <p class="texto">
-         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente este
-         <a class="link_s" href="scripts_arduino/tema8.ino">link</a> y lo cargaremos como hemos aprendido.
-         <br><br>
-         Antes de ejecutar este script, asegúrate de que se ha instalado la biblioteca <strong>servo</strong>, de lo contrario,
-         el código no funcionará. Puedes descargarlo desde
-         este <a class="link_s" download href="scripts_arduino/librerias/servo.h">link</a>
-      </p>
-      <h2>Imagen de ejemplo</h2>
+      <h2>Esquemas de conexión</h2>
+      <h3>Esquema eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema9/9-2.png" width="70%" alt=""></p>
+      <h3>Diagrama ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema9/9-3.png" width="50%" alt=""></p>
+      <h3>Imagen de ejemplo</h3>
       <p class="texto">
          En la foto, el cable marrón del servo se adapta a través del cable negro, el rojo se adapta a través del cable
          rojo y el naranja se adapta a través del cable amarillo.
       </p>
-      <p class="img_centrada"><img src="img/tema9/9-4.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema9/9-4.png" width="40%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente este
+         <a class="link_s" href="scripts_arduino/tema9.ino">link</a> y lo cargaremos como hemos aprendido.
+         <br><br>
+         De la librería Servo.h hemos declarado un objeto o variable servo9 y hacemos uso de dos métodos. 
+         <br><br>
+         Por un lado el <strong>attach</strong>, que nos permite indicar en que pin tenemos conectado nuestro servo.
+      </p>
+      <p class="codigo">
+         void setup()<br>
+         {<br>
+            &emsp;&emsp;// Definimos los parámetros del servo:<br>
+            &emsp;&emsp;// - pin: el número del pin al que está conectado el servo<br>
+            &emsp;&emsp;// - min (opcional): el ancho de pulso, en microsegundos,<br>
+            &emsp;&emsp;//   correspondiente al ángulo mínimo (0 grados) en el servo<br>
+            &emsp;&emsp;//   (predeterminado en 544)<br>
+            &emsp;&emsp;// - max (opcional): el ancho de pulso, en microsegundos,<br>
+            &emsp;&emsp;// correspondiente al ángulo máximo (180 grados) en el servo<br>
+            &emsp;&emsp;// (predeterminado en 2400)<br>
+            &emsp;&emsp;servo_9.attach(9, 500, 2500);<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         Por otro lado el <strong>write</strong>, donde indicamos en qué ángulo queremos posicionar nuestro servomotor.
+      </p>
+      <p class="codigo">
+            servo_9.write(pos);
+      </p>
+      <p class="texto">
+         <br>
+         Otros métodos de la librería servo son:
+         <br><br>
+         &emsp;- writeMicroseconds(tiempo): El parámetro tiempo será el ancho del pulso indicado en microsegundos.
+         <br><br>
+         &emsp;- read(): Lee la posición actual del servo dado en grados, devolviendo un valor entre 0 y 180.
+         <br><br>
+         &emsp;- attached(pin): Verifica si la variable del tipo Servo está asignada al pin indicado. Devuelve un 
+                 valor de true o false.
+         <br><br>
+         &emsp;- detach(pin): Separa la variable del tipo Servo del pin indicado.
+      </p>
+      <p class="texto">
+         <br>
+         Antes de ejecutar este script, asegúrate de que se ha instalado la biblioteca <strong>servo</strong>, 
+         de lo contrario, el código no funcionará. El archivo lo descargaremos del siguiente
+         <a class="link_s" download href="scripts_arduino/librerias/servo.h">link.</a>
+         <br><br>
+         Para más información sobre los métodos de la librería servo, consulta este 
+         <a class="link_s" download href="https://www.arduino.cc/reference/en/libraries/servo/">link.</a>
+      </p>
+      <h2>Retos</h2>
+      <p class="texto">
+         &emsp;Ya hemos aprendido a manejar el servomotor definiéndolo y moviéndolo. 
+         <br><br>
+         &emsp;El reto consiste en añadirle un potenciómetro al ejemplo que será el que controle el ángulo de giro del 
+         servomotor.
+      </p>
+      <p class="img_centrada"><img src="img/tema9/9-5.gif" width="40%" alt=""></p>
+      <p class="texto">
+         &emsp;Para ello, utilizaremos una nueva función para mapear directamente del rango de valores de salida del 
+         potenciómetro al rango de valores de entrada del servo.
+      </p>
+      <p class="codigo">
+            &emsp;map(VariableAMapear,ValorDesdeMasBajo, ValorDesdeMasAlto, ValorHastaMasBajo, ValorHastaMasAlto);
+      </p>
+      <br><br>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/cQS5VPfeqnV-tema-9-ej-1-servomotor-con-potenciometro" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <br><br>
       <a class="texto volver" download href="index.html">Volver al índice</a>
    </div>
    <div id="pie">
