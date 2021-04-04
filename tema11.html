@@ -9,11 +9,11 @@
    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
    <script src="js/scripts.js"></script>
-   <title>Tema 10: Sensor de Humedad y Temperatura</title>
+   <title>Tema 11: Pantalla LCD</title>
 </head>
 <body>
    <div id="cabecera">
-      <h1>Sensor de Humedad y Temperatura</h1>
+      <h1>Pantalla LCD</h1>
    </div>
    <!-- INICIO_LOADER -->
    <div id="pageloader">
@@ -23,54 +23,95 @@
    <div id="contenido">
       <h2>Objetivos</h2>
       <p class="texto">
-         En este tema vamos a aprender cómo usar el sensor de humedad y temperatura DHT11. Este sensor es lo
-         suficientemente exacto para la mayoría de los proyectos que necesitan hacer un seguimiento de las lecturas
-         de humedad y temperatura.
+         En este tema, aprenderemos cómo conectar y usar una pantalla LCD alfanumérica. La pantalla tiene una retro
+         iluminación LED.
          <br><br>
-         Como en otros temas, vamos a usar una biblioteca diseñada específicamente para estos sensores que harán que
-         nuestro código sea corto y fácil de escribir.
+         Se pueden ver los rectángulos para cada carácter en la pantalla y los píxeles que componen cada carácter.
+         La pantalla es blanca y azul y además está diseñada para mostrar texto.
+         <br><br>
+         En este tema, se ejecutará el programa de ejemplo de Arduino de la biblioteca para la pantalla LCD.
       </p>
       <h2>Materiales</h2>
       <p class="texto">
          &emsp;&emsp;(1) x Placa Arduino<br>
-         &emsp;&emsp;(1) x módulo de humedad y temperatura DHT11<br>
-         &emsp;&emsp;(3) x F M cables (cables de hembra a macho)
+         &emsp;&emsp;(1) x Módulo LCD 1602<br>
+         &emsp;&emsp;(1) x Potenciómetro (10k)<br>
+         &emsp;&emsp;(1) x Protoboard<br>
+         &emsp;&emsp;(16) x M-M cables (cables de macho a macho)<br>
       </p>
       <h2>Introducción a los componentes</h2>
-      <h3>Sensor de humedad y temperatura</h3>
+      <h3>Módulo LCD</h3>
       <p class="texto">
-         El sensor digital de temperatura y humedad DHT11 es un sensor compuesto que da una salida digital calibrada
-         de la temperatura y la humedad. El sensor incluye un sensor resistente al agua y un dispositivo de medición
-         de temperatura NTC, ambos conectados a un micro controlador de 8 bits de alto rendimiento.
+         El módulo LCD1602, o pantalla de cristal líquido de tipo 1602, es un tipo de módulo de matriz de puntos para
+         mostrar letras, números y caracteres, etc. Se compone de posiciones de matriz de puntos de 5x7 o 5x11;
+         cada posición puede mostrar un carácter.
          <br><br>
-         Entre las aplicaciones mas comunes del sensor tenemos: HVAC, deshumidificador, bienes de consumo, controles
-         automáticos, automóviles, registradores de datos, estaciones meteorológicas, electrodomésticos, regulador
-         de humedad, etc.
+         Hay un punto entre dos caracteres y un espacio entre líneas, separando así los caracteres y las líneas. El
+         nombre de modelo 1602, significa que muestra 2 líneas de 16 caracteres. En general, LCD1602 tiene puertos
+         paralelos, es decir, controlaría varios pines al mismo tiempo. El LCD1602 se puede clasificar en conexiones
+         de ocho puertos y cuatro puertos.
       </p>
-      <p class="img_centrada"><img src="img/tema11/11-1.png" width="30%"></p>
+      <p class="img_centrada"><img src="img/tema12/12-1.png" width="60%"></p>
       <h2>Esquema eléctrico</h2>
-      <p class="img_centrada"><img src="img/tema11/11-2.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema12/12-2.png" width="70%"></p>
       <h2>Diagrama ilustrativo</h2>
-      <p class="img_centrada"><img src="img/tema11/11-3.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema12/12-3.png" width="70%"></p>
+      <p class="advertencia texto">
+         No lo olvides, el cable largo amarillo que conecta del potenciómetro a la clavija 3 de la pantalla. El
+         potenciómetro se utiliza para controlar el contraste de la pantalla.
+      </p>
       <h2>Código</h2>
       <p class="texto">
-         Antes de ejecutar el script, nos aseguramos de que está instalado el <strong>SimpleDHT</strong> de lo
-         contrario, iremos a biblioteca para volver a instalarlo, si es necesario. El archivo lo descargaremos de
-         <a class="link_s" download href="scripts_arduino/librerias/dht_nonblocking.h">aquí</a>
-         <p class="texto">
-            Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
-            <a class="link_s" href="scripts_arduino/tema10.ino">enlace</a> y lo cargaremos como hemos aprendido.
-         </p>
+         Antes de cargar el script, asegúrate de que está instalada la biblioteca <strong>LiquidCrystal</strong>. El
+         archivo puedes descargarlo desde <a class="link_s" download href="scripts_arduino/librerias/LiquidCrystal.h">aquí</a>
+         <br><br>
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="scripts_arduino/tema11.ino">enlace</a> y lo cargaremos como hemos aprendido.
+      </p>
+      <p class="texto">
+         Al subir el código a la placa Arduino, veremos que la pantalla muestra el mensaje <strong>Hola, mundo</strong>,
+         seguido de un número que cuenta de cero.
+         <br><br>
+         Evaluemos el script:
+      </p>
+      <p class="codigo texto" style="margin-bottom: 28px;">
+         #include < LiquidCrystal.h >
+      </p>
+      <p class="texto">
+         Esto le dice a Arduino que queremos utilizar la biblioteca de <strong>tema11-LCD</strong>. A continuación tenemos
+         la línea que teníamos que modificar. Esto define qué pines de Arduino son para conectarse a que pines de la pantalla.
+      </p>
+      <p class="codigo texto" style="margin-bottom: 28px;">
+         LiquidCrystal lcd (7, 8, 9, 10, 11, 12);
+      </p>
+      <p class="texto">
+         Después de subir este código, asegúrese de que se enciende la retroiluminación y ajustar el potenciómetro
+         girándolo hasta que aparezca el mensaje de texto.
+         <br><br>
+         En la función de <strong>configuración</strong>, tenemos dos comandos:
+      </p>
+      <p class="codigo texto" style="margin-bottom: 28px;">
+         LCD.Begin (16, 2);<br>
+         LCD.Print ("Hola, mundo!");
+      </p>
+      <p class="texto">
+         La primera línea se indican cuántas columnas y filas tiene la pantalla. La segunda línea muestra el mensaje
+         que vemos en la primera línea de la pantalla.
+         <br><br>
+         En la función de 'loop', hay dos comandos:
+      </p>
+      <p class="codigo texto" style="margin-bottom: 28px;">
+         LCD.setCursor (0, 1);<br>
+         LCD.Print(Millis()/1000);
+      </p>
+      <p class="texto">
+         La primera línea establece la posición del cursor (donde aparecerá el siguiente texto) columna 0 y fila 1.
+         Los números de columna y fila comienzan en 0 en lugar de 1.
+         <br><br>
+         La segunda línea muestra el número de milisegundos desde que se restableció el Arduino.
       </p>
       <h2>Imagen de ejemplo</h2>
-      <p class="img_centrada"><img src="img/tema11/11-4.png" width="60%" alt=""></p>
-      <p class="texto">
-         Vamos ahora a abrir al monitor, para ver los datos que se van recogiendo, para ello hacemos click en el 
-         botón de <strong>Serial Monitor</strong> para encender el monitor de serie.
-         <br><br>
-         Deberíamos tener algo como la siguiente imagen.
-      </p>
-      <p class="img_centrada"><img src="img/tema11/11-5.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema12/12-4.png" width="70%" alt=""></p>
       <a class="texto volver" href="index.html">Volver al índice</a>
    </div>
    <div id="pie">
