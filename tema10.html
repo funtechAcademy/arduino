@@ -9,7 +9,7 @@
    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
    <script src="js/scripts.js"></script>
-   <title>Tema 9: Sensor Ultrasónico</title>
+   <title>Tema 10: Sensor Ultrasónico</title>
 </head>
 <body>
    <div id="cabecera">
@@ -41,35 +41,117 @@
          El módulo HC-SR04 sensor ultrasónico proporciona una medición sin contacto de una distancia comprendida entre
          2 y 400 cm. La precisión varía entorno a los  3 mm. Los módulos incluyen transmisores ultrasónicos, receptor
          y circuito de control.<br><br>
-         El principio básico del trabajo que haremos es:<br><br>
-         &emsp;&emsp;1. Utilizando el disparador de ultrasonidos para lanzar una señal de nivel alto de al menos 10us.<br>
-         &emsp;&emsp;2. El Módulo envía una señal de 40 kHz y detecta si hay una señal que devuelve un pulso hacia atrás.<br>
-         &emsp;&emsp;3. Se calcula el tiempo que tarda en volver la señal para así poder calcular la distancia.
       </p>
       <p class="img_centrada"><img src="img/tema10/10-1.png" width="40%" alt=""></p>
-      <h2>Esquema eléctrico</h2>
-      <p class="img_centrada"><img src="img/tema10/10-2.png" width="60%" alt=""></p>
-      <h2>Diagrama ilustrativo</h2>
-      <p class="img_centrada"><img src="img/tema10/10-3.png" width="70%" alt=""></p>
+      <p class="texto">
+         El sensor HC-SR04 es un módulo que incorpora un par de transductores de ultrasonido que se utilizan de manera 
+         conjunta para determinar la distancia del sensor con un objeto colocado enfrente de este. 
+         <br><br>
+         Un transductor emite una “ráfaga” de ultrasonido y el otro capta el rebote de dicha onda. El tiempo que tarda 
+         la onda sonora en ir y regresar a un objeto puede utilizarse para conocer la distancia que existe entre el 
+         origen del sonido y el objeto.
+      </p>
+      <p class="img_centrada"><img src="img/tema10/10-2.png" width="70%" alt=""></p>
+      <p class="texto">
+         La interfaz del sensor HC-SR04 y arduino se logra mediante 2 pines digitales: el pin de disparo (trigger) y 
+         el pin de eco (echo). La función de cada uno de estos pines es la siguiente:
+         <br><br>
+         &emsp;- <strong>El pin trigger</strong> recibe un pulso de habilitación de parte del microcontrolador, 
+         mediante el cual se le indica al módulo que comience a realizar la medición de distancia.
+         <br><br>
+         &emsp;- <strong>En el pin echo</strong> el sensor devuelve al microcontrolador un puso cuyo ancho es 
+         proporcional al tiempo que tarda el sonido en viajar del transductor al obstáculo y luego de vuelta al
+         módulo.
+         <br><br>
+         Mediante una sencilla formula puede estimarse entonces la distancia entre el sensor y el obstáculo si se 
+         conoce el tiempo de viaje del sonido así como la velocidad de propagación de la onda sonora. 
+         <br><br>
+         Partimos de la siguiente formula:
+      </p>
+      <p class="img_centrada"><img src="img/tema10/10-3.png" width="40%" alt=""></p>
+      <p class="texto">
+         Donde <strong>Velocidad</strong> es la velocidad del sonido (340m/s), <strong>tiempo</strong> es el tiempo 
+         que tarda en llegar el ultrasonido al objeto y regresar al sensor, y la <strong>distancia recorrida</strong> 
+         es dos veces la distancia hacia el objeto.
+      </p>
+      <h2>Esquemas de conexión</h2>
+      <h3>Esquema eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema10/10-4.png" width="60%" alt=""></p>
+      <h3>Diagrama ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema10/10-5.png" width="70%" alt=""></p>
+      <h3>Imagen de ejemplo</h3>
+      <p class="texto">
+         Cabe aclarar que nosotros hemos utilizado los pines 11 y 12, pero vale cualquier otra combinación de pines. 
+         <br><br>
+         Es bastante fácil de conectar, solamente tener cuidado con la polaridad y posición de las señales.
+         <br><br>
+         Podemos realizarla utilizando un protoboard, o directamente con cables.
+      </p>
+      <p class="img_centrada"><img src="img/tema10/10-6.png" width="70%" alt=""></p>
       <h2>Código</h2>
       <p class="texto">
          Haremos uso de una biblioteca diseñada para estos sensores que hará nuestro código corto y sencillo.
          Incluimos la biblioteca al principio de nuestro código, y luego mediante simples comandos podemos controlar
          el comportamiento del sensor. El archivo lo descargaremos de
-         <a class="link_s" download href="scripts_arduino/librerias/SR04.h">aquí</a>
+         <a class="link_s" download href="scripts_arduino/librerias/ultrasonico/SR04.h">aquí</a>
       </p>
       <p class="texto">
          Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
-         <a class="link_s" href="scripts_arduino/tema9.ino">enlace</a> y lo cargaremos como hemos aprendido.
+         <a class="link_s" href="scripts_arduino/tema10.ino">enlace</a> y lo cargaremos como hemos aprendido.
       </p>
-      <h2>Imagen de ejemplo</h2>
-      <p class="img_centrada"><img src="img/tema10/10-4.png" width="70%" alt=""></p>
       <p class="texto">
          Vamos ahora a abrir al monitor, para ver los datos que se van recogiendo. Para ello hacemos click en el botón
-         de <strong>Serial Monitor</strong> para encender el monitor serie.<br><br> Deberíamos tener algo como la
+         de <strong>Serial Monitor</strong> para encender el monitor serie.
+         <br><br>
+         Deberíamos tener algo como la
          siguiente imagen.
       </p>
-      <p class="img_centrada"><img src="img/tema10/10-5.png" width="50%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema10/10-7.png" width="50%" alt=""></p>
+      <h2>Retos</h2>
+      <p class="texto">
+         &emsp;Ya sabemos como funciona básicamente el sensor ultrasónico. El reto consistirá en crear un radar de 
+         velocidad.
+         <br><br>
+         &emsp;Este reto se puede resolver básicamente de dos maneras, y aunque ninguna de ellas funcione exactamente 
+         como un radar de velocidad real, nos devolverán la velocidad de un objeto que se acerque a nuestro radar.
+         <br><br>
+         &emsp;La mayoría de radares funcionan a través de micro ondas que varían su frecuencia al rebotar en un 
+         vehículo según la velocidad a la que vaya, pudiendo calcular por tanto la velocidad real.
+         <br><br>
+         &emsp;Una forma sería utilizar dos detecciones (ultrasónicos, infrarrojos, capacitivos, fotocélulas) 
+         separadas una distancia concreta por las que pasará el coche. Cronometrando el tiempo que pasa entre una 
+         detección y otra, y siendo conocida la distancia, podemos calcular la velocidad. Así funcionan algunos 
+         radares de tramo y de bandas.
+         <br><br>
+         &emsp;La otra manera de resolver el reto del radar con Arduino sería medir cuanta distancia recorre el coche 
+         en un tiempo determinado. Esta es la opción que hemos elegido para resolver el reto.
+      </p>
+      <p class="img_centrada"><img src="img/tema10/10-8.png" width="80%" alt=""></p>
+      <p class="texto">
+         &emsp;Mediante un sensor de ultrasonidos tomaremos dos medidas de distancia en un intervalo de tiempo 
+         concreto. 
+         <br><br>
+         &emsp;Restando las distancias podemos saber la distancia recorrida en esa décima de segundo y por lo tanto 
+         calcular la velocidad.
+         <br><br>
+         &emsp;Finalmente se muestra la medida en el monitor de serie.
+
+
+
+
+
+
+      </p>
+      <p class="img_centrada"><img src="img/tema10/10-9.gif" width="60%" alt=""></p>
+
+
+      <br><br><br>
+      <p class="texto">
+         <a class="link_b" href="scripts_arduino/RadarVelocidad.ino" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <br><br>
       <a class="texto volver" href="index.html">Volver al índice</a>
    </div>
    <div id="pie">
