@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 6: Control de Flujo</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Control de Flujo</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>if (si)</h2>
+      <p class="texto">
+         <strong>if</strong> es un estamento que se utiliza para probar si una determinada condición se ha alcanzado, 
+         como por ejemplo averiguar si un valor analógico está por encima de un cierto número, y ejecutar una serie 
+         de declaraciones (operaciones) que se escriben dentro de llaves, si es verdad. Si es falso (la condición no 
+         se cumple) el programa salta y no ejecuta las operaciones que están dentro de las llaves, El formato para if 
+         es el siguiente:
+      </p>
+      <p class="codigo">
+         if (unaVariable ?? valor)<br>
+         {<br>
+         &emsp;ejecutaInstrucciones;<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         En el ejemplo anterior se compara una variable con un valor, el cual puede ser una variable o constante. Si 
+         la comparación, o la condición entre paréntesis se cumple (es cierta), las declaraciones dentro de las 
+         llaves se ejecutan. Si no es así, el programa salta sobre ellas y sigue.
+      </p>
+      <p class="nota">
+         Nota: Tenga en cuenta el uso especial del símbolo '=', poner dentro de if (x = 10), podría parecer que es 
+         valido pero sin embargo no lo es ya que esa expresión asigna el valor 10 a la variable x, por eso dentro de 
+         la estructura if se utilizaría X==10 que en este caso lo que hace el programa es comprobar si el valor de x 
+         es 10. Ambas cosas son distintas por lo tanto dentro de las estructuras if, cuando se pregunte por un valor 
+         se debe poner el signo doble de igual “==”
+      </p>
+      <h2>if... else... (si... sino ..)</h2>
+      <p class="texto">
+         <strong>if... else...</strong> viene a ser un estructura que se ejecuta en respuesta a la idea “si esto no 
+         se cumple haz esto otro”. Por ejemplo, si se desea comprobar una entrada digital, y hacer una cosa si la 
+         entrada es HIGH o hacer otra cosa si la entrada es LOW, se escribiría de esta manera:
+      </p>
+      <p class="codigo">
+         if (inputPin == HIGH) // Si el valor de la entrada inputPin es HIGH<br>
+         {<br>
+         &emsp;instruccionesA; // Ejecuta si se cumple la condición<br>
+         }<br>
+         else<br>
+         {<br>
+         &emsp;instruccionesB; // Ejecuta si no se cumple la condición<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         Else puede ir precedido de otra condición de manera que se pueden establecer varias estructuras condicionales 
+         de tipo unas dentro de las otras (anidamiento) de forma que sean mutuamente excluyentes pudiéndose ejecutar 
+         a la vez. Es incluso posible tener un número ilimitado de estos condicionales. Recuerde sin embargo que sólo 
+         un conjunto de declaraciones se llevará a cabo dependiendo de la condición probada:
+      </p>
+      <p class="codigo">
+         if (inputPin < 500)<br>
+         {<br>
+         &emsp;instruccionesA; // Ejecuta las operaciones A<br>
+         }<br>
+         else if (inputPin >= 1000)<br>
+         {<br>
+         &emsp;instruccionesB; // Ejecuta las operacione B<br>
+         }<br>
+         else<br>
+         {<br>
+         &emsp;instruccionesC; // Ejecuta las operaciones C<br>
+         }
+      </p>
+      <p class="nota">
+         Nota: Un estamento de tipo if prueba simplemente si la condición dentro del paréntesis es verdadera o falsa. 
+         Esta declaración puede ser cualquier declaración válida. En el anterior ejemplo, si cambiamos y ponemos 
+         (inputPin == HIGH), el estamento if sólo chequearía si la entrada especificado esta en nivel alto (HIGH), 
+         o +5 v.
+      </p>
+      <h2>for</h2>
+      <p class="texto">
+         La declaración <strong>for</strong> se usa para repetir un bloque de sentencias encerradas entre llaves un 
+         número determinado de veces. Cada vez que se ejecutan las instrucciones del bucle se vuelve a testear la 
+         condición. La declaración for tiene tres partes separadas por (;). Vemos el ejemplo de su sintaxis:
+      </p>
+      <p class="codigo">
+         for (inicialización; condición; expresión)<br>
+         {<br>
+         &emsp;ejecutaInstrucciones;<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         La <strong>inicialización</strong> de una variable local se produce una sola vez y la 
+         <strong>condición</strong> se testea cada vez que se termina la ejecución de las instrucciones dentro del 
+         bucle. Si la condición sigue cumpliéndose, las instrucciones del bucle se vuelven a ejecutar. Cuando la 
+         condición no se cumple, el bucle termina.
+         <br><br>
+         El siguiente ejemplo inicia el entero i en el 0, y la condición es probar que el valor es inferior a 20 y si
+          es cierto i se incrementa en 1 y se vuelven a ejecutar las instrucciones que hay dentro de las llaves:
+      </p>
+      <p class="codigop">
+      for (int i=0; i<20; i++) // Declara i, prueba que es menor que 20, incrementa i en 1<br>
+      {<br>
+      &emsp;digitalWrite(13, HIGH); // Envía un 1 al pin 13<br>
+      &emsp;delay(250); // Espera 1⁄4 de segundo<br>
+      &emsp;digitalWrite(13, LOW); // Envía un 0 al pin 13<br>
+      &emsp;delay(250); // Espera 1⁄4 de segundo<br>
+      }
+      </p>
+      <p class="nota">
+         Nota: El bucle en el lenguaje C es mucho más flexible que otros bucles encontrados en algunos otros lenguajes 
+         de programación, incluyendo BASIC. Cualquiera de los tres elementos de cabecera puede omitirse, aunque el 
+         punto y coma es obligatorio. También las declaraciones de inicialización, condición y expresión puede ser 
+         cualquier estamento válido en lenguaje C sin relación con las variables declaradas. Estos tipos de estados 
+         son raros pero permiten disponer soluciones a algunos problemas de programación raras.
+      </p>
+      <h2>while</h2>
+      <p class="texto">
+         Un bucle del tipo <strong>while</strong> es un bucle de ejecución continua mientras se cumpla la expresión 
+         colocada entre paréntesis en la cabecera del bucle. La variable de prueba tendrá que cambiar para salir del 
+         bucle. La situación podrá cambiar a expensas de una expresión dentro el código del bucle o también por el 
+         cambio de un valor en una entrada de un sensor
+      </p>
+      <p class="codigo">
+         while (unaVariable ?? valor)<br>
+         {<br>
+         &emsp;ejecutarSentencias;<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         El siguiente ejemplo testea si la variable "unaVariable” es inferior a 200 y, si es verdad, ejecuta las 
+         declaraciones dentro de las llaves y continuará ejecutando el bucle hasta que 'unaVariable' no sea inferior 
+         a 200.
+      </p>
+      <p class="codigo">
+         while (unaVariable < 200) // Testea si es menor que 200<br>
+         {<br>
+         &emsp;instrucciones; // Ejecuta las instrucciones entre llaves<br>
+         &emsp;unaVariable++; // Incrementa la variable en 1<br>
+         }
+      </p>
+      <h2>do... while</h2>
+      <p class="texto">
+         El bucle <strong>do while</strong> funciona de la misma manera que el bucle <strong>while</strong>, con la 
+         salvedad de que la condición se prueba al final del bucle, por lo que el bucle siempre se ejecutará al menos 
+         una vez.
+      </p>
+      <p class="codigo">
+         do<br>
+         {<br>
+         &emsp;instrucciones;<br>
+         } while (unaVariable ?? valor);
+      </p>
+      <p class="texto">
+         <br>
+         El siguiente ejemplo asigna el valor leído leeSensor() a la variable 'x', espera 50 milisegundos, y luego 
+         continua mientras que el valor de la 'x' sea inferior a 100:
+      </p>
+      <p class="codigo">
+         do<br>
+         {<br>
+         &emsp;delay(50);<br>
+         } while (x < 100);
+      </p>
+      <br><br>
+      <a class="texto volver" href="indexpro.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

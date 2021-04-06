@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 1: Estructura del Programa</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Estructura</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Estructura del Programa</h2>
+      <p class="texto">
+         La estructura básica del lenguaje de programación de Arduino es bastante simple y se compone de al menos dos
+         partes. Estas dos partes necesarias, o funciones, encierran bloques que contienen declaraciones, estamentos o
+         instrucciones.
+      </p>
+      <p class="codigo">
+         void setup()<br>
+         {<br>
+         &emsp;&emsp;estamentos;<br>
+         }<br>
+         <br>
+         void loop()<br>
+         {<br>
+         &emsp;&emsp;estamentos;<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         En donde <strong>setup()</strong> es la parte encargada de recoger la configuración y <strong>loop()</strong>
+         es la que contienen el programa que se ejecutará cíclicamente (de ahí el termino loop –bucle-).
+         <br><br>
+         Ambas funciones son necesarias para que el programa trabaje.
+         <br><br>
+         La función de configuración debe contener la declaración de las variables. Es la primera función a ejecutar en 
+         el programa, se ejecuta sólo una vez, y se utiliza para configurar o inicializar pinMode (modo de trabajo de 
+         las Entradas y Salidas), configuración de la comunicación en serie y otras.
+         <br><br>
+         La función bucle (loop) siguiente contiene el código que se ejecutara continuamente (lectura de entradas, 
+         activación de salidas, etc). Esta función es el núcleo de todos los programas de Arduino y la que realiza la 
+         mayor parte del trabajo.
+      </p>
+      <h2>setup()</h2>
+      <p class="texto">
+         La función <strong>setup()</strong> se invoca una sola vez cuando el programa empieza. Se utiliza para
+         inicializar los modos de trabajo de los pins, o el puerto serie. Debe ser incluido en un programa aunque no 
+         haya declaración que ejecutar.
+      </p>
+      <p class="codigo">
+         void setup()<br>
+         {<br>
+         &emsp;&emsp;pinMode(pin, OUTPUT); // Configura el 'pin' como salida<br>
+         }
+      </p>
+      <h2>loop()</h2>
+      <p class="texto">
+         Después de llamar a setup(), la función loop() hace precisamente lo que sugiere su nombre, se ejecuta de 
+         forma cíclica, lo que posibilita que el programa este respondiendo continuamente ante los eventos que se 
+         produzcan en la tarjeta
+      </p>
+      <p class="codigo">
+         void loop()<br>
+         {<br>
+         &emsp;&emsp;digitalWrite(pin, HIGH);// Pone en uno (on, 5v) el ´pin´<br>
+         &emsp;&emsp;delay(1000);&emsp;&emsp;&emsp;&emsp;&emsp; // Espera un segundo (1000 ms)<br>
+         &emsp;&emsp;digitalWrite(pin, LOW);  // Pone en cero (off, 0v.) el ´pin´<br>
+         &emsp;&emsp;delay(1000);<br>
+         }
+      </p>
+      <h2>Funciones</h2>
+      <p class="texto">
+         Una función es un bloque de código que tiene un nombre y un conjunto de estamentos que son ejecutados cuando 
+         se llama a la función. Son funciones setup() y loop() de las que ya se ha hablado. 
+         <br><br>
+         Las funciones de usuario pueden ser escritas para realizar tareas repetitivas y para reducir el tamaño de un 
+         programa. 
+         <br><br>
+         Las funciones se declaran asociadas a un tipo de valor <strong>“type”</strong>. Este valor será el que 
+         devolverá la función, por ejemplo 'int' se utilizará cuando la función devuelva un dato numérico de tipo 
+         entero. Si la función no devuelve ningún valor entonces se colocará delante la palabra 
+         <strong>“void”</strong>, que significa  “función vacía”. 
+         <br><br>
+         Después de declarar el tipo de dato que devuelve la función se debe escribir el nombre de la función y entre 
+         paréntesis se escribirán, si es necesario, los parámetros que se deben pasar a la función para que se ejecute.
+      </p>
+      <p class="codigo">
+         type nombreFunción(Parámetros)<br>
+         {<br>
+         &emsp;&emsp;estamentos;<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         La función siguiente devuelve un número entero, <strong>delayVal()</strong> se utiliza para poner un valor 
+         de retraso en un programa que lee una variable analógica de un potenciómetro conectado a una entrada de 
+         Arduino. 
+         <br><br>
+         Al principio se declara como una variable local, <strong>´v´</strong> recoge el valor leído del potenciómetro 
+         que estará comprendido entre 0 y 1023, luego se divide el valor por 4 para ajustarlo a un margen comprendido 
+         entre 0 y 255, finalmente se devuelve el valor <strong>´v´</strong> y se retornaría al programa principal. 
+         <br><br>
+         Esta función cuando se ejecuta devuelve el valor de tipo entero <strong>´v´</strong>.
+      </p>
+      <p class="codigo">
+         int delayVal()<br>
+         {<br>
+         &emsp;&emsp;int v;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp; &emsp;// Crea una variable temporal 'v'<br>
+         &emsp;&emsp;v = analogRead(pot);&emsp;// Lee el valor del potenciómetro<br>
+         &emsp;&emsp;v /= 4;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Convierte 0-1023 a 0-255<br>
+         &emsp;&emsp;return v;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp; // Devuelve el valor final<br>
+         }
+      </p>
+      <h2>{} Entre Llaves</h2>
+      <p class="texto">
+         Las llaves sirven para definir el principio y el final de un bloque de instrucciones. Se utilizan para los 
+         bloques de programación setup(), loop(), if.., etc.
+      </p>
+      <p class="codigo">
+         type funcion()<br>
+         {<br>
+         &emsp;&emsp;estamentos;<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         Una llave de apertura “{“ siempre debe ir seguida de una llave de cierre “}”, si no es así el programa dará 
+         errores.
+         <br><br>
+         El entorno de programación de Arduino incluye una herramienta de gran utilidad para comprobar el total de 
+         llaves. Sólo tienes que hacer click en el punto de inserción de una llave abierta e inmediatamente se marca 
+         el correspondiente cierre de ese bloque (llave cerrada).
+      </p>
+      <h2>; Punto y Coma</h2>
+      <p class="texto">
+         El punto y coma “;” se utiliza para separar instrucciones en el lenguaje de programación de Arduino. También 
+         se utiliza para separar elementos en una instrucción de tipo “bucle for”.
+      </p>
+      <p class="codigo">
+         int x = 13; // Declara la variable 'x' como tipo entero de valor 13
+      </p>
+      <p class="nota">
+         Nota: Olvidarse de poner fin a una línea con un punto y coma se traducirá en un error de compilación. El 
+         texto de error puede ser obvio, y se referirá a la falta de una coma, o puede que no. Si se produce un error 
+         raro y de difícil detección lo primero que debemos hacer es comprobar que los puntos y comas están 
+         colocados al final de las instrucciones.
+      </p>
+      <h2>/*… */ Bloque de Comentarios</h2>
+      <p class="texto">
+         Los bloques de comentarios, o multi-línea de comentarios, son áreas de texto ignorados por el programa que 
+         se utilizan para las descripciones del código o comentarios que ayudan a comprender el programa. Comienzan 
+         con <strong>/*</strong> y terminan con <strong>*/</strong> y pueden abarcar varias líneas.
+      </p>
+      <p class="codigo">
+         /* esto es un bloque de comentario<br>
+         &emsp;no se debe olvidar cerrar los comentarios<br>
+         &emsp;estos deben estar equilibrados<br>
+         */
+      </p>
+      <p class="texto">
+         <br>
+         Debido a que los comentarios son ignorados por el programa y no ocupan espacio en la memoria de Arduino 
+         pueden ser utilizados con generosidad y también pueden utilizarse para "comentar" bloques de código con el 
+         propósito de anotar informaciones para depuración.
+      </p>
+      <p class="nota">
+         Nota: Dentro de una misma línea de un bloque de comentarios no se puede escribir otra bloque de comentarios 
+         (usando <strong>/* .. */</strong> )
+      </p>
+      <h2>// Línea de Comentarios</h2>
+      <p class="texto">
+         Una línea de comentario empieza con // y terminan con la siguiente línea de código. Al igual que los 
+         comentarios de bloque, los de línea son ignoradas por el programa y no ocupan espacio en la memoria.
+      </p>
+      <p class="codigo">
+         // esto es un comentario
+      </p>
+      <p class="texto">
+      <br>
+         Una línea de comentario se utiliza a menudo después de una instrucción, para proporcionar más información 
+         acerca de lo que hace esta o para recordarla más adelante.
+      </p>
+      <br><br>
+      <a class="texto volver" href="indexpro.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

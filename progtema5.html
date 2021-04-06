@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 5: Constantes</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Constantes</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Constantes</h2>
+      <p class="texto">
+         El lenguaje de programación de Arduino tiene unos valores predeterminados, que son llamados constantes. Se 
+         utilizan para hacer los programas más fáciles de leer. Las constantes se clasifican en grupos.
+      </p>
+      <h2>Cierto/Falso (true/false)</h2>
+      <p class="texto">
+         Estas son constantes booleanas que definen los niveles <strong>HIGH</strong> (alto) y <strong>LOW</strong> 
+         (bajo) cuando estos se refieren al estado de las salidas digitales. <strong>FALSE</strong> se asocia con 
+         <strong>0</strong> (cero), mientras que <strong>TRUE</strong> se asocia con <strong>1</strong>, pero TRUE 
+         también puede ser cualquier otra cosa excepto cero. Por lo tanto, en sentido booleano, -1, 2 y -200 todos 
+         se definen también como TRUE (esto es importante tenerlo en cuenta).
+      </p>
+      <p class="codigo">
+         if (b == TRUE);<br>
+         {<br>
+         &emsp;ejecutar las instrucciones;<br>
+         }
+      </p>
+      <h2>high/low</h2>
+      <p class="texto">
+         Estas constantes definen los niveles de salida altos o bajos y se utilizan para la lectura o la escritura 
+         digital para las patillas. <strong>ALTO</strong> se define como en la lógica de nivel 1, <strong>ON</strong>, 
+         ó 5 voltios, mientras que <strong>BAJO</strong> es lógica nivel 0, <strong>OFF</strong>, o 0 voltios.
+      </p>
+      <p class="codigo">
+         digitalWrite(13, HIGH); // Activa la salida 13 con un nivel alto (5v.)
+      </p>
+      <h2>input/output</h2>
+      <p class="texto">
+         Estas constantes son utilizadas para definir, al comienzo del programa, el modo de funcionamiento de los 
+         pines mediante la instrucción pinMode de tal manera que el pin puede ser una <strong>entrada INPUT</strong> 
+         o una <strong>salida OUTPUT</strong>.
+      </p>
+      <p class="codigo">
+         pinMode(13, OUTPUT); // Designamos que el PIN 13 es una salida
+      </p>
+      <br><br>
+      <a class="texto volver" href="indexpro.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>
