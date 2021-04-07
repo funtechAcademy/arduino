@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 11: Aleatorio</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Aleatorio</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>randomSeed(seed)</h2>
+      <p class="texto">
+         Establece un valor, o semilla, como punto de partida para la función random().
+      </p>
+      <p class="codigo">
+         randomSeed(valor); // Hace que valor sea la semilla del random
+      </p>
+      <p class="texto">
+         <br>
+         Debido a que Arduino es incapaz de crear un verdadero número aleatorio, <strong>randomSeed</strong> te 
+         permite colocar una variable, constante, u otra función de control dentro de la función 
+         <strong>random</strong>, lo que permite generar números aleatorios "al azar". 
+         <br><br>
+         Hay una variedad de semillas, o funciones, que pueden ser utilizados en esta función, incluido 
+         <strong>millis()</strong> o incluso <strong>analogRead()</strong> que permite leer ruido eléctrico a través 
+         de un pin analógico.
+      </p>
+      <h2>random(max) random(min, max)</h2>
+      <p class="texto">
+         La función random devuelve un número aleatorio entero de un intervalo de valores especificado entre los 
+         valores min y max.
+      </p>
+      <p class="codigop">
+         valor = random(100, 200); // Asigna a 'valor' un numero aleatorio entre 100-200
+      </p>
+      <p class="nota">
+         Nota: Usa esta funcián después de usar el randomSeed().
+      </p>
+      <p class="texto">
+         El siguiente ejemplo genera un valor aleatorio entre 0-255 y lo envía a una salida analógica PWM:
+      </p>
+      <p class="codigop">
+         int randNumber; // Variable que almacena el valor aleatorio<br>
+         int led = 10; // Define led como 10<br><br>
+         void setup() // No es necesario configurar nada<br>
+         {<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;randomSeed(millis()); // Genera una semilla a partir de millis()<br>
+         &emsp;randNumber = random(255); // Genera número aleatorio entre 0-255<br>
+         &emsp;analogWrite(led, randNumber); // Envía a la salida led de tipo PWM el valor<br>
+         &emsp;delay(500); // Espera 0,5 seg.<br>
+         }
+      </p>
+      <br><br>
+      <a class="texto volver" href="indexpro.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 8: Entradas y Salidas Analógicas</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Entradas y Salidas Analógicas</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>analogRead(pin)</h2>
+      <p class="texto">
+         Lee el valor de un determinado pin definido como entrada analógica con una resolución de 10 bits. Esta 
+         instrucción sólo funciona en los pines (0-5). El rango de valor que podemos leer oscila de 0 a 1023.
+      </p>
+      <p class="codigo">
+         valor = analogRead(pin); // Asigna a valor lo que lee en la entrada 'pin'
+      </p>
+      <p class="nota">
+         Nota: Los pins analógicos (0-5) a diferencia de los pines digitales, no necesitan ser declarados como INPUT 
+         u OUPUT ya que son siempre INPUT's.
+      </p>
+      <h2>analogWrite(pin, value)</h2>
+      <p class="texto">
+         Esta instrucción sirve para escribir un pseudo-valor analógico utilizando el procedimiento de modulación por 
+         ancho de pulso (PWM) a uno de los pin's de Arduino marcados como “pin PWM”. El más reciente Arduino, que 
+         implementa el <strong>chip ATmega168, permite habilitar como salidas analógicas tipo PWM los pines 3, 5, 6, 
+         9, 10 y 11</strong>. Los modelos de Arduino más antiguos que implementan el <strong>chip ATmega8, solo tiene 
+         habilitadas para esta función los pines 9, 10 y 11</strong>. El valor que se puede enviar a estos pines de 
+         salida analógica puede darse en forma de variable o constante, pero siempre con un margen de 0-255.
+      </p>
+      <p class="codigop">
+         analogWrite(pin, valor); // Escribe 'valor' en el 'pin' definido como analógico
+      </p>
+      <p class="texto">
+         <br>
+         Si enviamos el valor 0 genera una salida de 0 voltios en el pin especificado; un valor de 255 genera una 
+         salida de 5 voltios de salida en el pin especificado. Para valores de entre 0 y 255, el pin saca tensiones 
+         entre 0 y 5 voltios - el valor HIGH de salida equivale a 5v (5 voltios). 
+         <br><br>
+         Teniendo en cuenta el concepto de señal PWM , por ejemplo, un valor de 64 equivaldrá a mantener 0 voltios de 
+         tres cuartas partes del tiempo y 5 voltios a una cuarta parte del tiempo; un valor de 128 equivaldrá a 
+         mantener la salida en 0 la mitad del tiempo y 5 voltios la otra mitad del tiempo, y un valor de 192 
+         equivaldrá a mantener en la salida 0 voltios una cuarta parte del tiempo y de 5 voltios de tres cuartas 
+         partes del tiempo restante.
+      </p>
+      <p class="texto">
+         Debido a que esta es una función de hardware, en el pin de salida analógica (PWN) se generará una onda 
+         constante después de ejecutada la instrucción <strong>analogWrite</strong> hasta que se llegue a ejecutar 
+         otra instrucción <strong>analogWrite</strong> (o una llamada a <strong>digitalRead</strong> o 
+         <strong>digitalWrite</strong> en el mismo pin).
+      </p>
+      <p class="nota">
+         Nota: Las salidas analógicas a diferencia de las digitales, no necesitan ser declaradas como INPUT u OUTPUT.
+      </p>
+      <p class="texto">
+         El siguiente ejemplo lee un valor analógico de un pin de entrada analógica, convierte el valor dividiéndolo 
+         por 4, y envía el nuevo valor convertido a una salida del tipo PWM o salida analógica:
+      </p>
+      <p class="codigop">
+         int led = 10; // Define el pin 10 como 'led'<br>
+         int analog = 0; // Define el pin 0 como 'analog'<br>
+         int valor; // Define la variable 'valor'<br><br>
+         void setup() // No es necesario configurar entradas ni salidas<br>
+         {<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;valor = analogRead(analog); // Lee el pin 0 y lo asocia a la variable valor<br>
+         &emsp;valor /= 4; // Divide valor entre 4 y lo reasigna a valor<br>
+         &emsp;analogWrite(led, value); // Escribe en el pin10 'valor'<br>
+         }
+      </p>
+      <br><br>
+      <a class="texto volver" href="indexpro.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

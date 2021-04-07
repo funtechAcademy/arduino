@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 9: Tiempo</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Tiempo</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>delay(ms)</h2>
+      <p class="texto">
+         Detiene la ejecución del programa la cantidad de tiempo en milisegundos que se indica en la propia 
+         instrucción. De tal manera que 1000 equivale a 1 segundo.
+      </p>
+      <p class="codigo">
+         delay(1000); // Espera 1 segundo
+      </p>
+      <h2>millis()</h2>
+      <p class="texto">
+         Devuelve el número de milisegundos transcurrido desde el inicio del programa en Arduino hasta el momento 
+         actual. Normalmente será un valor grande (dependiendo del tiempo que este en marcha la aplicación después 
+         de cargada o después de la última vez que se pulsó el botón “reset” de la tarjeta).
+      </p>
+      <p class="codigo">
+         valor = millis(); // Valor recoge el número de milisegundos
+      </p>
+      <p class="nota">
+         Nota: Este número se desbordará (si no se resetea de nuevo a cero), después de aproximadamente 9 horas.
+      </p>
+      <br><br>
+      <a class="texto volver" href="indexpro.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

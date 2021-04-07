@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 12: Puerto Serie</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Puerto Serie</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Serial.begin(rate)</h2>
+      <p class="texto">
+         Abre el puerto serie y fija la velocidad en baudios para la transmisión de datos en serie. El valor típico 
+         de velocidad para comunicarse con el ordenador es 9600, aunque otras velocidades pueden ser soportadas.
+      </p>
+      <p class="codigop">
+         void setup()<br>
+         {<br>
+         &emsp;Serial.begin(9600); // Abre el Puerto serie configurando la velocidad en 9600 bps<br>
+         }
+      </p>
+      <p class="nota">
+         Nota: Cuando se utiliza la comunicación serie los pins digital 0 (RX) y 1 (TX) no puede utilizarse al mismo 
+         tiempo.
+      </p>
+      <h2>Serial.print(data, data type)</h2>
+      <p class="texto">
+         Vuelca o envía un número o una cadena de carateres, al puerto serie. Dicho comando puede tomar diferentes 
+         formas, dependiendo de los parámetros que utilicemos para definir el formato de volcado de los números.
+      </p>
+      <h3>Parámetros</h3>
+      <p class="texto">
+         <strong>data</strong>: El número o la cadena de caracteres a volcar o enviar.
+         <br><br>
+         <strong>data type</strong>: Determina el formato de salida de los valores numéricos (decimal, octal, binario, 
+         etc...) <strong>DEC, OCT, BIN, HEX, BYTE , si no se pone nada, devuelve ASCII</strong>.
+      </p>
+      <h3>Ejemplos</h3>
+      <p class="texto">
+         <strong>Serial.print(b)</strong>
+         <br><br>
+         &emsp;Vuelca o envía el valor de b como un número decimal en caracteres ASCII. Equivaldría a 
+         <strong>printInteger()</strong>.
+      </p>
+      <p class="codigo">
+         int b = 79;<br>
+         Serial.print(b); // Imprime la cadena "79"
+      </p>
+      <p class="texto">
+         <br>
+         <strong>Serial.print(b, DEC)</strong>
+         <br><br>
+         &emsp;Vuelca o envía el valor de b como un número decimal en caracteres ASCII. Equivaldría a 
+         <strong>printInteger()</strong>.
+      </p>
+      <p class="codigo">
+         int b = 79;<br>
+         Serial.print(b, DEC); // Imprime la cadena "79"
+      </p>
+      <p class="texto">
+         <br>
+         <strong>Serial.print(b, HEX)</strong>
+         <br><br>
+         &emsp;Vuelca o envía el valor de b como un número hexdecimal en caracteres ASCII. Equivaldría a 
+         <strong>printHex()</strong>.
+      </p>
+      <p class="codigo">
+         int b = 79;<br>
+         Serial.print(b, HEX); // Imprime la cadena "4F"
+      </p>
+      <p class="texto">
+         <br>
+         <strong>Serial.print(b, OCT)</strong>
+         <br><br>
+         &emsp;Vuelca o envía el valor de b como un número octal en caracteres ASCII. Equivaldría a 
+         <strong>printOctal()</strong>.
+      </p>
+      <p class="codigo">
+         int b = 79;<br>
+         Serial.print(b, OCT); // Imprime la cadena "117"
+      </p>
+      <p class="texto">
+         <br>
+         <strong>Serial.print(b, BIN)</strong>
+         <br><br>
+         &emsp;Vuelca o envía el valor de b como un número binario en caracteres ASCII. Equivaldría a 
+         <strong>printBinary()</strong>.
+      </p>
+      <p class="codigo">
+         int b = 79;<br>
+         Serial.print(b, BIN); // Imprime la cadena "1001111"
+      </p>
+      <p class="texto">
+         <br>
+         <strong>Serial.print(b, BYTE)</strong>
+         <br><br>
+         &emsp;Vuelca o envía el valor de b como un byte. Equivaldría a <strong>printByte()</strong>.
+      </p>
+      <p class="codigo">
+         int b = 79;<br>
+         Serial.print(b, BYTE); // Imprime el carácter "O", el cual representa 
+         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// el carácter ASCII del valor 79
+      </p>
+      <p class="texto">
+         <br>
+         <strong>Serial.print(str)</strong>
+         <br><br>
+         &emsp;Vuelca o envía la cadena de caracteres como una cadena ASCII. Equivaldría a <strong>printString()</strong>.
+      </p>
+      <p class="codigo">
+         Serial.print("Hello World!"); // Imprime "Hello World!"
+      </p>
+      <h2>Serial.println(data)</h2>
+      <p class="texto">
+         Imprime los datos en el puerto serie, seguido por un retorno de carro automático y salto de línea. Este 
+         comando toma la misma forma que <strong>Serial.print()</strong>, pero es más fácil para la lectura de los 
+         datos en el Monitor Serie del software.
+      </p>
+      <p class="codigo">
+         Serial.println(analogValue); // Envía el valor 'analogValue' al puerto
+      </p>
+      <p class="nota">
+         Nota: Para obtener más información sobre las distintas posibilidades de <strong>Serial.print()</strong> y 
+         <strong>Serial.println()</strong> puedes consultar el sitio web de Arduino.
+      </p>
+      <p class="texto">
+         El siguiente ejemplo toma de una lectura analógica pin0 y envía estos datos al ordenador cada segundo.
+      </p>
+      <p class="codigo">
+         void setup()<br>
+         {<br>
+         &emsp;Serial.begin(9600); // Configura el puerto serie a 9600 bps<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;Serial.println(analogRead(0)); // Envía el valor de la lectura analógica<br>
+         &emsp;delay(1000); // Espera 1 segundo<br>
+         }
+      </p>
+      <h2>Serial.printnl(data, data type)</h2>
+      <p class="texto">
+         Vuelca o envía un número o una cadena de carateres al puerto serie, seguido de un caracter de retorno de 
+         carro "CR" (ASCII 13, o '\r') y un caracter de salto de línea "LF" (ASCII 10, o '\n'). Toma la misma forma 
+         que el comando <strong>Serial.print()</strong>
+         <br><br>
+         <strong>Serial.println(b)</strong>
+         <br><br>
+         &emsp;Vuelca o envía el valor de b como un número decimal en caracteres ASCII seguido de "CR" y "LF".
+         <br><br><br>
+         <strong>Serial.println(b, DEC)</strong>
+         <br><br>
+         &emsp;Vuelca o envía el valor de b como un número decimal en caracteres ASCII seguido de "CR" y "LF".
+         <br><br><br>
+         <strong>Serial.println(b, HEX)</strong>
+         <br><br>
+         &emsp;Vuelca o envía el valor de b como un número hexdecimal en caracteres ASCII seguido de "CR" y "LF".
+         <br><br><br>
+         <strong>Serial.println(b, OCT)</strong>
+         <br><br>
+         &emsp;Vuelca o envía el valor de b como un número octal en caracteres ASCII seguido de "CR" y "LF".
+         <br><br><br>
+         <strong>Serial.println(b, BIN)</strong>
+         <br><br>
+         &emsp;Vuelca o envía el valor de b como un número binario en caracteres ASCII seguido de "CR" y "LF".
+         <br><br><br>
+         <strong>Serial.print(b, BYTE)</strong>
+         <br><br>
+         &emsp;Vuelca o envía el valor de b como un byte seguido de "CR" y "LF".
+         <br><br><br>
+         <strong>Serial.println(str)</strong>
+         <br><br>
+         &emsp;Vuelca o envía la cadena de caracteres como una cadena ASCII seguido de "CR" y "LF".
+         <br><br><br>
+         <strong>Serial.println()</strong>
+         <br><br>
+         &emsp;Solo vuelca o envía "CR" y "LF". Equivaldría a <strong>printNewline()</strong>.
+      </p>
+      <h2>Serial.avaible()</h2>
+      <p class="texto">
+         Obtiene un número entero con el número de bytes (caracteres) diponibles para leer o capturar desde el puerto 
+         serie. Equivaldría a la función <strong>serialAvailable()</strong>.
+      </p>
+      <p class="codigo">
+         int Serial.available()
+      </p>
+      <p class="texto">
+         <br>
+         Devuelve un entero con el número de bytes disponibles para leer desde el buffer serie, o 0 si no hay ninguno. 
+         Si hay algún dato disponible, <strong>SerialAvailable()</strong> será mayor que 0. El buffer serie puede 
+         almacenar como máximo 64 bytes.
+      </p>
+      <p class="codigop">
+         int incomingByte = 0; // Almacena el dato serie<br><br>
+         void setup()<br>
+         {<br>
+         &emsp;Serial.begin(9600); // Abre el puerto serie, y le asigna la velocidad de 9600 bps<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;// Envía datos sólo si los recibe<br>
+         &emsp;if (Serial.available() > 0)<br>
+         &emsp;{<br>
+         &emsp;&emsp;incomingByte = Serial.read(); // Lee el byte de entrada<br>
+         &emsp;&emsp;// Lo vuelca a pantalla<br>
+         &emsp;&emsp;Serial.print("Se ha recibido: ");<br>
+         &emsp;&emsp;Serial.println(incomingByte, DEC);<br>
+         &emsp;}<br>
+         }
+      </p>
+      <h2>Serial.Read()</h2>
+      <p class="texto">
+         Lee o captura un byte (un caracter) desde el puerto serie. Equivaldría a la función 
+         <strong>serialRead()</strong>.
+      </p>
+      <p class="codigo">
+         int Serial.Read()
+      </p>
+      <p class="texto">
+      Devuelve el siguiente byte (carácter) desde el puerto serie, o -1 si no hay ninguno.
+      </p>
+      <p class="codigo">
+         int incomingByte = 0; // Almacena el dato serie<br><br>
+         void setup()<br>
+         {<br>
+         &emsp;Serial.begin(9600); // Abre el puerto serie, y le asigna la velocidad de 9600 bps<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;// Envía datos sólo si los recibe<br>
+         &emsp;if (Serial.available() > 0)<br>
+         &emsp;{<br>
+         &emsp;&emsp;incomingByte = Serial.read(); // Lee el byte de entrada<br>
+         &emsp;&emsp;// Lo vuelca a pantalla<br>
+         &emsp;&emsp;Serial.print("Se ha recibido: ");<br>
+         &emsp;&emsp;Serial.println(incomingByte, DEC);<br>
+         &emsp;}<br>
+         }
+      </p>
+      <br><br>
+      <a class="texto volver" href="indexpro.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

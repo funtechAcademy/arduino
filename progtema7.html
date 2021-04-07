@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 7: Entradas y Salidas Digitales</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Entradas y Salidas Digitales</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>pinMode(pin, mode)</h2>
+      <p class="texto">
+         Esta instrucción es utilizada en la parte de configuración setup() y sirve para configurar el modo de 
+         trabajo de un <strong>PIN</strong> pudiendo ser <strong>INPUT</strong> (entrada) u <strong>OUTPUT</strong> 
+         (salida).
+      </p>
+      <p class="codigo">
+         pinMode(pin, OUTPUT); // Configura ‘pin’ como salida
+      </p>
+      <p class="texto">
+         <br>
+         Los terminales de Arduino, por defecto, están configurados como entradas, por lo tanto no es necesario 
+         definirlos en el caso de que vayan a trabajar como entradas. Los pines configurados como entrada quedan, 
+         bajo el punto de vista eléctrico, como entradas en estado de alta impedancia.
+         <br><br>
+         Estos pines tienen a nivel interno una resistencia de 20 KΩ a las que se puede acceder mediante software. 
+         Estas resistencias se accede de la siguiente manera:
+      </p>
+      <p class="codigo">
+         pinMode(pin, INPUT); // Configura el ‘pin’ como entrada<br>
+         digitalWrite(pin, HIGH); // Activa las resistencias internas
+      </p>
+      <p class="texto">
+         <br>
+         Las resistencias internas normalmente se utilizan para conectar las entradas a interruptores. En el ejemplo 
+         anterior no se trata de convertir un pin en salida, es simplemente un método para activar las resistencias 
+         interiores.
+         <br><br>
+         Los pins configurados como OUTPUT (salida) se dice que están en un estado de baja impedancia y pueden 
+         proporcionar <strong>40 mA</strong> (miliamperios) de corriente a otros dispositivos y circuitos. Esta 
+         corriente es suficiente para alimentar un diodo LED (no olvidando poner una resistencia en serie), pero no 
+         es lo suficientemente grande como para alimentar cargas de mayor consumo como relés, solenoides, o motores.
+         <br><br>
+         Un cortocircuito en las patillas Arduino provocará una corriente elevada que puede dañar o destruir el chip 
+         Atmega. A menudo es una buena idea conectar en la OUTUPT (salida) una resistencia externa de 470Ω o de 
+         1000 Ω.
+      </p>
+      <h2>digitalRead(pin)</h2>
+      <p class="texto">
+         Lee el valor de un pin (definido como digital) dando un resultado <strong>HIGH</strong> (alto) o 
+         <strong>LOW</strong> (bajo). El pin se puede especificar ya sea como una variable o una constante (0-13).
+      </p>
+      <p class="codigop">
+         valor = digitalRead(Pin); // Hace que 'valor' sea igual al estado leído en 'Pin'
+      </p>
+      <h2>digitalWrite(pin, value)</h2>
+      <p class="texto">
+         Envía al 'pin' definido previamente como OUTPUT el valor HIGH o LOW (poniendo en 1 o 0 la salida). El pin se 
+         puede especificar ya sea como una variable o como una constante (0-13).
+      </p>
+      <p class="codigo">
+         digitalWrite(pin, HIGH); // Deposita en el 'pin' un valor HIGH (alto o 1)
+      </p>
+      <p class="texto">
+         <br>
+         El siguiente ejemplo lee el estado de un pulsador conectado a una entrada digital y lo escribe en el 'pin' 
+         de salida LED:
+      </p>
+      <p class="codigo">
+         int led = 13; // Asigna a LED el valor 13<br>
+         int boton = 7; // Asigna a botón el valor 7<br>
+         int valor = 0; // Define el valor y le asigna el valor 0<br><br>
+         void setup()<br>
+         {<br>
+         &emsp;pinMode(led, OUTPUT); // Configura el led (pin13) como salida<br>
+         &emsp;pinMode(boton, INPUT); // Configura botón (pin7) como entrada<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;valor = digitalRead(boton); // Lee el estado de la entrada botón<br>
+         &emsp;digitalWrite(led, valor); // Envía a la salida 'led' el valor leído<br>
+         }
+      </p>
+      <br><br>
+      <a class="texto volver" href="indexpro.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>
