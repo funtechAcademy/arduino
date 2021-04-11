@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 13: Conexiones de Entradas y Salidas</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Conexiones de Entradas y Salidas</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Salida Digital</h2>
+      <p class="texto">
+         Este es el ejemplo básico equivalente al "hola mundo" de cualquier lenguaje de programación haciendo 
+         simplemente el encendido y apagado de un LED. En este ejemplo el LED está conectado en el PIN13, y se 
+         enciende y apaga “parpadea” cada segundo. 
+      </p>
+      <p class="img_centrada"><img src="img/progtema13/13-1.png" width="40%" alt=""></p>
+      <p class="texto">
+         La resistencia que se debe colocar en serie con el LED en este caso puede omitirse ya que el pin13 de 
+         Arduino ya incluye en la tarjeta esta resistencia.
+      </p>
+      <p class="codigo">
+         int ledPin = 13; // LED en el pin digital 13<br><br>
+         void setup()<br>
+         {<br>
+         &emsp;pinMode(ledPin, OUTPUT); // Configura el pin 13 como salida<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;digitalWrite(ledPin, HIGH); // Activa el LED<br>
+         &emsp;delay(1000); // Espera 1 segundo<br>
+         &emsp;digitalWrite(ledPin, LOW); // Desactiva el LED<br>
+         &emsp;delay(1000); // Espera 1 segundo }
+      </p>
+      <h2>Entrada Digital</h2>
+      <p class="texto">
+         Esta es la forma más sencilla de entrada con sólo dos posibles estados: encendido o apagado. 
+      </p>
+      <p class="img_centrada"><img src="img/progtema13/13-2.png" width="40%" alt=""></p>
+      <p class="texto">
+         En este ejemplo se lee un simple switch o pulsador conectado a PIN2. Cuando el interruptor está cerrado el 
+         pin de entrada se lee HIGH y encenderá un LED colocado en el PIN13.
+      </p>
+      <p class="codigo">
+         int ledPin = 13; // Pin 13 asignado para el LED de salida<br>
+         int inPin = 2; // Pin 2 asignado para el pulsador<br><br>
+         void setup() // Configura entradas y salidas<br>
+         {<br>
+         &emsp;pinMode(ledPin, OUTPUT); // Declara LED como salida<br>
+         &emsp;pinMode(inPin, INPUT); // Declara pulsador como entrada<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;if (digitalRead(inPin) == HIGH) // Testea si la entrada esta activa<br>
+         &emsp;{<br>
+         &emsp;&emsp;digitalWrite(ledPin, HIGH); // Enciende el LED<br>
+         &emsp;&emsp;delay(1000); // Espera 1 segundo<br>
+         &emsp;&emsp;digitalWrite(ledPin, LOW); // Apaga el LED<br>
+         &emsp;}<br>
+         }
+      </p>
+      <h2>Salida de Alto Consumo (Corriente)</h2>
+      <p class="texto">
+         A veces es necesario controlar cargas de más de los 40 mA que es capaz de suministrar la tarjeta Arduino. En 
+         este caso se hace uso de un transistor MOSFET que puede alimentar cargas de mayor consumo de corriente. El 
+         siguiente ejemplo muestra como el transistor MOSFET conmuta 5 veces cada segundo.
+      </p>
+      <p class="img_centrada"><img src="img/progtema13/13-3.png" width="40%" alt=""></p>
+      <p class="nota">
+         Nota: El esquema muestra un motor con un diodo de protección por ser una carga inductiva. En los casos que 
+         las cargas no sean inductivas no será necesario colocar el diodo.
+      </p>
+      <p class="codigo">
+         int outPin = 5; // Pin de salida para el MOSFET<br><br>
+         void setup()<br>
+         {<br>
+         &emsp;pinMode(outPin, OUTPUT); // Pin5 como salida<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;for (int i=0; i<=5; i++) // Repetir bucle 5 veces<br>
+         &emsp;{<br>
+         &emsp;&emsp;digitalWrite(outPin, HIGH); // Activa el MOSFET<br>
+         &emsp;&emsp;delay(250); // Espera 1/4 segundo<br>
+         &emsp;&emsp;digitalWrite(outPin, LOW); // Desactiva el MOSFET<br>
+         &emsp;&emsp;delay(250); // Espera 1/4 segundo<br>
+         &emsp;}<br>
+         &emsp;delay(1000); // Espera 1 segundo<br>
+         }
+      </p>
+      <h2>Salida Analógica del Tipo PWM (Modulación por Ancho de Pulsos)</h2>
+      <p class="texto">
+         La Modulación por Ancho de Pulsos (PWM) es una forma de conseguir una “falsa” salida analógica. Esto podría 
+         ser utilizado para modificar el brillo de un LED o controlar un servo motor. El siguiente ejemplo lentamente 
+         hace que el LED se ilumine y se apague haciendo uso de dos bucles.
+      </p>
+      <p class="img_centrada"><img src="img/progtema13/13-4.png" width="40%" alt=""></p>
+      <p class="codigo">
+         int ledPin = 9; // Pin PWM para el LED<br><br>
+         void setup() // No es necesario configurar nada<br>
+         {<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;for (int i=0; i<=255; i++) // El valor de i asciende<br>
+         &emsp;{<br>
+         &emsp;&emsp;analogWrite(ledPin, i); // Se escribe el valor de i en el PIN del LED<br>
+         &emsp;&emsp;delay(100); // Espera durante 100ms<br>
+         &emsp;}<br>
+         &emsp;for (int i=255; i>=0; i--) // El valor de i desciende<br>
+         &emsp;{<br>
+         &emsp;&emsp;analogWrite(ledPin, i); // Se escribe el valor de i<br>
+         &emsp;&emsp;delay(100); // Espera durante 100ms<br>
+         &emsp;}<br>
+         }
+      </p>
+      <h2>Potenciómetro de Entrada (Analógica)</h2>
+      <p class="texto">
+         El uso de un potenciómetro y uno de los pines de entrada analógica-digital de Arduino (ADC) permite leer 
+         valores analógicos que se convertirán en valores dentro del rango de 0-1024. 
+      </p>
+      <p class="img_centrada"><img src="img/progtema13/13-5.png" width="40%" alt=""></p>
+      <p class="texto">
+         El siguiente ejemplo utiliza un potenciómetro para controlar el tiempo de parpadeo de un LED.
+      </p>
+      <p class="codigo">
+         int potPin = 0; // Pin entrada para potenciómetro<br>
+         int ledPin = 13; // Pin de salida para el LED<br><br>
+         void setup()<br>
+         {<br>
+         &emsp;pinMode(ledPin, OUTPUT); // Declara ledPin como SALIDA<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;digitalWrite(ledPin, HIGH); // Pone ledPin en ON<br>
+         &emsp;delay(analogRead(potPin)); // Detiene la ejecución un tiempo “potPin”<br>
+         &emsp;digitalWrite(ledPin, LOW); // Pone ledPin en OFF<br>
+         &emsp;delay(analogRead(potPin)); // Detiene la ejecución un tiempo “potPin”<br>
+         }
+      </p>
+      <h2>Resistencia Variable de Entrada (Analógica)</h2>
+      <p class="texto">
+         Las resistencias variables como los sensores de luz LCD los termistores, sensores de esfuerzos, etc. Se 
+         conectan a las entradas analógicas para recoger valores de parámetros físicos. 
+      </p>
+      <p class="img_centrada"><img src="img/progtema13/13-6.png" width="40%" alt=""></p>
+      <p class="texto">
+         Este ejemplo hace uso de una función para leer el valor analógico y establecer un tiempo de retardo. Este 
+         tiempo controla el brillo de un diodo LED conectado en la salida.
+      </p>
+      <p class="codigop">
+         int ledPin = 9; // Salida analógica PWM para conectar a LED<br>
+         int analogPin = 0; // Resistencia variable conectada a la entrada analógica pin 0<br><br>
+         void setup() // No es necesario configurar entradas y salidas<br>
+         {<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;for (int i=0; i<=255; i++) // Incremento de valor de i<br>
+         &emsp;{<br>
+         &emsp;&emsp;analogWrite(ledPin, i); // Configura el nivel brillo con el valor de i<br>
+         &emsp;&emsp;delay(delayVal()); // Espera un tiempo<br>
+         &emsp;}<br>
+         &emsp;for (int i=255; i>=0; i--) // Decrementa el valor de i<br>
+         &emsp;{<br>
+         &emsp;&emsp;analogWrite(ledPin, i); // Configura el nivel de brillo con el valor de i<br>
+         &emsp;&emsp;delay(delayVal()); // Espera un tiempo<br>
+         &emsp;}<br>
+         }<br><br>
+         int delayVal() // Método para recoger el tiempo de retardo<br>
+         {<br>
+         &emsp;int v; // Crea una variable temporal (local)<br>
+         &emsp;v = analogRead(analogPin); // Lee valor analógico<br>
+         &emsp;v /= 8; // Convierte el valor leído de 0-1024 a 0-128<br>
+         &emsp;return v; // Devuelve el valor v<br>
+         }
+      </p>
+      <h2>Salida a Servo</h2>
+      <p class="texto">
+         Los servos de los juguetes tienen un tipo de motor que se puede mover en un arco de 180º y contienen la 
+         electrónica necesaria para ello. 
+      </p>
+      <p class="img_centrada"><img src="img/progtema13/13-7.png" width="40%" alt=""></p>
+      <p class="texto">
+         Todo lo que se necesita es un pulso enviado cada 20ms. Este ejemplo utiliza la función servoPulse para mover 
+         el servo de 10º a 170º.
+      </p>
+      <p class="codigo">
+         int servoPin = 2; // Servo conectado al pin digital 2<br> 
+         int myAngle; // Ángulo del servo de 0-180<br>
+         int pulseWidth; // Anchura del pulso para la función servoPulse<br><br>
+         void setup()<br>
+         {<br>
+         &emsp;pinMode(servoPin, OUTPUT); // Configura pin 2 como salida<br>
+         }<br><br>
+         void servoPulse(int servoPin, int myAngle)<br>
+         {<br>
+         &emsp;pulseWidth = (myAngle * 10) + 600; // Determina retardo<br>
+         &emsp;digitalWrite(servoPin, HIGH); // Activa el servo<br>
+         &emsp;delayMicroseconds(pulseWidth); // Pausa<br>
+         &emsp;digitalWrite(servoPin, LOW); // Desactiva el servo<br>
+         &emsp;delay(20); // Retardo de refresco<br>
+         }<br>
+         void loop()<br>
+         {<br>
+         &emsp;// El servo inicia su recorrido en 10º y gira hasta 170º<br>
+         &emsp;for (myAngle=10; myAngle<=170; myAngle++)<br>
+         &emsp;{<br>
+         &emsp;&emsp;servoPulse(servoPin, myAngle);<br>
+         &emsp;}<br>
+         &emsp;// El servo vuelve desde 170º hasta 10º<br>
+         &emsp;for (myAngle=170; myAngle>=10; myAngle--)<br>
+         &emsp;{<br>
+         &emsp;&emsp;servoPulse(servoPin, myAngle);<br>
+         &emsp;}<br>
+         }
+      </p>
+      <br><br>
+      <a class="texto volver" href="indexpro.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

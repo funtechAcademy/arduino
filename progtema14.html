@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 14: Cómo Crear una Librería en Arduino</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Cómo Crear una Librería en Arduino</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Cómo Crear una Librería en Arduino</h2>
+      <p class="texto">
+         En este tema, vamos a explicar cómo crear una librería para Arduino. Se comienza con un programa que realiza, 
+         mediante encendido y apagado de un led, el código Morse y se explica cómo convertir este en una función de 
+         librería. Esto permite a otras personas utilizar fácilmente el código que has escrito cargándolo de una forma 
+         sencilla.
+         <br><br>
+         Se comienza con el programa de un sencillo código Morse: La palabra a generar es SOS (... --- ...).
+      </p>
+      <p class="codigo">
+         // Genera SOS en código Morse luminoso<br>
+         int pin = 13;<br><br>
+         void setup()<br>
+         {<br>
+         &emsp;pinMode(pin, OUTPUT);<br>
+         }<br><br>
+         void loop() //Programa principal que gerera “. . . “- - -“ y “. . . “<br>
+         {<br>
+         &emsp;punto(); punto(); punto(); //Genera la S (. . . )<br>
+         &emsp;raya(); raya(); raya(); // Genera la O (- - -)<br>
+         &emsp;punto(); punto(); punto(); // Genera la S (. . . )<br>
+         &emsp;delay(3000); // Espera un tiempo<br>
+         }<br><br>
+         void punto() //Procedimiento para generar un punto<br>
+         {<br>
+         &emsp;digitalWrite(pin, HIGH);<br>
+         &emsp;delay(250);<br>
+         &emsp;digitalWrite(pin, LOW);<br>
+         &emsp;delay(250);<br>
+         }<br><br>
+         void raya() //Procedimiento para generar una raya<br>
+         {<br>
+         &emsp;digitalWrite(pin, HIGH);<br>
+         &emsp;delay(1000);<br>
+         &emsp;digitalWrite(pin, LOW);<br>
+         &emsp;delay(250);<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         Si se ejecuta este programa, se ejecuta el código SOS (llamada de solicitud de auxilio) en la salida PIN13.
+         <br><br>
+         El programa tiene distintas partes que tendremos que poner en nuestra librería. En primer lugar, por 
+         supuesto, tenemos las funciones <strong>punto()</strong> y <strong>raya()</strong> que se encargan de que el 
+         LED parpadee de manera corta o larga respectivamente. En segundo lugar, tenemos la instruccién ledPin que 
+         utilizamos para determinar el pin a utilizar. Por último, está la llamada a la función 
+         <strong>pinMode()</strong> que inicializa el pin como salida.
+         <br><br>
+         Vamos a empezar a convertir el programa en una librería.
+         <br><br>
+         Necesitamos por lo menos dos archivos en una librería: un archivo de cabecera (w / la extensión .H) y el 
+         archivo fuente (w / extensión .CPP). El fichero de cabecera tiene definiciones para la librería: 
+         básicamente una lista de todo lo que contiene, mientras que el archivo fuente tiene el código real. Vamos a 
+         llamar a nuestra biblioteca "Morse", por lo que nuestro fichero de cabecera será Morse.h. Echemos un vistazo 
+         a lo que sucede en ella. Puede parecer un poco extraño al principio, pero lo entenderemos una vez que veamos 
+         el archivo de origen que va con ella.
+         <br><br>
+         El núcleo del archivo de cabecera consiste en una línea para cada función en la biblioteca, envuelto en una 
+         clase junto con las variables que necesitaremos:
+      </p>
+      <p class="codigo">
+         class Morse<br>
+         {<br>
+         &emsp;public:<br>
+         &emsp;&emsp;Morse(int pin);<br>
+         &emsp;&emsp;void punto();<br>
+         &emsp;&emsp;void raya();<br>
+         &emsp;private:<br>
+         &emsp;&emsp;int _pin;<br>
+         };
+      </p>
+      <p class="texto">
+         <br>
+         Una clase es simplemente una colección de funciones y variables que se mantienen unidos todos en un solo 
+         lugar. Estas funciones y variables pueden ser públicos, lo que significa que pueden ser utilizadas por 
+         quienes utilizan la librería, o privadas, lo que significa que sólo se puede acceder desde dentro de la 
+         propia clase. Cada clase tiene una función especial conocida como un <strong>constructor</strong>, que se 
+         utiliza para crear una instancia de la clase. El constructor tiene el mismo nombre que la clase, y no 
+         devuelve nada.
+         <br><br>
+         Usted necesita dos cosas más en el fichero de cabecera. Uno de ellos es un <strong># include</strong> 
+         declaración que le da acceso a los tipos estándar y las constantes del lenguaje de Arduino (esto se añade 
+         automáticamente en todos los programas que hacemos con Arduino, pero no a las librerías). Por lo que 
+         debemos incluirlas (poniéndolas por encima de la definición de clase dada anteriormente):
+      </p>
+      <p class="codigo">
+         # include "WConstants.h"
+      </p>
+      <p class="texto">
+         <br>
+         Por último, se colocara delante del código la cabecera siguiente:
+      </p>
+      <p class="codigo">
+         # ifndef Morse_h<br>
+         #define Morse_h<br>
+         // El estamento #include y el resto del código va aquí...<br>
+         #endif<br>
+      </p>
+      <p class="texto">
+         <br>
+         Básicamente, esto evita problemas si alguien accidentalmente pone # include en la librería dos veces.
+         <br><br>
+         Por último, por lo general, se pone un comentario en la parte superior de la librería con su nombre, una 
+         breve descripción de lo que hace, quien la escribió, la fecha y la licencia.
+         <br><br>
+         Echemos un vistazo a la completa disposición del fichero de cabecera .h.
+      </p>
+      <h3>Fichero Morse.h</h3>
+      <p class="codigo">
+         /* Morse.h - Biblioteca para flashear el código Morse.<br>
+         &emsp;Creado por Fun Tech Academy, 9 de Abril de 2021.<br>
+         &emsp;Publicado en el dominio público. */<br><br>
+         #ifndef Morse_h<br>
+         #define Morse_h<br>
+         #include "WConstants.h"<br><br>
+         class Morse<br>
+         {<br>
+         &emsp;public:<br>
+         &emsp;&emsp;Morse(int pin);<br>
+         &emsp;&emsp;void punto();<br>
+         &emsp;&emsp;void raya();<br>
+         &emsp;private:<br>
+         &emsp;&emsp;int _pin;<br>
+         };<br><br>
+         #endif
+      </p>
+      <p class="texto">
+         <br>
+         Ahora vamos a escribir las diversas partes del archivo fuente de la librería, <strong>Morse.cpp</strong>.
+         <br><br>
+         Primero se ponen un par de declaraciones mediante “# include”. Estas incluyen resto del código de acceso a 
+         las funciones estándar de Arduino, ya que en las definiciones figuran en el archivo de cabecera:
+      </p>
+      <p class="codigo">
+         #include "WProgram.h"<br>
+         #include "Morse.h"
+      </p>
+      <p class="texto">
+         <br>
+         Luego viene el <strong>constructor</strong>. Ahora se indicará lo que debería suceder cuando alguien crea una 
+         instancia a la clase. En este caso, el usuario especifica el pin que les gustaría utilizar. Configuramos el 
+         pin como salida guardándolo en una variable privada para su uso en las otras funciones:
+      </p>
+      <p class="codigo">
+         Morse::Morse(int pin)<br>
+         {<br>
+         &emsp;pinMode(pin, OUTPUT);<br>
+         &emsp;_pin = pin;<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         Hay un par de cosas extrañas en este código. El primero es el <strong>Morse::</strong> antes del nombre de la 
+         función. Esto indica que la función es parte de la clase <strong>Morse</strong>. Veremos esto de nuevo en las 
+         otras funciones en la clase.
+         <br><br>
+         La segunda cosa inusual es el guión bajo en el nombre de nuestra variable privada, <strong>_pin</strong>. 
+         Esta variable puede tener cualquier nombre que desee, siempre y cuando coincida con la definición que figura 
+         en el fichero de cabecera. La adición de un guión bajo al comienzo del nombre es una convención para dejar 
+         claro que las variables son privadas, y también a distinguir el nombre de la del argumento a la función 
+         (<strong>pin</strong> en este caso).
+         <br><br>
+         Después viene el código del programa que queremos convertir en una función (¡por fin!). Parece casi igual, 
+         excepto por <strong>Morse::</strong> delante de los nombres de las funciones, y <strong>_pin</strong> en 
+         lugar de <strong>pin</strong>:
+      </p>
+      <p class="codigo">
+         void Morse::punto()<br>
+         {<br>
+         &emsp;digitalWrite(_pin, HIGH);<br>
+         &emsp;delay(250);<br>
+         &emsp;digitalWrite(_pin, LOW);<br>
+         &emsp;delay(250);<br>
+         }<br><br>
+         void Morse::raya()<br>
+         {<br>
+         &emsp;digitalWrite(_pin, HIGH);<br>
+         &emsp;delay(1000);<br>
+         &emsp;digitalWrite(_pin, LOW);<br>
+         &emsp;delay(250);<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         Por último, es típico incluir el comentario de cabecera en la parte superior de la fuente así como el 
+         archivo. Vamos a ver el fichero completo.
+      </p>
+      <h3>Fichero Morse.h</h3>
+      <p class="codigo">
+         /* Morse.h - Biblioteca para flashear el código Morse.<br>
+         &emsp;Creado por Fun Tech Academy, 9 de Abril de 2021.<br>
+         &emsp;Publicado en el dominio público. */<br><br>
+         #include "WProgram.h"<br>
+         #include "Morse.h"<br><br>
+         Morse::Morse(int pin)<br>
+         {<br>
+         &emsp;pinMode(pin, OUTPUT);<br>
+         &emsp;_pin = pin;<br>
+         }<br><br>
+         void Morse::punto()<br>
+         {<br>
+         &emsp;digitalWrite(_pin, HIGH);<br>
+         &emsp;delay(250);<br>
+         &emsp;digitalWrite(_pin, LOW);<br>
+         &emsp;delay(250);<br>
+         }<br><br>
+         void Morse::raya()<br>
+         {<br>
+         &emsp;digitalWrite(_pin, HIGH);<br>
+         &emsp;delay(1000);<br>
+         &emsp;digitalWrite(_pin, LOW);<br>
+         &emsp;delay(250);<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         Y eso es todo lo que necesita (hay algunas otras cosas opcionales, pero vamos a hablar de eso más adelante).
+         <br><br>
+         Ahora vamos a ver cómo se utiliza la librería.
+         <br><br>
+         En primer lugar, debemos crear una carpeta llamada <strong>Morse</strong> dentro del subdirectorio 
+         <strong>hardware/libraries</strong> de la aplicación Arduino. Copiar o mover los archivos 
+         <strong>Morse.h</strong> y <strong>Morse.cpp</strong> a esa carpeta. Ahora lanzar la aplicación Arduino. 
+         <br><br>
+         Cuando se inicia, compilará la recién creada librería, generando un fichero objeto (<strong>Morse.o</strong>) 
+         y mostrando cualquier tipo de advertencias o errores. Si abrimos el menú 
+         <strong>Sketch> Import Library</strong>, deberíamos ver el interior el fichero objeto Morse. Como trabajamos 
+         con nuestra librería, tendremos que borrar el archivo Morse.o y relanzar Arduino (o elegir una nueva tarjeta 
+         en el menú <strong>Tools>Boards</strong>) para recompilar su biblioteca. 
+         <br><br>
+         Si la biblioteca no seconstruye, asegúrate de que están realmente los archivos CPP y. H (con y sin suplemento 
+         alguno .Pde o la extensión .Txt, por ejemplo).
+         <br><br>
+         Veamos como podemos escribir nuestro nuevo programa SOS haciendo uso de la nueva librería.
+      </p>
+      <h3>Programa para Arduino</h3>
+      <p class="codigo">
+      }
+         #include <Morse.h><br><br>
+         Morse morse(13);<br>
+         void setup()<br>
+         {<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;morse.punto(); morse.punto(); morse.punto();<br>
+         &emsp;morse.raya(); morse.raya(); morse.raya();<br>
+         &emsp;morse.punto(); morse.punto(); morse.punto();<br>
+         &emsp;delay(3000);<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         Hay algunas diferencias con respecto al antiguo programa (además del hecho de que algunos de los códigos se 
+         han incorporado a la librería).
+         <br><br>
+         En primer lugar, hemos añadido un estamento <strong>“# include”</strong> en la parte superior del programa. 
+         Esto hace que la librería Morse quede a disposición del programa y la incluye en el código. Esto significa 
+         que ya no necesitan una librería en el programa, debemos borrar el # include para ahorrar espacio.
+         <br><br>
+         En segundo lugar, nosotros ahora podemos crear una instancia de la clase <strong>Morse</strong> llamado 
+         morse:
+      </p>
+      <p class="codigo">
+         Morse morse(13);
+      </p>
+      <p class="texto">
+         <br>
+         Cuando esta línea se ejecuta (que en realidad sucede antes incluso de <strong>setup()</strong>), el 
+         constructor de la clase Morse será invocado y le pasara el argumento que se ha dado aquí (en este caso, sólo 
+         <strong>13</strong>).
+         <br><br>
+         Tendremos en cuenta que nuestra parte <strong>setup()</strong> del programa está vacía, porque la llamada a 
+         <strong>pinMode()</strong> se lleva a cabo en el interior de la librería (cuando la instancia se construye).
+         <br><br>
+         Por último, para llamar a las funciones <strong>punto()</strong> y <strong>raya()</strong>, es necesario 
+         colocar el prefijo <strong>morse.</strong> delante de la instancia que queremos usar. Podríamos tener varias
+         instancias de la clase Morse, cada uno en su propio pin almacenados en la variable privada _pin de esa 
+         instancia. Al llamar una función en un caso particular, especificaremos qué variables del ejemplo debe 
+         utilizarse durante esa llamada a una función. Es decir, si hemos escrito:
+      </p>
+      <p class="codigo">
+         Morse morse(13); 
+         Morse morse2(12);
+      </p>
+      <p class="texto">
+         <br>
+         Entonces dentro de una llamada a <strong>morse2.punto()</strong>, _pin sería 12.
+         <br><br>
+         Si hemos escrito el nuevo programa, probablemente te habrás dado cuenta de que ninguna de nuestras funciones 
+         de la librería fue reconocida por el entorno de Arduino destacando su color. Por desgracia, el software de 
+         Arduino no puede averiguar automáticamente lo que se ha definido en su librería (a pesar de que sería una 
+         característica interesante), lo que tiene que darle un poco de ayuda. 
+         <br><br>
+         Para hacer esto, cree un archivo llamado <strong>keywords.txt<strong> Morse en el directorio. Debe tener un 
+         aspecto como este:
+      </p>
+      <p class="codigo">
+         Morse KEYWORD1<br>
+         raya KEYWORD2<br>
+         punto KEYWORD2
+      </p>
+      <p class="texto">
+         <br>
+         Cada línea tiene el nombre de la palabra clave, seguida de un código (sin espacios), seguido por el tipo de 
+         palabra clave. Las clases deben ser KEYWORD1 y son de color naranja; funciones deben ser KEYWORD2 y serán de 
+         color marrón. Tendrás que reiniciar el entorno Arduino para conseguir reconocer las nuevas palabras clave.
+         <br><br>
+         Es interesante que quienes utilicen la libreia Morse tengan algun ejemplo guardado y que aparezca en el IDE 
+         Arduino cuando seleccionamos dentro de la carpeta ejemplos (Sketch). Para hacer esto, se crea una carpeta de 
+         <strong>ejemplos</strong> dentro de la carpeta que contiene la librería Morse. A continuación, movemos o 
+         copiamos el directorio que contiene el programa (lo llamaremos SOS) que hemos escrito anteriormente en el 
+         directorio de ejemplos. (Puedes encontrar el ejemplo mediante el menú 
+         <strong>Sketch> Sketch Show Folder</strong>.) Si reiniciamos Arduino, al reiniciar veremos una 
+         <strong>Library_Morse</strong> dentro del menú <strong>File > Sketchbook > Examples</strong> que contiene su 
+         ejemplo. Es posible que desee añadir algunos comentarios que expliquen mejor cómo utilizar la biblioteca.
+      </p>
+      <br><br>
+      <a class="texto volver" href="indexpro.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

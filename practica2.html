@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet"> 
+   <script src="js/scripts.js"></script>  
+   <title>Práctica : El Radar de Carretera</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>El Paso a Nivel</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivo</h2>
+      <p class="texto">
+         La práctica consiste en realizar un paso radar de carretera donde podamos regular la velocidad máxima a la 
+         que detectaremos la infracción con varios de los componentes que hemos utilizado hasta ahora.
+      </p>
+      <p class="img_centrada"><img src="img/practica2/2-1.png" width="450px" alt=""></p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Protoboard<br>
+         &emsp;&emsp;(1) x LED azul de 5mm<br>
+         &emsp;&emsp;(1) x LED rojo de 5mm<br>
+         &emsp;&emsp;(1) x LED verde de 5mm<br>
+         &emsp;&emsp;(2) x Resistencia de 220 ohmios<br>
+         &emsp;&emsp;(1) x Interruptor de presión<br>
+         &emsp;&emsp;(1) x Sensor ultrasónico<br>
+         &emsp;&emsp;(1) x Potenciómetro<br>
+         &emsp;&emsp;(1) x Pantalla LED<br>
+         &emsp;&emsp;(1) x Servomotor<br>
+         &emsp;&emsp;(-) x M M cables (cables de puente de macho a macho)
+     </p>
+      <h2>Ejercicio</h2>
+      <p class="texto">
+         El radar consistirá en:<br><br>
+         - Mediante el interruptor de presión se activará o desactivará todo el circuito, encendiendo un led azul 
+         cuando esté activado.<br><br>
+         - Al activarse el circuito, pondremos en funcionamiento nuestro radar, que mediante el sensor ultrasónico 
+         será capaz de determinar la velocidad a la que pasan los vehículos.<br><br>
+         - La velocidad a la que pase cada vehículo se mostrará en la pantalla LED.<br><br>
+         - La velocidad máxima a la que se puede circular se indicará en dicha pantalla LED mientras no esté 
+         pasando ningún vehículo.<br><br>
+         - Esta velocidad máxima será seleccionada mediante el potenciómetro, teniendo dos valores, uno cuando el 
+         potenciómetro esté al máximo y otro cuando el potenciómetro esté al minimo.<br><br>
+         - La selección de la velodidad máxima hará girar el servomotor para indicar dicha velodidad máxima en una 
+         señal resversible.<br><br>
+         - Al pasar nuestro vehículo, se detectará la velocidad del mismo, mostrándola en la pantalla LED y 
+         encendiendo el LED verde si estamos por debajo de la velocidad máxima y el LED rojo si sobrepasamos esa 
+         velocidad.
+      </p>
+      <p class="texto">
+   <!-- 
+         <a class="link_b" href="https://www.tinkercad.com/things/3wFQwuRon78-practica-1-el-paso-a-nivel" target="_blank">
+            Ejemplo de Solución
+         </a>
+   -->
+      </p>
+      <br><br>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+    </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

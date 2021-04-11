@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 16: Cálculo de Tonos</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Cálculo de Tonos</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Cálculo de Tonos</h2>
+      <p class="texto">
+         Aprovechando lo que ya sabemos de las señales analógicas PWM, vamos a usar el zumbador para emitir notas.
+         <br><br>
+         Recordemos como funcionan este tipo de señales:
+      </p>
+      <p class="img_centrada"><img src="img/progtema16/16-1.png" width="60%" alt=""></p>
+      <p class="texto">
+         Y también como se calcula la frecuencia.
+      </p>
+      <p class="img_centrada"><img src="img/progtema16/16-2.png" width="40%" alt=""></p>
+      <p class="texto">
+         Si el "ciclo de trabajo"=50%, es decir, el ancho de los pulsos activos (ON) e inactivos (OFF) son iguales, 
+         entonces:
+      </p>
+      <p class="img_centrada"><img src="img/progtema16/16-3.png" width="35%" alt=""></p>
+      <p class="texto">
+         Obteniéndo la siguiente fórmula matemática:
+      </p>
+      <p class="img_centrada"><img src="img/progtema16/16-4.png" width="75%" alt=""></p>
+      <p class="texto">
+         De forma que a una frecuencia o periodo dados, podemos obtener la siguiente tabla:
+      </p>
+      <p class="img_centrada"><img src="img/progtema16/16-5.png" width="75%" alt=""></p>
+      <p class="texto">
+         Con Arduino, tenemos dos formas de generar tonos. Con el primer ejemplo construiremos y enviaremos una señal 
+         cuadrada de salida al zumbador (o piezo), mientras que con el segundo haremos uso de la señal de modulación 
+         por ancho de pulso o PWM de salida en Arduino.
+      </p>
+      <h3>Ejemplo 1</h3>
+      <p class="texto">
+         Con el siguiente código y con sólo realizar modificaciones en los intervalos de tiempo que el pin 
+         seleccionado tenga valor HIGH o LOW, a través de la función digitalWrite(), generamos la señal PWM a una 
+         determinada frecuencia de salida igual a 261 Hercios (Hz).
+      </p>
+      <p class="codigop">
+         int digPin = 10; // Pin digital 10<br>
+         int PW = 1915; // Valor que determina el tiempo que el pulso va a estar en ON/OFF<br><br>
+         void setup()<br>
+         {<br>
+         &emsp;pinMode(digPin, OUTPUT); // Pin digital en modo salida<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;delayMicroseconds(PW); // Espera el valor de PW<br>
+         &emsp;digitalWrite(digPin, LOW); // Asigna el valor LOW al pin<br>
+         &emsp;delayMicroseconds(PW); // Espera el valor de PW<br>
+         &emsp;digitalWrite(digPin, HIGH); // Asigna el valor HIGH al pin<br>
+         } 
+      </p>
+      <h3>Ejemplo 2</h3>
+      <p class="texto">
+         En Arduino, la señal de salida PWM (pines 9,10) es una señal de frecuencia constante (30.769 Hz) y que sólo 
+         nos permite cambiar el "ciclo de trabajo" o el tiempo que el pulso está activo (ON) o inactivo (OFF), 
+         utilizando la función <strong>analogWrite()</strong>.
+         <br><br>
+         Usaremos la característica “Ancho de Pulso” (PW) con <strong>analogWrite</strong> para cambiar el volumen. 
+      </p>
+      <p class="codigo">
+         analogWrite(pin, valor)
+      </p>
+      <p class="texto">
+         <br>
+         <strong>Valor</strong> representa al parámetro "ciclo de trabajo" (PWM) y puede tomar valores entre 0 y 255.
+         <br><br>
+         - 0 corresponde a una señal de salida de valor constante de 0 v (LOW) o 0% de "ciclo de trabajo".
+         <br><br>
+         - 255 es una señal de salida de valor constante de 5 v (HIGH) o 100% de "ciclo de trabajo".
+         <br><br>
+         Para valores intermedios, el pin rápidamente alterna entre 0 y 5 voltios - el valor más alto, lo usual es 
+         que el pin esté en HIGH (5 voltios).
+         <br><br>
+         La frecuencia de la señal PWM es constante y aproximadamente de 30.769 Hz.
+      </p>
+      <p class="codigo">
+         int digPin = 9;<br>
+         int volumen = 300; // Máximo volumen es 1000<br>
+         int PW = 1915;<br><br>
+         void setup()<br>
+         {<br>
+         &emsp;pinMode(digPin, OUTPUT); // Pin digital en modo salida<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;analogWrite(digPin,0);<br>
+         &emsp;analogWrite(digPin,volume);<br>
+         &emsp;delayMicroseconds(PW);<br>
+         &emsp;analogWrite(digPin,0);<br>
+         &emsp;delayMicroseconds(PW);<br>
+         }
+      </p>
+      <br><br>
+      <a class="texto volver" href="indexpro.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>
