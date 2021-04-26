@@ -11,12 +11,14 @@
 SR04 sr04 = SR04(PIN_ECO,PIN_ENVIO);
 long distancia;
 
-void setup() {
+void setup() 
+{
    Serial.begin(9600);
    delay(1000);
 }
 
-void loop() {
+void loop() 
+{
    // Recogemos la distancia devuelta por el sensor
    distancia=sr04.Distance();
    Serial.print(a);

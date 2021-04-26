@@ -1,63 +1,52 @@
-//www.elegoo.com
-//2016.12.9
+// Fun Tech Academy 2021
 
 /*
-  LiquidCrystal Library - Hello World
+   LiquidCrystal Library - Hola Mundo
 
- Demonstrates the use a 16x2 LCD display.  The LiquidCrystal
- library works with all LCD displays that are compatible with the
- Hitachi HD44780 driver. There are many of them out there, and you
- can usually tell them by the 16-pin interface.
+   Demuestra el uso de una pantalla LCD de 16x2. 
+   La biblioteca de la pantalla LCD funciona con todas las 
+   pantallas LCD que son compatibles con la Controlador 
+   Hitachi HD44780 y que son de 16 pines.
 
- This sketch prints "Hello World!" to the LCD
- and shows the time.
+   Este ejemplo imprime "¡Hola mundo!" en la pantalla LCD
+   y muestra el tiempo desde que se enciende.
 
-  The circuit:
- * LCD RS pin to digital pin 7
- * LCD Enable pin to digital pin 8
- * LCD D4 pin to digital pin 9
- * LCD D5 pin to digital pin 10
- * LCD D6 pin to digital pin 11
- * LCD D7 pin to digital pin 12
- * LCD R/W pin to ground
- * LCD VSS pin to ground
- * LCD VCC pin to 5V
- * 10K resistor:
- * ends to +5V and ground
- * wiper to LCD VO pin (pin 3)
+   Las conexiones:
 
- Library originally added 18 Apr 2008
- by David A. Mellis
- library modified 5 Jul 2009
- by Limor Fried (http://www.ladyada.net)
- example added 9 Jul 2009
- by Tom Igoe
- modified 22 Nov 2010
- by Tom Igoe
+   * Pin LCD RS a pin digital 12
+   * Pin LCD Habilitar a pin digital 11
+   * Pin LCD D4 a pin digital 5
+   * Pin LCD D5 a pin digital 4
+   * Pin LCD D6 a pin digital 3
+   * Pin LCD D7 a pin digital 2
+   * Pin LCD R/W a tierra
+   * Pin LCD VSS a tierra
+   * Pin LCD VCC pin a 5V
+   * Resistencia de 10K
+   * Termina a + 5V y tierra
+   * Pontenciómetro al pin LCD VO (pin 3)
+*/
 
- This example code is in the public domain.
-
- http://www.arduino.cc/en/Tutorial/LiquidCrystal
- */
-
-// include the library code:
+// Incluimos el código de la librería:
 #include <LiquidCrystal.h>
 
-// initialize the library with the numbers of the interface pins
-LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+// Inicializamis la pantalla LCD con los pines de la interfaz
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
-void setup() {
-  // set up the LCD's number of columns and rows:
-  lcd.begin(16, 2);
-  // Print a message to the LCD.
-  lcd.print("Hello, World!");
+void setup()
+{
+   // Configura el número de columnas y filas del LCD:
+   lcd.begin(16, 2);
+   // Imprime el mensaje "Hola Mundo!" en la pantalla LCD.
+   lcd.print("Hola Mundo!");
 }
 
-void loop() {
-  // set the cursor to column 0, line 1
-  // (note: line 1 is the second row, since counting begins with 0):
-  lcd.setCursor(0, 1);
-  // print the number of seconds since reset:
-  lcd.print(millis() / 1000);
+void loop()
+{
+   // (la línea 0 es la primera fila)
+   // (la línea 1 es la segunda fila)
+   // Coloca el cursor en la columna 0, línea 1
+   lcd.setCursor(0, 1);
+   // imprime el número de segundos desde el reinicio:
+   lcd.print(millis()/100);
 }
-

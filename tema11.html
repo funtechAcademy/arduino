@@ -43,24 +43,29 @@
          El módulo LCD1602, o pantalla de cristal líquido de tipo 1602, es un tipo de módulo de matriz de puntos para
          mostrar letras, números y caracteres, etc. Se compone de posiciones de matriz de puntos de 5x7 o 5x11;
          cada posición puede mostrar un carácter.
-         <br><br>
-         Hay un punto entre dos caracteres y un espacio entre líneas, separando así los caracteres y las líneas. El
-         nombre de modelo 1602, significa que muestra 2 líneas de 16 caracteres. En general, LCD1602 tiene puertos
-         paralelos, es decir, controlaría varios pines al mismo tiempo. El LCD1602 se puede clasificar en conexiones
-         de ocho puertos y cuatro puertos.
       </p>
       <p class="img_centrada"><img src="img/tema11/11-1.png" width="60%"></p>
+      <p class="texto">
+         <br><br>
+         Hay un punto entre dos caracteres y un espacio entre líneas, separando así los caracteres y las líneas. El
+         nombre de modelo 1602, significa que muestra 2 líneas de 16 caracteres. 
+      </p>
+      <p class="img_centrada"><img src="img/tema11/11-2.png" width="50%"></p>
+      <p class="texto">
+         En general, LCD1602 tiene puertos paralelos, es decir, controlaría varios pines al mismo tiempo. El LCD1602 
+         se puede clasificar en conexiones de ocho puertos y cuatro puertos.
+      </p>
       <h2>Esquemas de Conexión</h2>
       <h3>Esquema Eléctrico</h3>
-      <p class="img_centrada"><img src="img/tema11/11-2.png" width="70%"></p>
-      <h3>Diagrama Ilustrativo</h3>
       <p class="img_centrada"><img src="img/tema11/11-3.png" width="70%"></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema11/11-4.png" width="70%"></p>
       <p class="advertencia texto">
          No lo olvides, el cable largo amarillo conecta el potenciómetro a la clavija 3 de la pantalla. El
          potenciómetro se utiliza para controlar el contraste de la pantalla.
       </p>
       <h3>Imagen de Ejemplo</h3>
-      <p class="img_centrada"><img src="img/tema11/11-4.png" width="70%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema11/11-5.png" width="70%" alt=""></p>
       <h2>Código</h2>
       <p class="texto">
          Antes de cargar el script, asegúrate de que está instalada la biblioteca <strong>LiquidCrystal</strong>. El
@@ -80,31 +85,32 @@
          #include < LiquidCrystal.h >
       </p>
       <p class="texto">
-         Esto le dice a Arduino que queremos utilizar la biblioteca de <strong>tema11-LCD</strong>. A continuación tenemos
-         la línea que teníamos que modificar. Esto define qué pines de Arduino son para conectarse a que pines de la pantalla.
+         Esto le dice a Arduino que queremos utilizar la biblioteca de <strong>LiquidCrystal</strong>. A continuación 
+         tenemos la línea que teníamos que modificar. Esto define qué pines de Arduino son para conectarse a que pines 
+         de la pantalla.
       </p>
       <p class="codigo texto" style="margin-bottom: 28px;">
-         LiquidCrystal lcd (7, 8, 9, 10, 11, 12);
+         LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
       </p>
       <p class="texto">
          Después de subir este código, asegúrese de que se enciende la retroiluminación y ajustar el potenciómetro
          girándolo hasta que aparezca el mensaje de texto.
          <br><br>
-         En la función de <strong>configuración</strong>, tenemos dos comandos:
+         En la función de <strong>setup</strong>, tenemos dos comandos:
       </p>
       <p class="codigo texto" style="margin-bottom: 28px;">
-         LCD.Begin (16, 2);<br>
-         LCD.Print ("Hola, mundo!");
+         lcd.Begin (16, 2);<br>
+         lcd.Print ("Hola, mundo!");
       </p>
       <p class="texto">
          La primera línea se indican cuántas columnas y filas tiene la pantalla. La segunda línea muestra el mensaje
          que vemos en la primera línea de la pantalla.
          <br><br>
-         En la función de 'loop', hay dos comandos:
+         En la función de <strong>loop</strong>, hay dos comandos:
       </p>
       <p class="codigo texto" style="margin-bottom: 28px;">
-         LCD.setCursor (0, 1);<br>
-         LCD.Print(Millis()/1000);
+         lcd.setCursor(0, 1);<br>
+         lcd.Print(Millis()/1000);
       </p>
       <p class="texto">
          La primera línea establece la posición del cursor (donde aparecerá el siguiente texto) columna 0 y fila 1.
@@ -115,54 +121,99 @@
       <h2>Retos</h2>
       <h3>Reto 1</h3>
       <p class="texto">
-         &emsp;Hasta ahora hemos visto cómo mostrar un texto en la pantalla LCD. Ahora vamos a mover ese texto.
+         Hasta ahora hemos visto cómo mostrar un texto en la pantalla LCD. Ahora vamos a ver otras funciones que tiene 
+         la librería <strong>LiquidCrystal</strong>.
+         <br><br>
+         En este reto, colocaremos después de un texto, un cursor que se quede parpadeando.
       </p>
-      <p class="img_centrada"><img src="img/tema11/11-5.gif" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema11/11-6.gif" width="50%" alt=""></p>
       <p class="texto">
-         &emsp;Haremos que el texto "Hola mundo!" vaya apareciendo por la parte 
-         derecha de la pantalla y vaya moviéndose a la izquierda hasta desaparecer.
+         Para ello, utilizaremos estas dos nuevas funciones de la librería:
+      </p>
+      <p class="codigo">
+         lcd.Cursor();<br>
+         lcd.noCursor();
       </p>
       <p class="texto">
-         <a class="link_b" href="scripts_arduino/.ino" target="_blank">
+         <br>
+         &emsp;- La función <strong>Cursor()</strong> muestra el cursor en la pantalla y en la posición que hayamos indicado.
+         <br><br>
+         &emsp;- La función <strong>noCursor()</strong> elimina el cursor de la pantalla.
+         <br><br>
+         <a class="link_b" href="https://www.tinkercad.com/things/0t8zLKVP02c-tema-11-ej-1-pantalla-lcd" target="_blank">
             Ejemplo de Solución
          </a>
       </p>
       <h3>Reto 2</h3>
       <p class="texto">
-         &emsp;Ahora vamos a crear una barra y la dibujaremos en la parte inferior de nuestra pantalla LCD.
+         El siguiente reto consiste en hacer que una palabra haga scroll a la derecha y a la izquierda sin salirse de 
+         la pantalla
       </p>
-      <p class="img_centrada"><img src="img/tema11/11-6.gif" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema11/11-7.gif" width="50%" alt=""></p>
       <p class="texto">
-         &emsp;Añadiremos otro potenciómetro al ejercicio que nos servirá para controlar la posición de la barra en 
-         nuestra pantalla LCD. Según vayamos girando hacia la derecha el potenciómetro, iremos moviendo la barra hacia 
-         la derecha hasta hacer coincidir el final del potenciómetro con el final de la pantalla LCD. Así mismo, según 
-         vayamos girando el potenciómetro hacia la izquierda, iremos moviendo la barra hacia la izquierda hasta hacer 
-         coincidir el final del potenciómetro con el final de la pantalla LCD.
+         Para ello, utilizaremos estas dos nuevas funciones de la librería:
       </p>
-      <p class="img_centrada"><img src="img/tema11/11-.gif" width="60%" alt=""></p>
+      <p class="codigo">
+         lcd.scrollDisplayRight();<br>
+         lcd.scrollDisplayLeft();
+      </p>
       <p class="texto">
-         <a class="link_b" href="scripts_arduino/.ino" target="_blank">
+         <br>
+         &emsp;- La función <strong>scrollDisplayRight()</strong> hace que el texto se desplace a la derecha.
+         <br><br>
+         &emsp;- La función <strong>scrollDisplayLeft()</strong> hace que el texto se desplace a la izquierda.
+         <br><br>
+         <a class="link_b" href="https://www.tinkercad.com/things/7vmd6HwyNVa-tema-11-ej-2-pantalla-lcd" target="_blank">
             Ejemplo de Solución
          </a>
       </p>
       <h3>Reto 3</h3>
       <p class="texto">
-         &emsp;Aprovechando la barra que hemos creado, vamos a hacer un juego en el que tenemos que manejar la barra 
-         para ir cogiendo las monedas que vayan cayendo desde la parte de arriba.
+         Ahora vamos a mover una palabra por toda la pantalla. Lo que hará nuestro texto es desplazarse de izquierda 
+         a derecha de la pantalla y luego que aparezca en la fila inferior por la derecha y desaparezca por la 
+         izquierda, y así continuamente.
       </p>
-      <p class="img_centrada"><img src="img/tema11/11-7.gif" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema11/11-8.gif" width="50%" alt=""></p>
       <p class="texto">
-         &emsp;Irán apareciendo pines cuadrados desde la parte de arriba de la pantalla en posiciones aleatorias en 
-         el eje X e irán cayendo hacia abajo hasta chocarse con el borde inferior de la pantalla o con nuestra barra.
+         Para ello necesitaremos usar nuevas funciones.
       </p>
-      <p class="img_centrada"><img src="img/tema11/11-.gif" width="60%" alt=""></p>
+      <p class="codigo">
+         lcd.length();<br>
+         lcd.substring(numero);<br>
+         lcd.clear()
+      </p>
       <p class="texto">
-         <a class="link_b" href="scripts_arduino/.ino" target="_blank">
+         <br>
+         &emsp;- La función <strong>length()</strong> sirve para obtener el tamaño del texto, es decir, el número de 
+         caracteres que tiene incluidos espacios, es decir, la función length() nos devuelve un número entero 
+         indicando su tamaño.
+         <br><br>
+         &emsp;- La función <strong>substring(numero)</strong> devuelve un trozo del texto. El número indica a partir 
+         de qué letra vamos a coger por ejemplo si hacemos “HOLA MUNDO”.substring(2) nos devolverá “LA MUNDO”. 
+         Recuerda que es un lenguaje de índice cero, el primer carácter del texto empieza por cero.
+         <br><br>
+         &emsp;- La función <strong>clear()</strong> limpia totalmente la pantalla de los caracteres impresos.
+         <br><br>
+         <a class="link_b" href="https://www.tinkercad.com/things/arJ0JFc9ZIa-tema-11-ej-3-pantalla-lcd-" target="_blank">
             Ejemplo de Solución
          </a>
       </p>
-
-
+      <h3>Reto 4</h3>
+      <p class="texto">
+         Ya sabemos como mover un texto por la pantalla. Vamos ahora a hacer que un cácter se mueva por la pantalla 
+         pero por donde nosotros queramos.
+      </p>
+      <p class="img_centrada"><img src="img/tema11/11-9.gif" width="40%" alt=""></p>
+      <p class="texto">
+         Escribiremos un carácter en la pantalla y utilizaremos un potenciómetro para moverlo por la pantalla. Si 
+         ponemos el potenciómetro a la izquierda del todo, el carácter estará a la izquierda. Según vayamos moviendo 
+         el potenciómetro a la derecha, el carácter se irá moviendo a la pantalla, hasta hacer coincidir el final 
+         del potenciómetro con el final de la pantalla.
+         <br><br>
+         <a class="link_b" href="https://www.tinkercad.com/things/8FUieSrAg47-tema-11-ej-4-pantalla-lcd" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
       <br><br>
       <a class="texto volver" href="index.html">Volver al índice</a>
    </div>
