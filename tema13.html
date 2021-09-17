@@ -9,11 +9,11 @@
    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
    <script src="js/scripts.js"></script>
-   <title>Tema 13: Termómetro Digital</title>
+   <title>Tema 13: Sensor de Temperatura</title>
 </head>
 <body>
    <div id="cabecera">
-      <h1>Termómetro Digital</h1>
+      <h1>Sensor de Temperatura</h1>
    </div>
    <!-- INICIO_LOADER -->
    <div id="pageloader">
@@ -23,64 +23,462 @@
    <div id="contenido">
       <h2>Objetivos</h2>
       <p class="texto">
-         ...
+         En este tema veremos como funciona un sensor de temperatura, la cantidad de sensores distintos que existen 
+         en el mercado y el funcionamiento del sensor <strong>TMP36</strong>.
       </p>
       <h2>Materiales</h2>
       <p class="texto">
          &emsp;&emsp;(1) x Placa Arduino<br>
-         &emsp;&emsp;(1) x Pantalla LCD (1602)<br>
-         &emsp;&emsp;(1) x Resistencia de 10 k Ohm<br>
-         &emsp;&emsp;(1) x Termistor<br>
-         &emsp;&emsp;(1) x Potenciómetro<br>
+         &emsp;&emsp;(1) x Sensor de Temperatura TMP36<br>
+         &emsp;&emsp;(1) x Resistencia de 100 kOhm<br>
          &emsp;&emsp;(1) x Protoboard<br>
-         &emsp;&emsp;(18) x M M cables (cables puente de macho a macho)
+         &emsp;&emsp;(-) x M M cables (cables puente de macho a macho)
       </p>
       <h2>Introducción a los Componentes</h2>
-      <h3>Termistor</h3>
+      <h3>Sensor de Temperatura o Termistor</h3>
       <p class="texto">
-         Un termistor es un resistor térmico (un resistor que cambia su resistencia con la temperatura). Pero esos
-         cambios de resistencia son generalmente muy pequeños y difíciles de medir. Los termistores están hechos
-         para que la resistencia cambie drásticamente con la temperatura, siendo 100 ohmios o más el cambio por grado.
-         <br><br>
-         Hay dos clases de termistores, NTC (coeficiente negativo de temperatura) y PTC (coeficiente positivo de
-         temperatura). En general, veremos sensores NTC para medir la temperatura.
-         <br><br>
-         Los PTC son de uso frecuente como fusibles reseteables: un aumento de temperatura aumenta la resistencia
-         que significa que conforme pasa más corriente a través de ellos, se calientan y 'estrangulan detrás' la
-         corriente. Muy útil para la protección de circuitos.
+         Un sensor de temperatura es un dispositivo que transforma los <strong>cambios de temperatura</strong> 
+         (magnitud fisíca) en <strong>señales eléctricas</strong> (voltaje), que luego pueden ser procesadas por 
+         equipos eléctricos o electrónicos.
       </p>
       <p class="img_centrada"><img src="img/tema13/13-1.png" width="60%" alt=""></p>
+      <p class="texto">
+         El <strong>sensor de temperatura</strong>, típicamente suele estar formado por el <strong>elemento 
+         sensor</strong>, y la cubierta o <strong>capsula protectora</strong> que lo envuelve.
+         <br><br>
+         Entre ambos existe un <strong>material de relleno</strong>, altamente <strong>conductor de la 
+         temperatura</strong>, para que los <strong>cambios</strong> se <strong>transmitan rápidamente</strong> al 
+         elemento sensor.
+         <br><br>
+         Los sensores de temperatura se usan para medir la temperatura del <strong>aire</strong> o la temperatura 
+         superficial de <strong>líquidos</strong> y <strong>sólidos</strong>.
+         <br><br>
+         Se usan comúnmente en proyectos de <strong>estaciones meteorológicas</strong> o en un <strong>termostato 
+         doméstico</strong>. 
+      </p>
+      <h3>Tipos de Sensores de Temperatura</h3>
+      <p class="texto">
+         No existe un <strong>sensor de temperatura</strong> universal para cada tipo de aplicación. Más bien, hay 
+         una extensa variedad de métodos y formas desde la cuales podemos medir el calor. Las dos variantes más 
+         amplias son los <strong>sensores de temperatura de contacto y sin contacto</strong>.
+         <br><br>
+         - Los <strong>sensores de temperatura de contacto</strong> incluyen los <strong>termopares</strong> y
+         <strong>termistores</strong> que hacen contacto con el objeto a medir.
+         <br><br>
+         - Los <strong>sensores de temperatura sin contacto</strong> se encargan de medir la <strong>radiación 
+         térmica</strong> emitida por una <strong>fuente de calor</strong> para determinar su temperatura. Este último 
+         grupo <strong>mide la temperatura a distancia</strong> y a menudo se utilizan en entornos peligrosos.
+         <br><br>
+         A continuación, enumenaremos los principales sensores de temperatura del mercado:
+      </p>
+      <h4>Sensor de temperatura termopar</h4>
+      <p class="texto">
+         El <strong>sensor de temperatura por termopar</strong> se compone básicamente de <strong>dos tiras de 
+         metal</strong> o dos alambres hechos de metales diferentes y unidos en un extremo.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-2.png" width="40%" alt=""></p>
+      <p class="texto">
+         Los cambios en la temperatura en esa <strong>unión termopar</strong> inducen un voltaje en los extremos. A 
+         medida que la <strong>temperatura sube</strong>, el <strong>voltaje aumenta</strong>. Son muy económicos de 
+         fabricar y bastante fiables, pero no son muy precisos.</p>
+      </p>
+      <h4>Sensor de temperatura por resistencia</h4>
+      <p class="texto">
+         El <strong>sensor de temperatura por resistencia</strong> se basa en materiales que varían su resistencia 
+         eléctrica al cambiar su temperatura.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-3.png" width="40%" alt=""></p>
+      <p class="texto">
+         Existen dos tipos de sensores con estas características, los dispositivos metálicos (<strong>RTD - Resistance 
+         Temperature Detector</strong>) y los <strong>termistores</strong>.
+         <br><br>
+         En los <strong>RTD</strong> la resistencia del metal <strong>aumenta</strong> en forma más o menos lineal con 
+         la temperatura. De esta forma, se pueden considerar <strong>termoresistores PTC</strong> (<strong>Positive 
+         Temperature Coefficient</strong> &#8211; Coeficiente de Temperatura Positivo).
+         <br><br>
+         Por otro lado, los <strong>termistores</strong> se basan en <strong>semiconductores cerámicos</strong>. La 
+         resistencia <strong>disminuye</strong> en forma no lineal con el <strong>aumento</strong> en la temperatura. 
+         Estos se pueden considerar <strong>termoresistores NTC</strong> (<strong>Negative Temperature 
+         Coefficient</strong> &#8211; Coeficiente de Temperatura Negativo).
+      </p>
+      <h4>Sensor de temperatura bimetálico</h4>
+      <p class="texto">
+         El <strong>sensor de temperatura bimetálico</strong> es también conocidos como termostato. Son básicamente 
+         <strong>interruptores</strong> que producen una salida del tipo <strong>on-off</strong> y cambian de un 
+         estado al otro cuando se alcanza un determinado valor de temperatura.</p>
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-4.png" width="40%" alt=""></p>
+      <p class="texto">
+         Constan generalmente de un <strong>bimetal</strong>, esto es, una pieza formada por <strong>dos 
+         metales</strong> con distinto coeficiente de <strong>dilatación térmica</strong>.
+         <br><br>
+         Cuando se calientan, <strong>un lado se dilatará más que el otro</strong>, y la curvatura resultante se
+         traduce en un <strong>movimiento mecánico</strong>, que puede ser usado para medir la temperatura mediante 
+         un indicador o para accionar un interruptor.
+         <br><br>
+         Estos sensores no requieren de una fuente de alimentación, y no son tan sensibles como los 
+         <strong>termopares</strong> o <strong>RTD</strong>.
+      </p>
+      <h4>Sensor de temperatura por dilatación de fluido</h4>
+      <p class="texto">
+         Un <strong>sensor por dilatación de fluido</strong>, es por ejemplo, el <strong>termómetro 
+         doméstico</strong>. Estos usan un <strong>líquido</strong> (generalmente mercurio) o <strong>gas</strong> 
+         que se <strong>contrae o expande</strong> con la variación de la temperatura.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-5.png" width="30%" alt=""></p>
+      <p class="texto">
+         Los sensores de dilatación de fluido no requieren energía eléctrica, y son estables. Por otra parte, no 
+         generan datos que se puedan registrar o transmitir fácilmente en forma digital.
+      </p>
+      <h4>Sensor de temperatura por infrarrojos o piro eléctricos</h4>
+      <p class="texto">
+         Un <strong>sensor de temperatura por infrarrojos</strong> (<strong>IR</strong>), denominados también 
+         <strong>pirómetros de radiación</strong>, son dispositivos que <strong>miden en forma indirecta la 
+         temperatura</strong> de cuerpos calientes a partir de la <strong>radiación térmica</strong> emitida en forma 
+         natural por los mismos.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-6.png" width="50%" alt=""></p>
+      <p class="texto">
+         Se utilizan en los casos en los cuales resulta imposible o peligroso el uso de sensores por contacto.
+      </p>
+      <h4>Sensor de temperatura monolíticos o de silicio</h4>
+      <p class="texto">
+         El <strong>sensor de temperatura monolítico</strong> es un dispositivo basado en las <strong>propiedades 
+         térmicas</strong> de las <strong>uniones semiconductoras (union PN)</strong>, particularmente la dependencia 
+         de la <strong>tensión base emisor</strong> (<strong>VBE</strong>) de los <strong>transistores 
+         bipolares</strong> con la temperatura cuando la corriente de colector es constante.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-7.png" width="50%" alt=""></p>
+      <p class="texto">
+         Generalmente incluyen sus propios circuitos de <strong>procesamiento de señales</strong>, así como varias 
+         funciones de interface especiales con el mundo externo.</p>
+      </p>
+      <h3>Modelos de sensores de temperatura</h3>
+      <p class="texto">
+         A continuación, veremos una lista de los <strong>sensores de temperatura</strong> más populares para el 
+         desarrollo de proyectos y prototipos con la placa <strong>Arduino</strong>. Estos sensores son excelentes 
+         para casi cualquier proyecto, ya que la mayoría de ellos son fáciles de usar y también son muy asequibles.
+      </p>
+      <h4>Sensor de temperatura y humedad DHT11</h4>
+      <p class="texto">
+         El <strong>sensor de temperatura DHT11</strong> además de leer la <strong>temperatura</strong>, también lee 
+         la <strong>humedad</strong>.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-8.png" width="30%" alt=""></p>
+      <p class="texto">
+         Es una buena opción por su <strong>bajo costo</strong>. Su único inconveniente es que solo puede leer la 
+         señal digital una vez cada 1 segundo.
+         <br><br>
+         <strong>Características:</strong>
+         <br><br>
+         &emsp;- Rango de voltaje desde 3 V a 5 V
+         <br>
+         &emsp;- Rango de medición de temperatura desde 0°C a 50 °C
+         <br>
+         &emsp;- Precisión de medición de temperatura de ±2.0 °C
+         <br>
+         &emsp;- Resolución Temperatura: de 0.1°C
+         <br>
+         &emsp;- Rango de medición de humedad desde 20% a 90% RH
+         <br>
+         &emsp;- Precisión de medición de humedad de 4% RH
+         <br>
+         &emsp;- Resolución humedad de 1% RH
+         <br>
+         &emsp;- Tiempo de sensado de 1 seg
+      </p>
+      <h4>Sensor de temperatura y humedad DHT22</h4>
+      <p class="texto">
+         El <strong>sensor de temperatura DHT22</strong> es muy similar en apariencia y funcionalidad al 
+         <strong>sensor de temperatura DHT11</strong> ya que también mide la <strong>temperatura</strong> y la 
+         <strong>humedad</strong>.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-9.png" width="30%" alt=""></p>
+      <p class="texto">
+         Es un poco más costoso, pero <strong>es más preciso</strong>. Su punto negativo es que su velocidad de 
+         lectura es más lenta que el <strong>DHT11</strong>, solo puede leer la señal digital una vez cada 2 segundos.
+         <br><br>
+         <strong>Características:</strong>
+         <br><br>
+         &emsp;- Rango de voltaje de 3.3V a 6V
+         <br>
+         &emsp;- Rango de medición de temperatura de -40°C a 80 °C
+         <br>
+         &emsp;- Precisión de medición de temperatura de &lt;±0.5 °C
+         <br>
+         &emsp;- Resolución Temperatura de 0.1°C
+         <br>
+         &emsp;- Rango de medición de humedad desde 0 a 100% RH
+         <br>
+         &emsp;- Precisión de medición de humedad de 2% RH
+         <br>
+         &emsp;- Resolución humedad de 0.1%RH
+         <br>
+         &emsp;- Tiempo de sensado de 2s
+      </p>
+      <h4>Sensor de temperatura LM75</h4>
+      <p class="texto">
+         El <strong>sensor de temperatura LM75</strong>, además de ser igual de practico y preciso que los anteriores, 
+         funciona mediante el <strong>bus I2C</strong>.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-10.png" width="30%" alt=""></p>
+      <p class="texto">
+         La gran ventaja de que sea un sensor <strong>completamente digital</strong> es su mayor <strong>inmunidad al 
+         ruido</strong>, ya que toda la electrónica de adquisición y conversión está integrada.
+         <br><br>
+         <strong>Características:</strong>
+         <br><br>
+         &emsp;- Interface de <strong>bus I2C</strong> para un máximo de 8 dispositivos en el bus
+         <br>
+         &emsp;- Rango de voltaje desde 2.8 V a 5.5 V
+         <br>
+         &emsp;- Rango de temperatura desde −55°C a +125°C
+         <br>
+         &emsp;- ADC interno de 11-bit con resolución de 0.125°C
+         <br>
+         &emsp;- Precisión de ±2°C desde −25°C a +100°C, ±3°C desde −55°C a +125°C
+         <br>
+         &emsp;- Bajo consumo
+      </p>
+      <h4>Sensor de temperatura TMP100</h4>
+      <p class="texto">
+         El <strong>sensor de temperatura TMP100</strong> al igual que el anterior usa el bus I2C</strong>, pero con 
+         la diferencia de que tiene <strong>dos pines de dirección</strong>, lo que permite controlar hasta 
+         <strong>ocho sensores diferentes</strong> usando un solo <strong>bus I2C</strong>.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-11.png" width="20%" alt=""></p>
+      <p class="texto">
+         Es una solución ideal para el caso en que se desee hacer mediciones de temperatura <strong>en diferentes 
+         puntos</strong> y se desea usar un cableado simple.
+         <br><br>
+         <strong>Características:</strong>
+         <br><br>
+         &emsp;- Interface bus I2C, para un máximo de 8 dispositivos en el bus
+         <br>
+         &emsp;- Rango de voltaje desde 2.7V a 5.5V
+         <br>
+         &emsp;- Resolución ajustable de 9 a 12 bits
+         <br>
+         &emsp;- Precisión de ±2ºC desde –25ºC a +85ºC, ±3ºC desde –55ºC a +125ºC
+         <br>
+         &emsp;- Bajo Consumo
+      </p>
+      <h4>Sensor de temperatura DS18B20</h4>
+      <p class="texto">
+         El <strong>sensor de temperatura DS18B20</strong> tiene como característica que para comunicarse utiliza el 
+         <strong>protocolo 1-Wire</strong>, esto significa que <strong>se comunica usando solo un pin</strong>.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-12.png" width="50%" alt=""></p>
+      <p class="texto">
+         Cada sensor tiene un <strong>número de serie único</strong>, lo que permite conectar más de un 
+         <strong>DS18B20</strong> en el mismo bus de datos sin interferencia alguna.
+         <br><br>
+         <strong>Características:</strong>
+         <br><br>
+         &emsp;- Interfaz 1-Wire, múltiples sensores pueden compartir el mismo pin
+         <br>
+         &emsp;- Rango de voltaje desde 3.0V a 5.5V
+         <br>
+         &emsp;- Rango de temperatura de -55 a 125°C
+         <br>
+         &emsp;- Resolución ajustable de 9 a 12 bits
+         <br>
+         &emsp;- Identificador interno único de 64 bits
+         <br>
+         &emsp;- Precisión de ±0.5°C desde -10°C a +85°C
+         <br>
+         &emsp;- Tiempo de captura inferior a 750ms
+      </p>
+      <h4>Sensor de temperatura y presión barométrica BMP180</h4>
+      <p class="texto">
+         El <strong>sensor de temperatura y presión barométrica BMP180</strong> es un dispositivo algo más avanzado. 
+         Es un sensor de bus I2C que combina lecturas de <strong>presión barométrica</strong> y de 
+         <strong>temperatura</strong>.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-13.png" width="30%" alt=""></p>
+      <p class="texto">
+         Con estos dos valores de lectura, y mediante un poco de programación, también permite <strong>inferir la 
+         altura</strong>. Es un sensor bastante económico y muy usado en proyectos de <strong>estaciones 
+         meteorológicas</strong>.
+         <br><br>
+         <strong>Características:</strong>
+         <br><br>
+         &emsp;- Interfaz bus I2C
+         <br>
+         &emsp;- Rango de voltaje de 3.3V a 5V
+         <br>
+         &emsp;- Rango de Presión barométrica desde 300 a 1100 hPa
+         <br>
+         &emsp;- Resolución barométrica de 1 Pa
+         <br>
+         &emsp;- Precisión barométrica absoluta de 1 hPa
+         <br>
+         &emsp;- Resolución de temperatura de 0.1°C
+         <br>
+         &emsp;- Precisión Temperatura de 1°C
+         <br>
+         &emsp;- Frecuencia de Muestreo de 120Hz
+         <br>
+         &emsp;- Consumo de energía ultra bajo
+         <br>
+         &emsp;- Completamente calibrado
+      </p>
+      <h4>Sensor de temperatura LM35DZ</h4>
+      <p class="texto">
+         El <strong>sensor de temperatura LM35DZ</strong> es un sensor de tipo <strong>analógico</strong>, y viene 
+         directamente calibrado en <strong>grados Celsius</strong>.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-14.png" width="25%" alt=""></p>
+      <p class="texto">
+         La <strong>salida analógica en voltaje</strong> es directamente <strong>proporcional a la temperatura</strong>.
+         <br><br>
+         <strong>Características:</strong>
+         <br><br>
+         &emsp;- Calibrado en grados Celsius
+         <br>
+         &emsp;- Bajo consumo
+         <br>
+         &emsp;- Factor de lectura lineal 10 mV/°C
+         <br>
+         &emsp;- Precisión del 0.5°C
+         <br>
+         &emsp;- Rango de lectura de −55°C a +150°C
+         <br>
+         &emsp;- Ideal para aplicaciones remotas
+         <br>
+         &emsp;- Voltaje de funcionamiento desde 4 V a 30 V
+      </p>
+      <h4>Sensor de temperatura TMP36</h4>
+      <p class="texto">
+         El <strong>sensor de temperatura TMP36</strong> es un sensor de tipo <strong>analógico</strong>, muy similar 
+         al <strong>sensor de temperatura LM35</strong>.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-15.png" width="25%" alt=""></p>
+      <p class="texto">
+         Al igual que el sensor anterior, su salida <strong>analógica</strong> de voltaje es 
+         <strong>proporcional</strong> a la temperatura ambiente.
+         <br><br>
+         <strong>Características:</strong>
+         <br><br>
+         &emsp;- Voltaje de funcionamiento de 2.7 V a 5.5 V
+         <br>
+         &emsp;- Calibrado directamente en °C
+         <br>
+         &emsp;- Factor de escala de 10 mV/°C
+         <br>
+         &emsp;- Precisión de ±2°C, linealidad de ±0.5°C
+         <br>
+         &emsp;- Stable with large capacitive loads
+         <br>
+         &emsp;- Rango de operación de −40°C to +125°C
+         <br>
+         &emsp;- Bajo consumo
+      </p>
+      <h3>Sensor de Temperatura Utilizado</h3>
+      <p class="texto">
+         En este tema vamos a utilizar unos modelos comerciales muy extendidos y fáciles de encontrar por muy poco 
+         dinero: TMP36 o LM35DZ. Vamos a ver como los usamos. 
+         <br><br>
+         Lo primero, tenéis que buscar la hoja de especificaciones del fabricante (busca TMP36 o  LM35DZ data sheet).
+         Aunque al principio no es fácil acostumbrarse a leer este tipo de documentación (y que encima vienen en 
+         inglés), en último término es a donde hay que ir cuando queráis saber exactamente las características de su
+         funcionamiento.
+         <br><br>
+         El resumen podría ser  más o menos así:
+         <br><br>
+         &emsp;- Ambos miden la temperatura en grados centígrados.
+         <br><br>
+         &emsp;- El TMP36 funciona entre -50º C y 125ºC.
+         <br><br>
+         &emsp;- El LM35DZ funciona entre 0º C y 100ºC.
+         <br><br>
+         &emsp;- No son especialmente precisos, ya que tiene ± 1ºC de incertidumbre, pero normalmente nos sobra para 
+         proyectos sencillos y son muy baratos.
+         <br><br>
+         &emsp;- El encapsulado es similar al de un transistor y también tiene tres patas, así que mucho cuidado con 
+         confundirlos. Intentad leer las letras que lleva serigrafiadas (si podéis, porque suelen ser tan pequeñas 
+         que a veces no se leen ni con lupa). 
+         <br><br>
+         &emsp;- El pin central es el de señal, pero para saber cuál es GND y 5V, el encapsulado tiene una cara plana 
+         y otra curva. Poniendo la cara plana mirando hacia vosotros con las patas hacia abajo (de modo que podais 
+         leer el modelo), el pin de la izquierda es alimentación 5V y el otro es GND.
+         <br><br>
+         Si conectáis la tensión al revés, tendréis tiempo de reaccionar y cambiarla, pero mucho cuidado porque se 
+         calentará más que suficiente para haceros una quemadura dolorosa.
+         <br><br>
+         Si veis que está caliente no tratéis de sacarlo con los dedos, simplemente desconectad el Arduino y dadle un 
+         rato para que se enfríe.
+      </p>
       <h2>Esquemas de Conexión</h2>
       <h3>Esquema Eléctrico</h3>
-      <p class="img_centrada"><img src="img/tema13/13-2.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema13/13-16.png" width="80%" alt=""></p>
       <h3>Diagrama Ilustrativo</h3>
-      <p class="img_centrada"><img src="img/tema13/13-3.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema13/13-17.png" width="80%" alt=""></p>
       <h3>Imagen de Ejemplo</h3>
-      <p class="img_centrada"><img src="img/tema13/13-4.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema13/13-18.png" width="80%" alt=""></p>
       <h2>Código</h2>
-      <p class="texto">
-         Antes de ejecutar el script, nos aseguramos de que está instalado el <strong></strong> de lo
-         contrario, iremos a biblioteca para volver a instalarlo, si es necesario. El archivo lo descargaremos de
-         <a class="link_s" download href="scripts_arduino/librerias/.h">aquí</a>
-      </p>
       <p class="texto">
          Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
          <a class="link_s" href="scripts_arduino/tema13.ino">enlace</a> y lo cargaremos como hemos aprendido.
       </p>
+      <h3>Entendiendo el Código</h3>
       <p class="texto">
-      </p>
-      <p class="img_centrada"><img src="img/tema13/13-5.png" width="60%" alt=""></p>
-      <h2>Retos</h2>
-      <p class="texto">
-         &emsp;
+         En el caso de ejemplo, lo que hace nuestro programa es leer el sensor de temperatura, transformarla a grados 
+         centígrados (o celsius) y escribirla en el monitor de serie cada segundo.
          <br><br>
+         Además, si la temperatura sube de una temperatura máxima (en este caso de 28 ºC) se encenderá el LED.
+         <br><br>
+         Recojemos el valor analógico que nos devuelve el sensor de temperatura. Lo que nos devuelve el sensor la 
+         tensión de salida. Según las especificaciones del sensor, nos dice que la salida de tensión será de 10 mV 
+         (mili voltios) por cada grado de temperatura y además sabemos que nuestra placa de Arduino mide en las 
+         puertas analógicas una máximo de 1.024 para 5V (y 0 para 0V), por tanto, para una lectura dada, el valor en 
+         voltios de la medida será:
       </p>
-      <p class="img_centrada"><img src="img/tema13/13-.png" width="80%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema13/13-19.png" width="40%" alt=""></p>
       <p class="texto">
+         Si dividimos 5 entre 1024, nos dá como resultado 0,0048828125, que según la fórmula, es lo que tendríamos 
+         que multiplicar al dato de salida para obtener el voltaje en voltios.
       </p>
-      <p class="img_centrada"><img src="img/tema13/13-.gif" width="60%" alt=""></p>
+      <p class="codigo texto" style="margin-bottom: 28px;">
+         voltaje = lectura * 0.0048828125;
+      </p>
       <p class="texto">
-         <a class="link_b" href="scripts_arduino/.ino" target="_blank">
+         Como cada voltio equivale a 100ºC ( 1V / 10mv = 100), la temperatura en grados Celsius es resultado de 
+         multiplicar esto por 100.
+         <br><br>
+         Pero para que la cosa no sea tan fácil el fabricante del TMP36 nos dice que el 0V no es 0º sino -50º (y así 
+         poder leer valores bajo cero), así que al total hay que restarle 50 (solo para este modelo de sensores).
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-20.png" width="40%" alt=""></p>
+      <p class="codigo texto" style="margin-bottom: 28px;">
+         temperatura = voltaje * 100 -50;
+      </p>
+      <p class="texto">
+         Otra función que nos puede ser de utilidad es la de calcular la temperatura en grados Fahrenheit en base a 
+         la temperatura en grados Celsius
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-21.png" width="40%" alt=""></p>
+      <h2>Retos</h2>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Tenemos que hacer un sistema que nos controle la temperatura máxima y mínima de un lugar.
+         <br><br>
+         Lo que haremos será controlar la temperatura máxima, que inicialmente será la temperatura medida, y siempre
+         que la temperatura supere esta temperatura máxima, se encenderá un LED rojo durante un segundo y dicha 
+         temperatura pasará a ser la temperatura máxima.
+         <br><br>
+         Al mismo tiempo se controlará también la temperatura mínima, que inicialmente será la temperatura medida, y 
+         siempre que la temperatura sea inferior a esta temperatura mínima, se encenderá un LED azul durante 1 
+         segundo y dicha temperatura pasará a ser la temperatura mínima.
+         <br><br>
+         Se mostrará cada segundo la temperatura actual, la máxima y la mínima.
+         <br><br>
+         La temperatura actual habrá que mostrarla tanto en ºC y en ºF.
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-22.png" width="80%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema13/13-22.gif" width="60%" alt=""></p>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/9xLZZiAUTRk-tema-13-ej-1-sensor-de-temperatura" target="_blank">
             Ejemplo de Solución
          </a>
       </p>
