@@ -9,11 +9,11 @@
    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
    <script src="js/scripts.js"></script>
-   <title>Tema 13: LEDs con Chip 74HC595</title>
+   <title>Tema 14: Joystick Analógico</title>
 </head>
 <body>
    <div id="cabecera">
-      <h1>LEDs con Chip 74HC595</h1>
+      <h1>Joystick Analógico</h1>
    </div>
    <!-- INICIO_LOADER -->
    <div id="pageloader">
@@ -23,7 +23,86 @@
    <div id="contenido">
       <h2>Objetivos</h2>
       <p class="texto">
+         Los joysticks analógicos son una gran manera de añadir un poco de control en tus proyectos y son un elemento 
+         de entrada para programas digitales. También es una herramienta muy útil, que nos ayuda a dar dirección a 
+         nuestro proyecto. 
+         <br><br>
+         En este tema aprenderemos a usar este módulo.
       </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Módulo Joystick Analógico<br>
+         &emsp;&emsp;(4) x F M cables (cables de hembra a macho)
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Módulo Joystick Analógico</h3>
+      <p class="texto">
+         El módulo con el que trabajaremos está construido mediante un conjunto de resistencias variables. Con este 
+         modulo joystick se puede utilizar el cambio de valor resistivo para tomar lectura con dos entradas 
+         analógicas.
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-1.png" width="30%"></p>
+      <p class="texto">
+         El funcionamiento está basado en el movimiento en dos dimensiones de una palanca, este movimiento es 
+         capturado por dos potenciómetros (uno para cada movimiento), de este modo se entiende que para cada 
+         movimiento en cada dirección será regulado un potenciómetro.
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-2.png" width="50%"></p>
+      <p class="texto">
+         Este módulo de joystick cuenta con cinco pines los cuales se enumeran tomando de referencia de izquierda a 
+         derecha:
+         <br><br>
+         &emsp;- GND: Pin conectado a tierra.<br>
+         &emsp;- +5V: pin de alimentación(5v).<br>
+         &emsp;- VRx: pin de lectura de potenciómetro para el eje de las x’s.<br>
+         &emsp;- VRy: pin de lectura de potenciómetro para el eje de las y’s.<br>
+         &emsp;- SW: es un pin adicional que se utiliza para un push button en la parte inferior.<br>
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-3.png" width="40%"></p>
+      <p class="texto">
+         Tenemos que usar pines analógicos para leer los datos de los pines X e Y, y un pin digital para leer el 
+         botón. 
+      </p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema14/14-4.png" width="60%" alt=""></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema14/14-5.png" width="60%" alt=""></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema14/14-6.png" width="60%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="scripts_arduino/tema14.ino" target="_blank>enlace</a> y lo cargaremos como hemos aprendido.
+      </p>
+      <p class="texto">
+         Vamos ahora a abrir al monitor, para ver los datos que se van recogiendo, para ello hacemos click en el 
+         botón de <strong>Serial Monitor</strong> para encender el monitor de serie.
+         <br><br>
+         En el monitor de seria, nos irá indicando los valores X e Y del Joystick. Los valores X irán de 0 a 1023 y 
+         los valores Y también van de 0 a 1023. Un valor intermedio de los dos ejes nos querrá decir que está en la 
+         posición central.
+      </p>
+      <h2>Retos</h2>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Ahora que ya sabemos como funciona el módulo de joystick, vamos a implementar con luces LED el movimiento 
+         del joystick.
+         <br><br>
+         El reto consiste en poner 4 LEDS en nuestra protoboard y encenderlos dependiendo de la posición de nuestro 
+         joystick.
+         <br><br>
+         Iluminaremos cada uno de los LEDS cuando estemos cerca del valor que lo indique.
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-7.gif" width="30%" alt=""></p>
+      <p class="texto">
+        <a class="link_b" download href="scripts_arduino/tema14reto1.ino" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <br><br>
+      <a class="texto volver" href="index.html">Volver al índice</a>
    </div>
    <div id="pie">
       <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>

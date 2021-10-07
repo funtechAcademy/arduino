@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 14: Motor Paso a Paso</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Motor Paso a Paso</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         En este tema veremos como funciona el motor paso a paso <strong>28BYJ-48</strong>.
+      </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Motor Paso a Paso 28BYJ-48<br>
+         &emsp;&emsp;(1) x Adaptador basado en el chip ULN2003A<br>
+         &emsp;&emsp;(1) x Protoboard<br>
+         &emsp;&emsp;(-) x M M cables (cables puente de macho a macho)
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Motor Paso a Paso</h3>
+      <p class="texto">
+         Un motor paso a paso (también llamado stepper) es un dispositivo electromagnético que convierte impulsos 
+         eléctricos en movimientos mecánicos de rotación. 
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-1.png" width="60%" alt=""></p>
+      <p class="texto">
+         La principal característica de estos motores es que se mueven un paso por cada impulso que reciben. 
+         <br><br>
+         Normalmente los pasos pueden ser de 1,8º a 90º por paso, dependiendo del motor. Por ejemplo: un motor paso a 
+         paso que se mueve 2º cada paso, quiere decir que para completar una vuelta (360º) tendrá que dar 
+         (360º/2º por paso) 180 pasos.
+         <br><br>
+         Son motores con mucha precisión, que permiten quedar fijos en una posición (como un servomotor) y también 
+         son capaces de girar libremente en un sentido u otro (como un motor DC).
+         <br><br>
+         Hay tres tipos de motores paso a paso:
+         <br><br>
+         &emsp;- Motor paso a paso de imán permanente (los que usaremos en este tutorial).
+         <br><br>
+         &emsp;- Motor paso a paso de reluctancia variable.
+         <br><br>
+         &emsp;- Motor paso a paso hibrido.
+         <br><br>
+         Los Motores paso a paso están formados por dos partes:
+         <br><br>
+         &emsp;- El estator es la parte fija del motor donde sus cavidades van depositadas las bobinas.
+         <br><br>
+         &emsp;- El rotor es la parte móvil del motor construido por un imán permanente.
+         <br><br>
+         Estas dos partes van montadas sobre un eje.
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-2.png" width="80%" alt=""></p>
+      <p class="texto">
+         El motor 28BYJ-48 es un pequeño motor paso a paso unipolar.
+         <br><br>
+         Las características eléctricas del 28BYJ-48 son modestas, pero incorpora un reductor integrado que lo 
+         convierte en un componente mucho más útil e interesante.
+         <br><br>
+         El 28BYJ-48 tiene un paso de 5.625 grados (64 pasos por vuelta). El reductor interno tiene una relación 
+         de 1/64 (exactamente es de 1/63.6875). Combinados, la precisión total es de 4096 pasos por vuelta, 
+         equivalente a un paso de 0.088º, que es una precisión muy elevada.
+         <br><br>
+         La alimentación del motor es 5V o 12V según modelo, siendo más habitual el modelo de 5V. Físicamente ambos 
+         modelos son idénticos, por lo que para saber la tensión nominal deberemos mirar la etiqueta del motor.
+         <br><br>
+         El 28BYJ-48 tiene un par máximo tras el reductor de 3N•cm (0.3Kgf•cm). La frecuencia máxima es de 100Hz, lo 
+         que supone unos 40 segundos por vuelta, o equivalentemente una velocidad de giro máxima en torno a 1.5 rpm.
+         <br><br>
+         La resistencia y el consumo eléctrico varían con el modelo de 28BYJ-48. En los modelos de 5V es de 60 Ohm, 
+         lo que supone un consumo de 83mA. Los modelos de 12V tienen resistencias de 130-380 Ohm, y consumos de 71 
+         a 32mA.
+         <br><br>
+         Para el control podemos emplear una placa con el chip integrado ULN2003. Normalmente el 28BYJ-48 se 
+         suministra con esta placa, y ambos dispositivos disponen clemas para una conexión sencilla.
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-3.png" width="60%" alt=""></p>
+      <p class="texto">
+         El 28BYJ-48 es un motor ampliamente utilizado en aplicaciones industriales, como el control de válvulas 
+         hidráulicas y neumáticas. En el campo de los hobbies, podemos usar el 28BYJ-48 para hacer pequeños robots 
+         articulados, brazos robóticos, posicionar sensores, girar la mesa de un escanner o mover una impresora 3D. 
+         <br><br>
+         Otras características básicas de este tipo de motores son:
+         <br><br>
+         &emsp;- Motor paso a paso con 5 cables (unipolar 4 bobinas).<br><br>
+         &emsp;- Torque de 34 Newton Metro más o menos 35 gramos por cm.<br><br>
+         &emsp;- Viene con un circuito integrado.<br>
+         &emsp;&emsp;- 4 LEDs que indican cuando se excita una bobina.<br>
+         &emsp;&emsp;- 4 resistencias para proteger los LEDs.<br>
+         &emsp;&emsp;- Chip ULN2003 que contiene 3 transistores Darlington.<br>
+         &emsp;&emsp;- 4 entradas para el controlador, por donde entran los pulsos.<br>
+         &emsp;&emsp;- Jumpers para seleccionar el voltaje de funcionamiento (5V o 12V).<br>
+         &emsp;&emsp;- Hay que puentear el voltaje que no se utiliza.<br><br>
+         &emsp;- Caja reductora mediante engranajes 1/64.<br>
+         &emsp;&emsp;- Se consigue un paso de 5,625/64 = 0,088º.
+         <br><br>
+         Antes de ver las conexiones, hay que aclarar que este tipo de motores lleva un driver o etapa de potencia. 
+         Este componente nos permite suministrar la energía suficiente al motor paso a paso para que se mueva.
+         <br><br>
+         Para el control del 28BYJ-48 vamos a usar una placa con el integrado ULN2003. El ULN2003 es una agrupación 
+         de 7 Par Darlington de los cuales usaremos 4, uno por cada fase del motor paso a paso.
+         <br><br>
+         Un par Darlington es un dispositivo que nos permite suministrar una corriente superior a las que podríamos 
+         usando las salidas de Arduino directamente.
+         <br><br>
+         El 28BYJ-48 es un motor unipolar, por lo que no necesitamos invertir la corriente que atraviesa las bobinas 
+         para hacerlo funcionar.
+         <br><br>
+         Aplicando un control todo o nada, es decir, encendiendo por completo o apagando por completo una bobina, 
+         únicamente tenemos que activar las bobinas en la secuencia correcta.
+         <br><br>
+         Existen varias secuencias posibles. A continuación vamos a ver las tres más empleadas.
+      </p>
+      <h4>Secuencia 1-Fase</h4>
+      <p class="texto">
+         En secuencia de 1-fase encendemos una única bobina cada vez.
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-4.png" width="40%" alt=""></p>
+      <p class="texto">
+         Llevando esta secuencia de encendido a una tabla, que posteriormente usaremos para el código, la secuencia 
+         quedaría de la siguiente forma.
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-5.png" width="70%" alt=""></p>
+      <h4>Secuencia 2-Fases</h4>
+      <p class="texto">
+         En la secuencia en 2-fases encendemos dos bobinas correlativas en cada fase. Al hacer trabajar dos bobinas 
+         simultáneamente en cada paso el campo magnético generado es superior (un 41% más) por lo que el motor tiene 
+         más par y, en general, presenta un mejor comportamiento. Como punto negativo, aumentamos el consumo 
+         energético al doble.
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-6.png" width="40%" alt=""></p>
+      <p class="texto">
+         Que expresado en forma de tabla resulta.
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-7.png" width="70%" alt=""></p>
+
+      <h4>Secuencia Medios Pasos</h4>
+      <p class="texto">
+         La última secuencia que vamos a ver es la secuencia en medio paso (half-step). Aquí encendemos 
+         alternativamente uno y dos bobinas.
+         <br><br>
+         Con esta secuencia conseguimos una precisión de la mitad del paso. El par desarrollado varía ya que en 
+         algunos pasos activamos dos bobinas y en otras solo una, pero a la vez el giro se encuentra más "guiado", 
+         por lo que en general ambos efectos se compensan y el funcionamiento es bueno, salvo en aplicaciones donde 
+         estemos muy al límite del par máximo.
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-8.png" width="60%" alt=""></p>
+      <p class="texto">
+         Expresando la secuencia en forma de tabla resulta.
+      </p>
+      <p class="img_centrada"><img src="img/tema14/14-9.png" width="70%" alt=""></p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema14/14-10.png" width="80%" alt=""></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema14/14-11.png" width="80%" alt=""></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema14/14-12.png" width="70%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Haremos uso de una biblioteca diseñada para estos motores que hará nuestro código corto y sencillo. 
+         Incluimos la biblioteca al principio de nuestro código y luego mediante simples comandos podemos controlar 
+         el comportamiento del motor. El archivo lo descargaremos de
+         <a class="link_s" download href="scripts_arduino/librerias/pasoapaso/Stepper.h">aquí</a>
+         <br><br>
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="scripts_arduino/tema14.ino">enlace</a> y lo cargaremos como hemos aprendido.
+      </p>
+      <h3>Entendiendo el Código</h3>
+      <p class="texto">
+         Utilizaremos nuevas funciones que tenemos que manejar de la librería Stepper.
+         <br><br>
+         Tenemos que definir el número de pasos que nuestro motor tiene por vuelta. 512 para el motor 28BYJ-48.
+      </p>
+      <p class="codigo texto" style="margin-bottom: 28px;">
+         #define PASOS 512
+      </p>
+      <p class="texto">
+         Creamos una instancia de la clase Stepper, pasándole los pines de control definidos. La llamaremos "motor"
+      </p>
+      <p class="codigo texto" style="margin-bottom: 28px;">
+         Stepper motor(PASOS, Pin1, Pin2, Pin3, Pin4);
+      </p>
+      <p class="texto">
+         Fijamos la velocidad del motor en revoluciones por minutop (rpm). En este caso, 25.
+      </p>
+      <p class="codigo texto" style="margin-bottom: 28px;">
+         motor.setSpeed(25);
+      </p>
+      <p class="texto">
+         Por último, movemos el motor un número determinado de pasos.
+      </p>
+      <p class="codigo texto" style="margin-bottom: 28px;">
+         motor.step(200);
+      </p>
+      <h2>Retos</h2>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Ahora que ya sabemos la forma de controlar los motores paso a paso, vamos a hacer un pequeño proyecto con un 
+         motor bipolar. Con un potenciómetro regularemos la velocidad de este, y con dos pulsaremos seleccionaremos 
+         el sentido de giro.
+         <br><br>
+
+
+/*
+  www.diymakers.es
+  by A.García
+  Mover motores paso a paso con Arduino
+  Tutorial en: http://diymakers.es/mover-motores-paso-paso-con-arduino/
+*/
+ 
+#include <Stepper.h> //Importamos la librería para controlar motores paso a paso
+ 
+#define STEPS 200 //Ponemos el número de pasos que necesita para dar una vuelta. 200 en nuestro caso
+ 
+// Ponemos nombre al motor, el número de pasos y los pins de control
+Stepper stepper(STEPS, 8, 9); //Stepper nombre motor (número de pasos por vuelta, pins de control)
+ 
+int pot;  //Variable lectura potenciómetro
+int derecha=3;  //Pulsador derecha
+int izquierda=2;  //Pulsador izquierda
+int direccion;  //Variable para indicar la direccón
+ 
+void setup()
+{
+  pinMode(derecha,INPUT);
+  pinMode(izquierda,INPUT);
+}
+ 
+void loop()
+{
+  pot=analogRead(A0); //Lectura potenciómetro
+  pot = map(pot, 0, 1023, 30, 150); //Establecemos la velocidad entre 30 y 150 rpm
+ 
+  stepper.setSpeed(pot); //Indicamos la velocidad al motor
+ 
+  stepper.step(direccion); //Indicamos la dirección al motor
+ 
+  if(digitalRead(izquierda)==HIGH)
+  {
+     direccion=200;  //Si pulsamos el pulsador izquierdo, el motor gira a la izquierda
+  }
+ 
+  if(digitalRead(derecha)==HIGH)
+  {
+     direccion=-200;  //Si pulsamos el pulsador derecho, el motor gira a la derech
+  }
+}
+
+
+
+      </p>
+      <p class="img_centrada"><img src="img/tema13/13-22.png" width="30%" alt=""></p>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/9xLZZiAUTRk-tema-13-ej-1-sensor-de-temperatura" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <br><br>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

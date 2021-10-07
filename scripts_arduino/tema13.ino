@@ -1,9 +1,11 @@
+// Fun Tech Academy 2021
+
 int lectura = 0;          // Variable para la lectura del sensor
-int pin_temperatura = A1; // Pin del sensor de temperatura
-int pin_led = 7;          // Pin del LED
+int pin_temperatura = A0; // Pin del sensor de temperatura
+int pin_led = 10;          // Pin del LED
 float voltaje;            // Variable con decimales para el cálculo del voltaje devuelto
 float temperatura = 0.0;  // Variable con decimales para el cálculo de la temperatura
-int temp_maxima = 28;     // Variable para la temperatura máxima a controlar
+int temp_maxima = 25;     // Variable para la temperatura máxima a controlar
 
 void setup()
 {
@@ -35,4 +37,3 @@ void loop()
    }
   delay(1000);
 }
-
