@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 15: Control Remoto IR</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Control Remoto IR</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         En este tema usaremos un módulo sensor infrarrojo para recibir la señal de controles remotos IR (infrarrojos) 
+         que usan muchos de los equipos domésticos como televisiones, equipos de sonido, etc. 
+         <br><br>
+         Usando un control remoto es una forma de tener el control inalámbrico de nuestro proyecto.
+         <br><br>
+         A través de estos módulos controlaremos las salidas de nuestro Arduino.
+      </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Módulo receptor IR<br>
+         &emsp;&emsp;(1) x Control remoto IR<br>
+         &emsp;&emsp;(1) x LED rojo de 5mm<br>
+         &emsp;&emsp;(1) x Resistencia de 220 ohm<br>
+         &emsp;&emsp;(3) x F M cables (cables de hembra a macho)
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Sensor Receptor De Infrarrojos (IR)</h3>
+      <p class="texto">
+         Los detectores de infrarrojos son pequeños microchips con una fotocélula que están sintonizados para 
+         escuchar la luz infrarroja. 
+      </p>
+      <p class="img_centrada"><img src="img/tema15/15-1.png" width="30%"></p>
+      <p class="texto">
+         Casi siempre se utilizan para la detección por control remoto: todos los televisores y reproductores de DVD 
+         tienen uno de estos en la parte frontal para escuchar la señal de infrarrojos del mando a distancia. Dentro 
+         del control remoto hay un LED de infrarrojos a juego, que emite pulsos de infrarrojos para indicarle al 
+         televisor que se encienda, apague o cambie de canal. 
+         <br><br>
+         La luz infrarroja no es visible para el ojo humano, lo que significa que se necesita un poco más de trabajo 
+         para probar una configuración.
+         <br><br>
+         Este sensor tiene un filtro interno para detectar solo frecuencias infrarrojas cercanas a 38KHz, lo que lo 
+         hace compatible con la mayoría de mandos infrarrojos.
+         <br><br>
+         Posee 3 pines de conexión GND, VCC y DATA, el cual nos permite conectar directamente a un pin digital de 
+         nuestro Arduino o cualquier microcontrolador que deseemos usar.
+         <br><br>
+         Como mando usaremos el que viene junto al sensor en el kit del mando infrarrojo.
+      </p>
+      <p class="img_centrada"><img src="img/tema15/15-2.png" width="40%"></p>
+      <p class="texto">
+         Este mando usa el protocolo NEC que trabaja a 38KHz de frecuencia, el formato del tren de pulsos que envía 
+         al presionar una tecla se muestra en la siguiente gráfica:
+      </p>
+      <p class="img_centrada"><img src="img/tema15/15-3.png" width="70%"></p>
+      <p class="texto">
+         Lo particular de este protocolo es que envía doble vez tanto la dirección como el comando, de forma normal y 
+         negado, con esto posteriormente se puede validar los datos.
+         <br><br>
+         La dirección está asociada a un dispositivo, por ejemplo un TV, una equipo de sonido, un VCR, etc. Y el 
+         comando está asociado a la acción o función del botón. Por ejemplo subir el volumen, apagar, el número 1 o 2, 
+         etc.
+         <br><br>
+         Para este tema vamos a trabajar como si se tratase de un solo bloque de datos 32 bits.
+         <br><br>
+         A continuación se muestran los valores de los datos correspondientes a los botones del control remoto usado:
+      </p>
+      <p class="img_centrada"><img src="img/tema15/15-4.png" width="80%"></p>
+      <p class="texto">
+         Como se observa el dato está formado por la dirección, comando y sus negaciones, por ejemplo para la 
+         tecla OK: el dato de 32bits es 0x00FF02FD, donde la dirección es 00 y su negación FF, y el comando o función 
+         es 02 y su negación FD.
+      </p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema15/15-5.png" width="60%" alt=""></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema15/15-6.png" width="50%" alt=""></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema15/15-7.png" width="60%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Haremos uso de una biblioteca diseñada para estos módulos que hará nuestro código corto y sencillo.
+         <br><br>
+         IRremote es una de las librerías más usadas y completas para trabajar con protocolos de controles 
+         infrarrojos. Tiene implementado varios protocolos de las marcas más conocidas como Sony, LG, Samsung, etc.
+         <br><br>
+         Es necesario descargar e importarla a nuestro IDE Arduino para poder trabajar con este módulo.
+         <br><br>
+         Incluimos la biblioteca al principio de nuestro código, y luego mediante simples comandos podemos controlar
+         el comportamiento del módulo. El archivo lo descargaremos de
+         <a class="link_s" download href="scripts_arduino/librerias/receptorir/IRremote.zip">aquí.</a> Tendremos que 
+         descomprimir los archivos antes de incluirlos.
+         <br><br>
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="scripts_arduino/tema15.ino" target="_blank">enlace</a> y lo cargaremos como hemos 
+         aprendido.
+         <br><br>
+         En el ejemplo, se encenderá y apagará el led del pin 13 con cualquier tecla de nuestro control remoto, 
+         incluso con cualquier otro mando a distancia.
+      </p>
+
+      <h3>Entendiendo el Código</h3>
+      <p class="texto">
+         Con <strong>IRrecv irrecv(pin_receptor)</strong> creamos la variable u objeto para el receptor IR, en el pin 
+         especificado, luego creamos la variable <strong>resultados</strong>, que es una estructura en donde se 
+         guardaran todos los datos relacionados cuando se recibe un dato por el sensor. 
+      </p>
+      <p class="codigo">
+         int pin_receptor = 11;<br>
+         int pin_led = 13;<br>
+         IRrecv irrecv(pin_receptor);<br>
+         decode_results resultados;<br>
+      </p>
+      <br><br>
+      <p class="texto">
+         En <strong>Setup()</strong> inicializamos la recepción de datos con <strong>irrecv.enableIRIn()</strong> y 
+         configuramos el pin 13 como salida.
+      </p>
+      <p class="codigo">
+         irrecv.enableIRIn();<br>
+         pinMode(pin_led, OUTPUT);<br>
+      </p>
+      <br><br>
+      <p class="texto">
+         En <strong>loop()</strong> simplemente comprobamos si le llega un dato al receptor, esto lo hacemos con 
+         <strong>if(irrecv.decode(&resultados))</strong>, si hay un dato, encendemos y apagamos el LED. 
+         <br><br>
+         Posteriormente, reseteamos el receptor para poder recibir la siguiente señal
+      </p>
+      <p class="codigo">
+         if (irrecv.decode(&resultados))<br>
+         {<br>
+         &emsp;&emsp;digitalWrite(pin_led, HIGH);<br>
+         &emsp;&emsp;delay(300);<br>
+         &emsp;&emsp;digitalWrite(pin_led, LOW); <br>
+         &emsp;&emsp;irrecv.resume();<br>
+         }  
+      </p>
+      <br><br>
+      <p class="texto">
+         Después de cargar el programa, al presionar cualquier tecla de cualquier control remoto, deberá encender el 
+         LED.
+      </p>
+      <h2>Retos</h2>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Ahora vamos a evaluar cada uno de los botones que pulsamos.
+         <br><br>
+         Tenemos que enviar al puerto serie los datos correspondientes a la tecla presionada.
+      </p>
+      <p class="img_centrada"><img src="img/tema15/15-8.gif" width="50%" alt=""></p>
+      <p class="texto">
+         Para este reto, crearemos una función para extraer toda la información que nos da la estructura de datos que 
+         recibe nuestro receptor IR. Podemos llamarla:
+      </p>
+      <p class="codigo">
+         void traducirIR()
+      </p>
+      <br><br>
+      <p class="texto">
+         Primero mostraremos el tipo de señal. Este dato nos indica el número de bits que utiliza la señal y lo 
+         mostraremos como un número decimal. Lo extraemos del valor de la estructura:
+      </p>
+      <p class="codigo">
+         Serial.print(resultados->bits, DEC);
+       </p>
+      <br><br>
+      <p class="texto">
+         A continuación mostraremos el tipo de mando a distancia. Este dato lo extraemos del valor de la estructura:
+      </p>
+      <p class="codigo">
+         resultados->decode_type
+      </p>
+      <br><br>
+      <p class="texto">
+         Después mostraremos el valor del botón pulsado y lo haremos tanto en hecadecimal como en binario. Este dato 
+         lo extraemos del valor de la estructura:
+      </p>
+      <p class="codigo">
+         Serial.print(resultados->value, HEX);<br>
+         Serial.print(resultados->value, BIN);
+      </p>
+      <br><br>
+      <p class="texto">
+         Lo mostraremos todo de tal manera que en una única línea nos indique todos los valores con un texto que 
+         identifique cada valor.
+      </p>
+      <p class="texto">
+        <a class="link_b" download href="scripts_arduino/tema15reto1.ino" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <h3>Reto 2</h3>
+      <p class="texto">
+         Ahora que ya sabemos el valor del dato que corresponde a cada uno de los botones de nuestro mando (el de 
+         Arduino o el de la tele), vamos a asociar los 4 botones numéricos del 1 al 4 a 4 pines digitales y encender 
+         o apagar leds, que se podrían remplazar por ejemplo con cada uno de los canales de la tele.
+      </p>
+      <p class="img_centrada"><img src="img/tema15/15-9.gif" width="50%" alt=""></p>
+      <p class="texto">
+         Para este reto, aprovecharemos el reto anterior para ver el valor de cada una de los botones de nuestro 
+         mando de arduino y mostraremos en el terminal de serie cada uno de los botones pulsados. Esto lo haremos de 
+         la siguiente forma:
+      </p>
+      <p class="codigo">
+         switch(resultados.value)<br>
+         {<br>
+         &emsp;case 0x00FF629D:<br>
+         &emsp;&emsp;Serial.println("Tecla: Arriba");<br>
+         &emsp;&emsp;break;<br>
+         }<br>
+      </p>
+      <br><br>
+      <p class="texto">
+         Además, cuando pulsemos los números del 1 al 4, encenderemos el pin correspondiente al LED. 
+         <br><br>
+         Esta vez, lo haremos de una forma distinta. Si lo pulsamos una vez, lo encenderemos y si lo volvemnos a 
+         pulsar, lo apagaremos. En lugar de evaluar primero si está encendido o no, lo haremos directamente haciendo 
+         lo contrario de la situación en la que se encuentre. Esto lo haremos de la siguiente forma:
+      </p>
+      <p class="codigo">
+         digitalWrite(pin_led1, !digitalRead(pin_led1));
+      </p>
+      <br><br>
+      <p class="texto">
+        <a class="link_b" download href="scripts_arduino/tema15reto2.ino" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>
