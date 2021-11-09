@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 16: Fotoresistencia</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Fotoresistencia</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         En este tema aprenderemos a medir la intensidad de la luz utilizando una entrada analógica. 
+      </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Protoboard<br>
+         &emsp;&emsp;(1) x Fotoresistencia<br>
+         &emsp;&emsp;(1) x LED blanco de 5mm<br>
+         &emsp;&emsp;(1) x Resistencia de 220 ohm<br>
+         &emsp;&emsp;(1) x Resistencia de 10 kohm<br>
+         &emsp;&emsp;(4) x M M cables (cables de macho a macho)
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Fotoresistencia</h3>
+      <p class="texto">
+         Una fotoresistencia, fotorresistor, fotocélula o LDR (por sus siglas en inglés “light-dependent resistor”) 
+         es un componente electrónico cuya resistencia varía en función de la luz recibida.
+      <p class="img_centrada"><img src="img/tema16/16-1.png" width="30%"></p>
+      <p class="texto">
+         Una fotoresistencia está formado por un semiconductor, típicamente sulfuro de cadmio (CdS). Al incidir la 
+         luz sobre él algunos de los fotones son absorbidos, provocando que electrones pasen a la banda de conducción 
+         y, por tanto, disminuyendo la resistencia del componente.
+         <br><br>
+         Se trata de un sensor que actúa como una resistencia variable en función de la luz que capta. A mayor 
+         intensidad de luz, menor resistencia: el sensor ofrece una resistencia de 1M ohm en la oscuridad, alrededor 
+         de 10k ohm en exposición de luz ambiente, hasta menos de 1k ohm expuesto a la luz del sol. Aunque estos 
+         valores pueden depender del modelo de LDR.
+         <br><br>
+         El LDR actúa como una resistencia variable. Para conocer la cantidad de luz que el sensor capta en cierto 
+         ambiente, necesitamos medir la tensión de salida del mismo. Para ello utilizaremos un divisor de tensión, 
+         colocando el punto de lectura para Vout entre ambas resistencias. De esta forma:
+      </p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema16/16-2.png" width="50%" alt=""></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema16/16-3.png" width="50%" alt=""></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema16/16-4.png" width="60%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="scripts_arduino/tema16.ino" target="_blank">enlace</a> y lo cargaremos como hemos 
+         aprendido.
+         <br><br>
+         En el ejemplo, si hay luz, encendemos el LED de la placa.
+      </p>
+      <h2>Retos</h2>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Ahora que ya sabemos utilizar la fotorresistencia, haremos como las farolas inteligentes. Encenderemos el LED 
+         blanco cuando estemos a oscuras.
+      </p>
+      <p class="img_centrada"><img src="img/tema16/16-5.gif" width="50%" alt=""></p>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/9pMDVUb6yBN-tema-16-ej-1-fotorresistor" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>
