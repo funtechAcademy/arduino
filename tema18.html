@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 18: Transistores</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Transistores</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         En este tema conoceremos las aplicaciones de un transistor y funcionamiento como conmutador y amplificador.
+      </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Protoboard<br>
+         &emsp;&emsp;(1) x Transistor<br>
+         &emsp;&emsp;(2) x LED<br>
+         &emsp;&emsp;(2) x Resistencia de 100 Ohm<br>
+         &emsp;&emsp;(x) x M M cables (cables de macho a macho)
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Transistores</h3>
+      <p class="texto">
+         Ciertos dispositivos tecnológicos necesitan una corriente eléctrica mayor que la que proporciona la placa de 
+         Arduino y para ello se utiliza el transistor.
+      </p>
+      <p class="img_centrada"><img src="img/tema18/18-1.png" width="25%"></p>
+      <p class="texto">
+         El transistor es sin duda el componente electrónico más importante. Está formado por 3 capas de material 
+         semiconductor, cada una con un terminal metálico para poder conectarlo a los circuitos. Los materiales 
+         semiconductores se pueden comportar como aislantes o conductores según la energía que reciban, de ahí su 
+         versatilidad en el campo de la electrónica. 
+         <br><br>
+         Los 3 terminales de los transistores son:
+         <br><br>
+         &emsp;- <strong>Colector</strong>: Entrada de corriente.
+         <br><br>
+         &emsp;- <strong>Base</strong>: Entrada de corriente. Regula el funcionamiento.
+         <br><br>
+         &emsp;- <strong>Emisor</strong>: Salida de corriente.
+      </p>
+      <p class="img_centrada"><img src="img/tema18/18-2.png" width="30%"></p>
+      <p class="texto">
+         Según la forma en la que conectemos los terminales del transistor a resistencias externas éste puede 
+         funcionar de 3 formas:
+         <br><br>
+         &emsp;- <strong>Como interruptor abierto o en “corte”</strong>: Si la corriente que circula por la base es 
+                 nula, normalmente debido a que se conecta a ella una resistencia de un valor muy elevado, el 
+                 transistor no permite el paso de corriente entre colector y emisor.
+         <br><br>
+         &emsp;- <strong>Como interruptor cerrado o funcionamiento en zona “activa” o "conducción"</strong>: La 
+                 resistencia conectada a la base del transistor tiene un valor que permite circular corriente a 
+                 través de ella. De esta manera hay circulación de corriente entre el colector y emisor cuyo valor 
+                 será proporcional a la corriente que circula por la base. Normalmente mucho mayor con lo que 
+                 producirá el efecto de amplificación.
+         <br><br>
+         &emsp;- <strong>Funcionamiento en zona de “saturación"</strong>: Si se va aumentando la intensidad que 
+                 circula por la base llega un momento que la intensidad entre colector y emisor ya no aumenta más; es 
+                 decir, se satura.
+      </p>
+      <p class="img_centrada"><img src="img/tema18/18-3.png" width="70%"></p>
+      <h3>Tipos De Transistores</h3>
+      <h4>Transistor De Contacto Puntual</h4>
+      <p class="texto">
+         Llamado también «transistor de punta de contacto», fue el primer transistor capaz de obtener ganancia. 
+         Consta de una base de germanio, semiconductor para entonces mejor conocido que la combinación cobre-óxido de 
+         cobre, sobre la que se apoyan, muy juntas, dos puntas metálicas que constituyen el emisor y el colector. 
+         <br><br>
+         La corriente de base es capaz de modular la resistencia que se «ve» en el colector, de ahí el nombre de 
+         transfer resistor. Es difícil de fabricar (las puntas se ajustaban a mano), frágil (un golpe podía desplazar 
+         las puntas) y ruidoso. En la actualidad ha desaparecido.
+      </p>
+      <p class="img_centrada"><img src="img/tema18/18-4.png" width="40%"></p>
+      <h4>Transistor De Unión Bipolar</h4>
+      <p class="texto">
+         También llamado BJT por sus siglas del inglés (bipolar junction transistor) se fabrica sobre un monocristal 
+         de material semiconductor como el germanio, el silicio o el arseniuro de galio, cuyas cualidades son 
+         intermedias entre las de un conductor eléctrico y las de un aislante. 
+      </p>
+      <p class="img_centrada"><img src="img/tema18/18-5.png" width="30%"></p>
+      <p class="texto">
+         Sobre el sustrato de cristal se contaminan en forma muy controlada tres zonas sucesivas, N-P-N o P-N-P 
+         (P-> carga positiva;N-> carga negativa), dando lugar a dos uniones PN. La tres zonas contaminadas dan como 
+         resultado transistores PNP o NPN, donde la letra intermedia siempre corresponde a la región de la base, y 
+         las otras dos al emisor y al colector que, si bien son del mismo tipo y de signo contrario a la base, tienen 
+         diferente contaminación entre ellas.
+      </p>
+      <p class="img_centrada"><img src="img/tema18/18-6.png" width="80%"></p>
+      <h4>Transistor De Efecto De Campo</h4>
+      <p class="texto">
+         El transistor de efecto de campo de unión (JFET), fue el primer transistor de efecto de campo en la 
+         práctica. Lo forma una barra de material semiconductor de silicio de tipo N o P. En los terminales de la 
+         barra se establece un contacto óhmico, tenemos así un transistor de efecto de campo tipo N de la forma más 
+         básica. 
+         <br><br>
+         Si se difunden dos regiones P en una barra de material N y se conectan externamente entre sí, se producirá 
+         una puerta. A uno de estos contactos le llamaremos surtidor y al otro drenador. Aplicando tensión positiva 
+         entre el drenador y el surtidor y conectando la puerta al surtidor, estableceremos una corriente, a la que 
+         llamaremos corriente de drenador con polarización cero. Con un potencial negativo de puerta al que llamamos 
+         tensión de estrangulamiento, cesa la conducción en el canal.
+      </p>
+      <p class="img_centrada"><img src="img/tema18/18-7.png" width="30%"></p>
+      <h4>Fototransistor</h4>
+      <p class="texto">
+         Los fototransistores son sensibles a la radiación electromagnética en frecuencias cercanas a la de la luz 
+         visible; debido a esto su flujo de corriente puede ser regulado por medio de la luz incidente. Un 
+         fototransistor es, en esencia, lo mismo que un transistor normal, solo que puede trabajar de 2 maneras 
+         diferentes:
+         <br><br>
+         &emsp;- Como un transistor normal con la corriente de base (IB) modo común.
+         <br><br>
+         &emsp;- Como fototransistor, cuando la luz que incide en este elemento hace las veces de corriente de 
+                 base (IP) modo de iluminación.
+      </p>
+      <p class="img_centrada"><img src="img/tema18/18-8.png" width="30%"></p>
+      <p class="texto">
+         Para nuestro trabajo, utilizaremos un transistor de unión bipolar tipo NPN.
+      </p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema18/18-9.png" width="70%" alt=""></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema18/18-10.png" width="50%" alt=""></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema18/18-11.png" width="60%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="scripts_arduino/tema18.ino" target="_blank">enlace</a> y lo cargaremos como hemos 
+         aprendido.
+         <br><br>
+         En el ejemplo veremos como funciona nuestro transistor en modo de interruptor, y para ello, lo único que 
+         hacemos es activar el pin del LED rojo.
+         <br><br>
+         En el ejemplo, conectamos el Pin 7 al LED rojo (con su resistencia de 100 Ohm). Después, conectamos el otro 
+         terminal del LED rojo al colector del transistor. Luego conectaremos de nuevo el segundo terminal del LED rojo
+         a uno de los terminales del LED verde (con su resistencia de 100 Ohm). Ahora conectaremos el segundo 
+         terminal del LED verde a la base del transistor. Finalmente conectaremos al emisor del transistor la tierra 
+         (GND).
+         <br><br>
+         Vemos que el LED rojo se enciende con fuerza y que el verde también lo hace pero mínimamente. Curiosamente, 
+         si desenganchamos el LED verde de su sitio, el LED rojo deja de funcionar.
+         <br><br>
+         Esto pasa por el propio funcionamiento del transistor. La base del transistor funciona como un interruptor 
+         controlado por carga eléctrica, que cuando le llega un mínimo de carga, se excita y cierra el circuito entre 
+         el colector y el emisor
+         <br><br>
+         Además, el transistor nos permite amplificar la corriente, ya que con una pequeña corriente que se aplique 
+         en la base, se puede controlar una corriente de mayor intensidad.
+         <br><br>
+         En este ejemplo vemos dos de los funcionamientos de un transistor:
+         <br><br>
+         &emsp;- Activado cuando tenemos el LED verde y le damos corriente a la base, dejando el circuito cerrado. 
+         <br><br>
+         &emsp;- En corte cuando quitamos el LED verde y funciona como un interruptor abierto (no dejando pasar la 
+                 corriente).
+      </p>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/8IG0UtgTtTx-tema-17-condensador" target="_blank">
+            Ejemplo
+         </a>
+      </p>
+      <h2>Retos</h2>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Con el mismo circuito que tenemos como ejemplo, tenemos que hacer que nuestro LED rojo tenga una mayor 
+         iluminación sin cambiar el tamaño de la resistencia, eliminando aquello que haga que nuestro 
+         transistor pierda energía.
+         <br><br>
+         De esta forma, veremos funcionar el transistor en modo saturación.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/guOc5nFZ7TD-tema-18-ej-1-transistor" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

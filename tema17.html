@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 17: Condensadores</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Condensadores</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         En este tema conoceremos el funcionamiento de un condensador y su simbología. 
+      </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Protoboard<br>
+         &emsp;&emsp;(1) x Condensador de 100 μF<br>
+         &emsp;&emsp;(1) x Resistencia de 1 kOhm<br>
+         &emsp;&emsp;(1) x Resistencia de 470 Ohm<br>
+         &emsp;&emsp;(x) x M M cables (cables de macho a macho)
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Condensador</h3>
+      <p class="texto">
+         Un condensador, (también llamado capacitor) es un dispositivo capaz de almacenar energía en forma de campo 
+         eléctrico. 
+      </p>
+      <p class="img_centrada"><img src="img/tema17/17-1.png" width="30%"></p>
+      <p class="texto">
+         Los condensadores están constituidos internamente por dos superficies conductoras llamadas armaduras. Estas 
+         superficies se encuentran normalmente en forma de láminas o placas y están separadas por un dieléctrico o 
+         material no conductor que aísla una armadura de otra (se puede dejar un hueco entre las armaduras y usar el 
+         aire como dieléctrico).
+      </p>
+      <p class="img_centrada"><img src="img/tema17/17-2.png" width="60%"></p>
+      <p class="texto">
+         Los condensadores están caracterizados fundamentalmente por dos parámetros, capacidad y la tensión de trabajo.
+         <br><br>
+         &emsp;- <strong>Capacidad</strong>: La capacidad de un condensador, es directamente proporcional a la carga 
+                 eléctrica que este puede almacenar e inversamente proporcional al voltaje entre las armaduras del 
+                 mismo. La capacidad se mide en Faradios (F), aunque por ser una unidad muy grande y se suelen usar 
+                 submúltiplos.
+         <br><br>
+         &emsp;- <strong>Tensión de Trabajo</strong>: La tensión de trabajo es la máxima tensión que podemos aplicar 
+                 entre los extremos del condensador. Es <strong>MUY RECOMENDABLE</strong> no exceder esta tensión, si 
+                 lo hacemos puede saltar un arco eléctrico entre las armaduras del condensador que perfore el 
+                 dieléctrico y dañar el condensador.
+         <br><br>
+         Otra característica muy importante, aunque no es común a todos los condensadores, es la polaridad. Existen 
+         condensadores electrolíticos o polarizados, en los cuales tendremos que tener en cuenta su polaridad, esto es 
+         <strong>MUY IMPORTANTE</strong>, ya que si colocamos uno de estos condenadores con la polaridad invertida 
+         pueden llegar a <strong>explotar</strong>. 
+      </p>
+      <p class="nota">
+         Nota: Como hemos advertido ya, ojo con la polaridad de los condensadores, que pueden llegar a explotar si 
+         no se conectan correctamente.
+      </p>
+      <h3>Tipos De Condensadores</h3>
+      <p class="texto">
+         Al igual que ocurre con las resistencias, los condensadores pueden ser clasificados de muy diversas formas. 
+         Haremos una tipificación atendiendo en primer lugar a si son fijos o variables y en segundo lugar al material 
+         con el que están construidos sus dieléctricos:
+      </p>
+      <h4>Condensadores Fijos</h4>
+      <p class="texto">
+         Son los condensadores más comunes que podemos encontrar, el valor de su capacidad está fijado por el 
+         fabricante y no puede ser modificado. Pueden ser:
+         <br><br>
+         &emsp;- <strong>Condensadores electrolíticos</strong>: Los condensadores electrolíticos tienen el dieléctrico 
+                 formado por una lamina de papel impregnado en electrolito (liquido iónico). Estos condensadores 
+                 suelen tener mayor capacidad por unidad de volumen que otros condensadores, normalmente se encuentran 
+                 con capacidades superiores a 1µF. Estos condensadores poseen polaridad, por lo que hay que tener 
+                 cuidado en su colocación. Normalmente se emplean en circuitos eléctricos de grandes corrientes o en 
+                 fuentes de alimentación para el filtrado y estabilización de tensiones.
+      </p>
+      <p class="img_centrada"><img src="img/tema17/17-3.png" width="30%"></p>
+      <p class="texto">
+         &emsp;- <strong>Condensadores electrolíticos de Tántalo</strong>: Este tipo de condensadores tienen las 
+                 mismas características que los anteriores, con la diferencia que como electrolito usan oxido de 
+                 tantalio, con el que se pueden crear láminas más finas y con un mayor poder aislante. Se suelen usar 
+                 como filtros en fuentes de alimentación.
+      </p>
+      <p class="img_centrada"><img src="img/tema17/17-4.png" width="30%"></p>
+      <p class="texto">
+         &emsp;- <strong>Condensadores de poliéster</strong>: Los condensadores de poliéster suelen tener capacidades 
+                 inferiores a 1µF y presentar tensiones de trabajo más elevadas que los condensadores electrolíticos.
+      </p>
+      <p class="img_centrada"><img src="img/tema17/17-5.png" width="30%"></p>
+      <p class="texto">
+         &emsp;Dentro de este tipo de condensadores podemos encontrarnos dos variedades:
+         <br><br>
+         &emsp;&emsp;* <strong>Metalizado</strong>: Los condensadores de poliéster metalizado están constituidos por 
+                       dos laminas de policarbonato recubiertos por un deposito metálico que se bobinan juntas y que 
+                       normalmente se presentan en forma plana o aplastada.
+         <br><br>
+         &emsp;&emsp;* <strong>Tubular</strong>: Los condensadores de poliéster tubular son similares a los anteriores, 
+                       pero estos están arrollados formando cilindros.
+         <br><br>
+         <br><br>
+         &emsp;- <strong>Condensadores cerámicos</strong>: Este tipo de condensadores utiliza cerámica para formar el 
+                 dieléctrico. De todos los condensadores son los que presentan valores de capacidad más bajos, siendo 
+                 inferiores a 12 pF. Estos condensadores son llamados comúnmente "condensadores de lenteja" y se 
+                 suelen utilizar como filtro de altas frecuencias.
+      </p>
+      <p class="img_centrada"><img src="img/tema17/17-6.png" width="20%"></p>
+      <h4>Condensadores Variables</h4>
+      <p class="texto">
+         Un condensador variable es aquel que puede modificar su capacidad por medios mecánicos o electrónicos.
+         <br><br>
+         &emsp;- <strong>De ajuste mecánico</strong>: Los condensadores variables de ajuste mecánico suelen ser 
+                 llamados trimmers, estos cambian su capacidad alterando la superficie de armadura que penetra en 
+                 interior del condensador ó variando la distancia entre las armaduras.
+      </p>
+      <p class="img_centrada"><img src="img/tema17/17-7.png" width="35%"></p>
+      <p class="texto">
+         &emsp;- <strong>De ajuste electrónico</strong>: Para el ajuste de la capacidad de manera electrónica existe 
+                 un elemento llamado varactor o diodo varicap, este elemento es una mezcla entre un diodo y un 
+                 condensador, el varactor tendrá una capacidad variable que dependerá de la tensión aplicada entre 
+                 sus terminales. Estos dispositivos suelen ser utilizados como filtros, amplificadores paramétricos, 
+                 sintetizadores de frecuencias, etc.
+      </p>
+      <p class="img_centrada"><img src="img/tema17/17-8.png" width="30%"></p>
+      <h3>Asociación De Condensadores</h3>
+      <p class="texto">
+         Los condensadores, al igual que las resistencias, los podemos conectar tanto en serie como en paralelo. Con 
+         la asociación de condensadores en serie o en paralelo, podemos crear efectos totalmente diferente de los que 
+         podemos valernos a la hora de diseñar nuestros circuitos.
+      </p>
+      <p class="img_centrada"><img src="img/tema17/17-9.png" width="70%"></p>
+      <h4>Asociación En Serie</h4>
+      <p class="texto">
+         Cuando asociamos condensadores en serie (o en fila), la tensión resultante entre sus extremos será la suma 
+         de las tensiones de cada uno de los condensadores por separado, sin embargo, la capacidad equivalente de 
+         esta asociación será igual a la inversa de las suma de las inversas de las capacidades de cada uno de los 
+         condensadores por separado, por lo que la capacidad equivalente del conjunto será siempre menor que la 
+         capacidad de los condensadores por separado.
+      </p>
+      <h4>Asociación En Paralelo</h4>
+      <p class="texto">
+         Cuando asociamos condensadores en paralelo lo hacemos conectando las patillas de un lado y de otro de todos 
+         los condensadores a un mismo punto, por este motivo la tensión VAB entre los extremos de los condensadores 
+         siempre será la misma. La capacidad en la asociación en paralelo, será acumulativa, es decir la capacidad 
+         equivalente será igual a la suma de las capacidades de cada uno de los condensadores por separado.
+      </p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema17/17-10.png" width="70%" alt=""></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema17/17-11.png" width="50%" alt=""></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema17/17-12.png" width="60%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="scripts_arduino/tema17.ino" target="_blank">enlace</a> y lo cargaremos como hemos 
+         aprendido.
+         <br><br>
+         En el ejemplo podemos observar la curva de carga y descarga del condensador.
+         <br><br>
+         Usamos como sensor un puerto analógico/digital para medir el voltaje del condensador y el tiempo 
+         transcurrido desde el inicio del proceso de carga o descarga.
+         <br><br>
+         El sensor nos da las mediciones del voltaje del condensador como valores discretos en el rango [0, 1024], 
+         que son los valores discretos para el rango de voltajes [0, 5] en +V.
+         <br><br>
+         El dispositivo de medición nos da el tiempo transcurrido en microsegundos (μs) desde el inicio de evento de 
+         carga o descarga.
+         <br><br>
+         Las mediciones de los voltajes del condensador se realizan en el pin A0, que está en el bloque de entradas 
+         analógicas. El control de la carga se realiza con el pin 13 que pasa de estado alto +5V a estado bajo 0V, 
+         mientras que para la descarga se habilita el pin 11 para descarga más rápida con la resistencia R2. 
+         <br><br>
+         En el estado de carga el pin 11 pasa a un estado de alta impedancia, por lo que no afecta al circuito en 
+         general.
+      </p>
+      <p class="nota">
+         En el estado de alta impedancia, la salida se comporta como si aún no estuviera conectada al circuito, 
+         excepto por una pequeña corriente de fuga que puede fluir hacia adentro o hacia afuera del terminal de salida
+      </p>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/8IG0UtgTtTx-tema-17-condensador" target="_blank">
+            Ejemplo
+         </a>
+      </p>
+      <h2>Retos</h2>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Ahora pondermos un LED al circuito para aprovechar la energía descargada del condensador para encenderlo.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/aXNWiSITUPF-copy-of-tema-17-condensador" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

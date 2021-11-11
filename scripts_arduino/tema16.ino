@@ -11,12 +11,15 @@ void setup()
 
 void loop()
 {
-   int value = digitalRead(PinLDR);
-   // Si hay luz, encendemos el LED de la placa
-   if (value == HIGH)
+   int valorLDR = digitalRead(PinLDR);
+   // Si estamos a oscuras, encendemos el LED de la placa
+   if (valorLDR == HIGH)
    {
       digitalWrite(PinLED, HIGH);
       delay(50);
+   }
+   else
+   {
       digitalWrite(PinLED, LOW);
       delay(50);
    }
