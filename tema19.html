@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 19: Registro De Turnos 74HC595</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Registro De Turnos 74HC595</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         En este tema vamos a ver como aumentar las salidas digitales de Arduino con el registro de turnos, también 
+         llamado registro de desplazamiento. Pero con estos chips no solo vamos a poder manejar una matriz de LEDs 
+         sino que aumentaremos las salidas digitales para el propósito que queramos y se hacen fundamentales para 
+         multitud de proyectos.
+      </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Protoboard<br>
+         &emsp;&emsp;(1) x Registro De Turnos 74HC595<br>
+         &emsp;&emsp;(2) x LED<br>
+         &emsp;&emsp;(2) x Resistencia de 100 Ohm<br>
+         &emsp;&emsp;(x) x M M cables (cables de macho a macho)
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Registro De Turnos</h3>
+      <p class="texto">
+         ¿Alguna vez te has encontrado queriendo controlar muchos LEDs? ¿O sólo necesitabas más pines de E/S para 
+         controlar botones, sensores, servos, todo a la vez? Bueno, podrías conectar unos cuantos sensores a los 
+         pines de Arduino, pero rápidamente te quedarías sin pines en tu placa.
+         <br><br>
+         La solución para esto es usar un <strong>Registro de turnos</strong>. Un registro de desplazamiento te 
+         permite ampliar el número de pines de E/S que puedes utilizar de tu Arduino. Y el registro de desplazamiento 
+         74HC595 (apodado ‘595’) es uno de los más famosos entre todos.
+      </p>
+      <p class="img_centrada"><img src="img/tema19/19-1.png" width="30%"></p>
+      <p class="texto">
+         El 595 controla esencialmente ocho pines de salida separados, usando sólo tres pines de entrada. Y si 
+         necesitas más de 8 líneas de E/S adicionales, puedes encadenar fácilmente tantos registros de desplazamiento 
+         como quieras y crear toneladas de líneas de E/S. 
+         <br><br>
+         Los registros de turnos se utilizan a menudo con el fin de guardar los pines del microcontrolador, ya que 
+         cada microcontrolador tiene un número limitado de pines de E/S (GPIO).
+         <br><br>
+         Si tu proyecto necesita controlar 16 LEDs individuales, eso normalmente requeriría 16 pines de un Arduino. 
+         En el caso de que no tengas 16 pines de E/S disponibles, aquí es donde el registro de desplazamiento es útil 
+         y entra en juego. Con dos registros de cambio conectados en serie, podemos realizar la tarea de controlar 
+         los 16 LEDs con sólo 3 pines de E/S. Y no sólo esto; puedes guardar más pines cuanto más registros de 
+         desplazamiento tengas encadenados.
+         <br><br>
+         Un ejemplo del mundo real que utiliza el registro de desplazamiento es el «Mando Original de Nintendo». El 
+         mando principal de la Nintendo Entertainment System necesitaba que se pulsaran todos los botones en serie, y 
+         utilizaba un registro de desplazamiento para realizar esa tarea.
+      </p>
+      <p class="img_centrada"><img src="img/tema19/19-2.png" width="50%"></p>
+      <h3>Tipos de Registro De Turnos</h3>
+      <p class="texto">
+         Los registros de desplazamiento vienen en dos tipos básicos, o bien SIPO (Serial-In-Parallel-Out) o PISO 
+         (Parallel-In-Serial-Out). El popular chip SIPO es 74HC595, y el chip PISO es 74HC165.
+         <br><br>
+         &emsp;El tipo SIPO es útil para controlar un gran número de salidas, como los LEDs. Es el chip que vamos a 
+               utilizar en nuestro ejemplo.
+      </p>
+      <p class="img_centrada"><img src="img/tema19/19-3.png" width="70%"></p>
+      <p class="texto">
+         &emsp;El tipo PISO es bueno para reunir un gran número de entradas, como botones; como el que se utiliza en 
+               el mando original de Nintendo como se ha mencionado anteriormente.
+      </p>
+      <p class="img_centrada"><img src="img/tema19/19-4.png" width="70%"></p>
+      <h3>Pines Del El Registro De Turnos 74HC595</h3>
+      <p class="texto">
+         El 595 tiene en una variedad de marcas y modelos. Aquí hablaremos del modelo Texas Instruments SN74HC595N 
+         que es el más habitual. Vamos a conocer cada uno de sus pines.
+      </p>
+      <p class="img_centrada"><img src="img/tema19/19-5.png" width="50%"></p>
+      <p class="texto">
+         &emsp;- <strong>GND (8)</strong>: Debería estar conectado a la tierra de Arduino.
+         <br><br>
+         &emsp;- <strong>VCC (16)</strong>: Es la fuente de alimentación para el registro de cambio 74HC595 que 
+                 conectamos al pin 5V de Arduino.
+         <br><br>
+         &emsp;- <strong>SER (Serial Input) (14)</strong>: Se utiliza para alimentar los datos en el registro de 
+                 cambio de un bit a la vez.
+         <br><br>
+         &emsp;- <strong>SRCLK (Shift Register Clock) (11)</strong>: Es el reloj del registro de cambio. El 595 es 
+                 impulsado por el reloj en el borde ascendente. Esto significa que para desplazar bits en el registro 
+                 de desplazamiento, el reloj debe estar ALTO (HIGH). Y los bits se transfieren en el borde ascendente 
+                 del reloj.
+         <br><br>
+         &emsp;- <strong>RCLK (Register Clock/Latch) (12)</strong>:  Es un pin muy importante. Cuando se maneja en 
+                 ALTO (HIGH), el contenido del Registro de Desplazamiento se copia en el Registro de 
+                 Almacenamiento/Reloj, que finalmente se muestra en la salida. Así que la clavija del pestillo puede 
+                 ser vista como el paso final en el proceso de ver nuestros resultados en la salida, que en este caso 
+                 serán los LEDs.
+         <br><br>
+         &emsp;- <strong>SRCLR (Shift Register Clear) (10)</strong>: Nos permite reiniciar todo el Registro de 
+                 Desplazamiento, haciendo que todos sus bits sean 0, a la vez. Este es un pin de lógica negativa (por 
+                 eso tiene una línea sobre su nombre), así que para realizar este restablecimiento, necesitamos poner 
+                 el pin SRCLR en LOW. Cuando no se requiere un restablecimiento, este pin debe ser ALTO (HIGH).
+         <br><br>
+         &emsp;- <strong>OE (Output Enable) (13)</strong>: También es de lógica negativa (por eso también tiene una 
+                 línea sobre su nombre). Cuando el voltaje en él es ALTO (HIGH), los pines de salida se 
+                 deshabilitan/se ajustan a un estado de alta impedancia y no permiten que la corriente fluya. Cuando 
+                 OE tiene bajo voltaje, los pines de salida funcionan normalmente.
+         <br><br>
+         &emsp;- <strong>QA-QH (Output Enable) (del 1 al 7, el 9 y el 15)</strong>: Son los pines de salida y deben 
+                 ser conectados a algún tipo de salida como LEDs, 7 segmentos, etc. El Pin QH’ da salida al bit 7 del 
+                 ShiftRegister. Está ahí para que podamos encadenar 595s: si conectas este QH’ al pin SER de otro 595, 
+                 y das a ambos ICs la misma señal de reloj, se comportarán como un solo IC con 16 salidas. Por 
+                 supuesto, esta técnica no está limitada a dos ICs, puedes encadenar tantos como quieras, si tienes 
+                 suficiente potencia para todos ellos.
+      </p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema19/19-6.png" width="70%" alt=""></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema19/19-7.png" width="60%" alt=""></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema19/19-8.png" width="70%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="scripts_arduino/tema19.ino" target="_blank">enlace</a> y lo cargaremos como hemos 
+         aprendido.
+         <br><br>
+         En el ejemplo veremos como se encienden uno a uno todos los LEDs.
+      </p>
+      <h3>Entendiendo el Código</h3>
+      <p class="texto">
+         Lo primero que hacemos es definir los 3 pines de control, es decir, los pines del reloj y el pin de datos del 
+         74HC595.
+      </p>
+      <p class="codigo">
+         int Pin_SER = 0;<br>
+         int Pin_RCLK = 1;<br>
+         int Pin_SRCLK = 2;
+      </p>
+      <p class="texto">
+         <br>
+         A continuación, se define una variable llamada ‘leds’. Esto se usará para mantener el patrón de qué LEDs 
+         están actualmente encendidos o apagados. Los datos del tipo ‘byte’ representan números que usan ocho bits. 
+         Cada bit puede estar encendido o apagado, así que esto es perfecto para llevar la cuenta de cuál de nuestros 
+         ocho LEDs están encendidos o apagados.
+      </p>
+      <p class="codigo">
+         byte leds = 0;
+      </p>
+      <p class="texto">
+         <br>
+         En la función de configuración simplemente inicializamos los tres pines para que sean salidas digitales.
+      </p>
+      <p class="codigo">
+         pinMode(Pin_RCLK, OUTPUT);<br>
+         pinMode(Pin_SER, OUTPUT);<br>
+         pinMode(Pin_SRCLK, OUTPUT);
+      </p>
+      <p class="texto">
+         <br>
+         La función ActualizarRegistroTurnos(), en primer lugar pone el pasador del pestillo (LATCH) en LOW, y 
+         luego llama a la función de Arduino shiftOut() antes de poner el pasador del pestillo en HIGH de nuevo.
+         <br><br>
+         Afortunadamente Arduino proporciona una función de ayuda específica para los registros de cambio llamada 
+         shiftOut(), que nos permite simplemente cambiar los bits en una llamada.
+         <br><br>
+         La función shiftOut() toma cuatro parámetros; los dos primeros son los pines a utilizar para Data y Clock 
+         respectivamente. El tercer parámetro especifica en qué extremo de los datos quieres empezar. Vamos a empezar 
+         con el bit más correcto, que se denomina «Bit menos significativo» (LSB).
+         <br><br>
+         El último parámetro es el dato real que se desplazará en el registro de desplazamiento, que en este caso 
+         es "leds".
+      </p>
+      <p class="codigo">
+         void ActualizarRegistroTurnos()<br>
+         {<br>
+         &emsp;digitalWrite(Pin_RCLK, LOW);<br>
+         &emsp;shiftOut(Pin_SER, Pin_SRCLK, LSBFIRST, leds);<br>
+         &emsp;digitalWrite(Pin_RCLK, HIGH);<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         En la función "loop" inicialmente apagamos todos los LEDs, poniendo todos los bits de la variable ‘leds’ a 0. 
+         Luego llama a la función personalizada llamada ActualizarRegistroTurnos() que enviará el patrón de ‘leds’ al 
+         registro de cambio para que todos los LEDs se apaguen.
+         <br><br>
+         El programa se detiene durante medio segundo y luego comienza a contar de 0 a 7 usando el bucle ‘for’ y la 
+         variable ‘i’. Cada vez, utiliza la función de Arduino bitSet() para establecer el bit que controla el LED 
+         particular en la variable ‘leds’. Luego también llama a ActualizarRegistroTurnos() para que el estado de los 
+         LEDs cambie de acuerdo a lo que hay en la variable ‘leds’.
+         <br><br>
+         Después hay un retraso de medio segundo antes de que la variable "i" se incremente y se encienda el 
+         siguiente LED.
+      </p>
+      <p class="codigo">
+         leds = 0;<br>
+         ActualizarRegistroTurnos();<br>
+         delay(500);<br>
+         for (int i = 0; i < 8; i++)<br>
+         {<br>
+         &emsp;bitSet(leds, i);<br>
+         &emsp;updateShiftRegister();<br>
+         &emsp;delay(500);<br>
+         }
+      </p>
+      <h2>Retos</h2>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Hemos visto como a través del registro de turnos, podemos enganchar a nuestro proyecto más componentes de 
+         los que nos permite la placa de Arduino.
+         <br><br>
+         Ahora actualizaremos el ejemplo para que además de encender uno a uno los LEDs, también los iremos apagando 
+         uno a uno. Los encendemos del 1 al 8 y los apagaremos del 8 al 1.
+      </p>
+      <p class="img_centrada"><img src="img/tema19/19-8.gif" width="50%" alt=""></p>
+      <p class="texto">
+         Tenemos que tener en cuenta que para apagar un LED tendremos que utilizar una nueva función.
+      </p>
+      <p class="codigo">
+         bitClear(x, n)
+      </p>
+      <p class="texto">
+         <br>
+         Donde:
+         <br><br>
+         &emsp;- x: La variable numérica cuyo bit se quiere borrar (en nuestro caso "leds").
+         <br><br>
+         &emsp;- n: El bit a borrar, comenzando por 0 del bit menos significativo (más a la derecha).
+      </p>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/1yMGDPrpY1w-tema-19-ej-1-74hc595" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>
