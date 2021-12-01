@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 21: El Monitor De Serie</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>El Monitor De Serie</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         En este tema aprenderemos a controlar los LEDs desde el ordenador con el Monitor Serie del Arduino. 
+      </p>
+      <p class="img_centrada"><img src="img/tema21/21-1.png" width="60%" alt=""></p>
+      <p class="texto">
+         El monitor de serie es el "cable" entre el ordenador y el nuestra placa de Arduino. Permite enviar y recibir 
+         mensajes de texto, útiles para la depuración y también control de tu placa de Arduino. Por ejemplo, es 
+         posible enviar comandos desde el ordenador para encender LEDs.
+     </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Protoboard<br>
+         &emsp;&emsp;(1) x Registro De Turnos 74HC595<br>
+         &emsp;&emsp;(8) x LED<br>
+         &emsp;&emsp;(1) x Resistencia de 100 Ohm<br>
+         &emsp;&emsp;(x) x M M cables (cables de macho a macho)
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Monitor De Serie</h3>
+      <p class="texto">
+         El IDE de Arduino, posee una herramienta llamada "Monitor de Serie". Esta herramienta abrirá una consola con 
+         la que podemos comunicarnos con Arduino, tanto para mandarle comandos como para recibir información. Esto es 
+         muy útil para conocer el estado de las variables de programa y saber qué es lo que realmente está pasando 
+         dentro de nuestro Arduino.
+         <br><br>
+         El puerto serie de la placa de Arduino utiliza los pines digitales 0(RX) y 1(TX). Estos están conectados al 
+         controlador FTDI integrado en la placa, que es el que permite la traducción del formato serie TTL a USB. 
+      </p>
+      <p class="nota">
+         Nota: Los pines 0 y 1 <strong>NO</strong> pueden ser utilizados para cualquier otro propósito mientras 
+         estamos utilizando la comunicación serie.
+      </p>
+      <p class="texto">
+         Para usar el puerto serie del Arduino hay varias funciones de programación que debemos de conocer. A 
+         continuación os mostramos las más importantes:
+         <br><br>
+         &emsp;· <strong>Serial.begin(velocidad)</strong>: Activa la comunicación serie y establece la velocidad. La 
+                 velocidad de conexión (baudios o Baud Rate) es la velocidad que llegan los datos al puerto serie 
+                 (normalmente se usa 9600bps).
+         <br><br>
+         &emsp;· <strong>Serial.available()</strong>: Devuelve el estado del buffer del puerto serie y nos dice si 
+                 hay datos dentro de este.
+         <br><br>
+         &emsp;· <strong>Serial.read()</strong>: Lee un carácter del buffer (un solo byte).
+         <br><br>
+         &emsp;· <strong>Serial.write()</strong>: Escribe tantos caracteres como quieras a través del puerto serie.
+         <br><br>
+         &emsp;· <strong>Serial.print()</strong>: Imprime los datos al puerto serie como texto ASCII.
+         <br><br>
+         &emsp;· <strong>Serial.println()</strong>: Imprime los datos al puerto serie como texto ASCII seguido de un 
+                 retorno de carro (ASCII 13, o ‘\r’) y un carácter de avance de línea (ASCII 10, o ‘\n’).
+         <br><br>
+         &emsp;· <strong>Serial.flush()</strong>: Vacía el buffer de entrada de datos.
+         <br><br>
+         &emsp;· <strong>Serial.end()</strong>: Desactiva la comunicación serie, para que los pines 0(RX) y 1 (TX) 
+                 puedan utilizarse como entradas o salidas digitales.
+      <p class="nota">
+         Nota: Para enviar y recibir datos, Arduino utiliza el código ASCII.
+      </p>
+      <p class="texto">
+         Para acceder al “Monitor de Serie”, una vez abierto el IDE de Arduino, nos tenemos que dirigir hacia 
+         "Programa / Monitor Serie" o mediante comandos abreviados teclear Ctrl+Mayús+M.
+      </p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema21/21-2.png" width="70%" alt=""></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema21/21-3.png" width="60%" alt=""></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema21/21-4.png" width="70%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="scripts_arduino/tema14.ino" target="_blank">enlace</a> y lo cargaremos como hemos 
+         aprendido.
+      </p>
+      <h3>Entendiendo el Código</h3>
+      <p class="texto">
+         Con el ejemplo y aprovechando el ejemplo del tema 19 (Registro De Turnos 74HC595), vamos a ser capaces da 
+         encender cualquiera de los 8 pines y apagarlos, cuando enviamos su posición a través del monitor serie. Si 
+         el carácter enviado es del 0 al 7, encendemos el LED correspondiente y si lo que enviamos es “x” apagamos 
+         todos los LEDs.
+         <br><br>
+         El mensaje "Introduce el LED que quieres encender o 'x' para apagar" ha sido enviado por la placa de Arduino.
+         Nos está diciendo qué números podemos enviar (donde 0 es el LED de la derecha, 1 es el siguiente, hasta 7 
+         para el LED más a la izquierda) o la "x" para apagar todos los LEDs.
+         <br><br>
+         Tenemos que escribir los comandos en la parte inferior del Monitor de Serie y pinchar en "Enviar" o pulsar 
+         "Enter" para enviar los comandos a la placa.
+      </p>
+      <p class="img_centrada"><img src="img/tema21/21-5.png" width="60%" alt=""></p>
+      <p class="texto">
+         En la función "setup" tenemos estas nuevas líneas al final:
+      </p>
+      <p class="codigo">
+         Serial.begin(9600);<br>
+         while (!Serial);<br>
+         {<br>
+         &emsp;Serial.println("Introduce el LED que quieres encender o 'x' para apagar");<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         En primer lugar, tenemos el comando <strong>"Serial.begin(9600)"</strong>. Esto inicia la comunicación serie, 
+         para que la placa de Arduino pueda enviar comandos a través de la conexión USB. El valor 9600 es la 
+         configuración velocidad de la conexión. Esto es la rapidez con la que los datos debe ser enviados. Esto puede 
+         cambiar a un valor más alto, pero también tendrás que cambiar al Monitor de Serie el mismo valor.
+         <br><br>
+         El comienzo de la siguiente línea con "while" asegura que hay algo en el otro extremo de la conexión USB 
+         para que comience el envío de mensajes. De lo contrario, el mensaje puede ser enviado, pero no aparecerá. 
+         Esta línea es realmente necesaria sólo si se utiliza la placa de Arduino "Leonardo" porque el resto se 
+         restablece automáticamente la placa Arduino al abrir el Monitor de la serie.
+         <br><br>
+         La última líneas envía el mensaje al Monitor de Serie.
+         <br><br>
+         En la función "loop" es donde sucede toda la acción:
+      </p>
+      <p class="codigo">
+         if (Serial.available())<br>
+         {<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         Todo lo que ocurre dentro del bucle está contenido dentro de una instrucción "if", con lo que a menos que la 
+         llamada a la función incorporada de Arduino "Serial.available()" sea "true" no sucederá nada.
+         <br><br>
+         "Serial.available()" devuelve "true" si los datos han sido enviado a la placa y allí están listos para ser 
+         procesados. Los mensajes entrantes se llevan a cabo en lo que se llama un <strong>buffer</strong> y
+         "Serial.available()" devuelve "true" si ese buffer no está vacío.
+         <br><br>
+         Si el mensaje ha sido recibido, es cuando pasamos a la siguiente línea de código:
+      </p>
+      <p class="codigo">
+         char ch = Serial.read();
+      </p>
+      <p class="texto">
+         <br>
+         Esta línea lee el siguiente carácter del buffer y lo elimina del buffer. También asigna el valor leido a la 
+         variable "ch". La variable "ch" es de tipo "char" que significa "carácter" y como su nombre indica, puede 
+         contener un único carácter.
+      </p>
+      <p class="codigo">
+         if (ch >= '0' && ch <= '7')<br>
+      </p>
+      <p class="texto">
+         <br>
+         La instrucción "if" en la línea siguiente comprueba si el dígito almacenado es un carácter entre 0 y 7. 
+         Parece un poco extraño comparar caracteres de esta manera, pero es perfectamente aceptable.
+         <br><br>
+         Cada carácter está representado por un número único, conocido por su valor ASCII. Esto significa que cuando 
+         se comparan caracteres usando <= y >= lo que se comparan realmente son sus valores ASCII.
+         <br><br>
+         Si pasa la comprobación, llegamos a la siguiente línea:
+      </p>
+      <p class="codigo">
+         int led = ch - '0';
+      </p>
+      <p class="texto">
+         <br>
+         Ahora estamos aplicando aritmética a los caracteres. Estamos restando el dígito '0' de cualquier dígitos 
+         haya sido introducido. Por lo tanto, si escribimos "0", "0"-"0" será igual a 0. Si escribimos "7", "7"-"0" 
+         será igual al número 7 ya que es realmente los valores ASCII que se utilizan en la sustracción.
+         <br><br>
+         Una vez que sabemos qué número de LED queremos encender, nos basta establecer este bit en la variable "leds" 
+         y actualizar el registro de desplazamiento. Esto, como ya vimos, lo haremos con:
+      </p>
+      <p class="codigo">
+         bitSet(leds, led);
+      </p>
+      <p class="texto">
+         <br>
+         A partir de aquí, ya conocemos el significado de las siguientes líneas de código dentro del "if".
+         <br><br>
+         Después de la instrucción "if" que maneja cuando el caracter introducido es entre 0 y 7, la segunda 
+         instrucción "if" comprueba si elcaracter es la letra "x".
+      </p>
+      <p class="codigo">
+         if (ch == 'x')
+      </p>
+      <p class="texto">
+         <br>
+         Si es así, entonces se apagan todos los LEDs y se envía un mensaje de confirmación.
+      </p>
+      <h2>Retos</h2>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Ahora que ya sabemos la forma de encender los LEDs a través del monitor de serie, vamos apagarlos también de 
+         uno en uno.
+         <br><br>
+         Indicaremos primero si queremos encender o apagar el LED con los carácteres "e" (encender) o "a" (apagar).
+         Posteriormente indicaremos el número del LED que queremos encender o apagar.
+      </p>
+      <p class="img_centrada"><img src="img/tema21/21-6.gif" width="5%" alt=""></p>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/bH30L9vM0oq-tema-21-ej-1-monitor-de-serie" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <br><br>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>

@@ -9,7 +9,7 @@
    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
    <script src="js/scripts.js"></script>
-   <title>Tema 14: Motor Paso a Paso</title>
+   <title>Tema 20: Motor Paso a Paso</title>
 </head>
 <body>
    <div id="cabecera">
@@ -39,7 +39,7 @@
          Un motor paso a paso (también llamado stepper) es un dispositivo electromagnético que convierte impulsos 
          eléctricos en movimientos mecánicos de rotación. 
       </p>
-      <p class="img_centrada"><img src="img/tema14/14-1.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema20/20-1.png" width="60%" alt=""></p>
       <p class="texto">
          La principal característica de estos motores es que se mueven un paso por cada impulso que reciben. 
          <br><br>
@@ -66,7 +66,7 @@
          <br><br>
          Estas dos partes van montadas sobre un eje.
       </p>
-      <p class="img_centrada"><img src="img/tema14/14-2.png" width="80%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema20/20-2.png" width="80%" alt=""></p>
       <p class="texto">
          El motor 28BYJ-48 es un pequeño motor paso a paso unipolar.
          <br><br>
@@ -90,7 +90,7 @@
          Para el control podemos emplear una placa con el chip integrado ULN2003. Normalmente el 28BYJ-48 se 
          suministra con esta placa, y ambos dispositivos disponen clemas para una conexión sencilla.
       </p>
-      <p class="img_centrada"><img src="img/tema14/14-3.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema20/20-3.png" width="60%" alt=""></p>
       <p class="texto">
          El 28BYJ-48 es un motor ampliamente utilizado en aplicaciones industriales, como el control de válvulas 
          hidráulicas y neumáticas. En el campo de los hobbies, podemos usar el 28BYJ-48 para hacer pequeños robots 
@@ -131,12 +131,12 @@
       <p class="texto">
          En secuencia de 1-fase encendemos una única bobina cada vez.
       </p>
-      <p class="img_centrada"><img src="img/tema14/14-4.png" width="40%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema20/20-4.png" width="40%" alt=""></p>
       <p class="texto">
          Llevando esta secuencia de encendido a una tabla, que posteriormente usaremos para el código, la secuencia 
          quedaría de la siguiente forma.
       </p>
-      <p class="img_centrada"><img src="img/tema14/14-5.png" width="70%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema20/20-5.png" width="70%" alt=""></p>
       <h4>Secuencia 2-Fases</h4>
       <p class="texto">
          En la secuencia en 2-fases encendemos dos bobinas correlativas en cada fase. Al hacer trabajar dos bobinas 
@@ -144,12 +144,11 @@
          más par y, en general, presenta un mejor comportamiento. Como punto negativo, aumentamos el consumo 
          energético al doble.
       </p>
-      <p class="img_centrada"><img src="img/tema14/14-6.png" width="40%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema20/20-6.png" width="40%" alt=""></p>
       <p class="texto">
          Que expresado en forma de tabla resulta.
       </p>
-      <p class="img_centrada"><img src="img/tema14/14-7.png" width="70%" alt=""></p>
-
+      <p class="img_centrada"><img src="img/tema20/20-7.png" width="70%" alt=""></p>
       <h4>Secuencia Medios Pasos</h4>
       <p class="texto">
          La última secuencia que vamos a ver es la secuencia en medio paso (half-step). Aquí encendemos 
@@ -160,27 +159,27 @@
          por lo que en general ambos efectos se compensan y el funcionamiento es bueno, salvo en aplicaciones donde 
          estemos muy al límite del par máximo.
       </p>
-      <p class="img_centrada"><img src="img/tema14/14-8.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema20/20-8.png" width="60%" alt=""></p>
       <p class="texto">
          Expresando la secuencia en forma de tabla resulta.
       </p>
-      <p class="img_centrada"><img src="img/tema14/14-9.png" width="70%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema20/20-9.png" width="70%" alt=""></p>
       <h2>Esquemas de Conexión</h2>
       <h3>Esquema Eléctrico</h3>
-      <p class="img_centrada"><img src="img/tema14/14-10.png" width="80%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema20/20-10.png" width="80%" alt=""></p>
       <h3>Diagrama Ilustrativo</h3>
-      <p class="img_centrada"><img src="img/tema14/14-11.png" width="80%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema20/20-11.png" width="80%" alt=""></p>
       <h3>Imagen de Ejemplo</h3>
-      <p class="img_centrada"><img src="img/tema14/14-12.png" width="70%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema20/20-12.png" width="70%" alt=""></p>
       <h2>Código</h2>
       <p class="texto">
          Haremos uso de una biblioteca diseñada para estos motores que hará nuestro código corto y sencillo. 
          Incluimos la biblioteca al principio de nuestro código y luego mediante simples comandos podemos controlar 
          el comportamiento del motor. El archivo lo descargaremos de
-         <a class="link_s" download href="scripts_arduino/librerias/pasoapaso/Stepper.h">aquí</a>
+         <a class="link_s" download href="scripts_arduino/librerias/pasoapaso/Stepper.h" target="_blank">aquí</a>
          <br><br>
          Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
-         <a class="link_s" href="scripts_arduino/tema14.ino">enlace</a> y lo cargaremos como hemos aprendido.
+         <a class="link_s" href="scripts_arduino/tema14.ino" target="_blank">enlace</a> y lo cargaremos como hemos aprendido.
       </p>
       <h3>Entendiendo el Código</h3>
       <p class="texto">
@@ -188,25 +187,25 @@
          <br><br>
          Tenemos que definir el número de pasos que nuestro motor tiene por vuelta. 512 para el motor 28BYJ-48.
       </p>
-      <p class="codigo texto" style="margin-bottom: 28px;">
+      <p class="codigo">
          #define PASOS 512
       </p>
       <p class="texto">
          Creamos una instancia de la clase Stepper, pasándole los pines de control definidos. La llamaremos "motor"
       </p>
-      <p class="codigo texto" style="margin-bottom: 28px;">
+      <p class="codigo">
          Stepper motor(PASOS, Pin1, Pin2, Pin3, Pin4);
       </p>
       <p class="texto">
          Fijamos la velocidad del motor en revoluciones por minutop (rpm). En este caso, 25.
       </p>
-      <p class="codigo texto" style="margin-bottom: 28px;">
+      <p class="codigo">
          motor.setSpeed(25);
       </p>
       <p class="texto">
          Por último, movemos el motor un número determinado de pasos.
       </p>
-      <p class="codigo texto" style="margin-bottom: 28px;">
+      <p class="codigo">
          motor.step(200);
       </p>
       <h2>Retos</h2>
@@ -215,60 +214,26 @@
          Ahora que ya sabemos la forma de controlar los motores paso a paso, vamos a hacer un pequeño proyecto con un 
          motor bipolar. Con un potenciómetro regularemos la velocidad de este, y con dos pulsaremos seleccionaremos 
          el sentido de giro.
-         <br><br>
-
-
-/*
-  www.diymakers.es
-  by A.García
-  Mover motores paso a paso con Arduino
-  Tutorial en: http://diymakers.es/mover-motores-paso-paso-con-arduino/
-*/
- 
-#include <Stepper.h> //Importamos la librería para controlar motores paso a paso
- 
-#define STEPS 200 //Ponemos el número de pasos que necesita para dar una vuelta. 200 en nuestro caso
- 
-// Ponemos nombre al motor, el número de pasos y los pins de control
-Stepper stepper(STEPS, 8, 9); //Stepper nombre motor (número de pasos por vuelta, pins de control)
- 
-int pot;  //Variable lectura potenciómetro
-int derecha=3;  //Pulsador derecha
-int izquierda=2;  //Pulsador izquierda
-int direccion;  //Variable para indicar la direccón
- 
-void setup()
-{
-  pinMode(derecha,INPUT);
-  pinMode(izquierda,INPUT);
-}
- 
-void loop()
-{
-  pot=analogRead(A0); //Lectura potenciómetro
-  pot = map(pot, 0, 1023, 30, 150); //Establecemos la velocidad entre 30 y 150 rpm
- 
-  stepper.setSpeed(pot); //Indicamos la velocidad al motor
- 
-  stepper.step(direccion); //Indicamos la dirección al motor
- 
-  if(digitalRead(izquierda)==HIGH)
-  {
-     direccion=200;  //Si pulsamos el pulsador izquierdo, el motor gira a la izquierda
-  }
- 
-  if(digitalRead(derecha)==HIGH)
-  {
-     direccion=-200;  //Si pulsamos el pulsador derecho, el motor gira a la derech
-  }
-}
-
-
-
       </p>
-      <p class="img_centrada"><img src="img/tema13/13-22.png" width="30%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema20/20-13.gif" width="60%" alt=""></p>
       <p class="texto">
-         <a class="link_b" href="https://www.tinkercad.com/things/9xLZZiAUTRk-tema-13-ej-1-sensor-de-temperatura" target="_blank">
+         <a class="link_b" href="scripts_arduino/tema20reto1.ino" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <h3>Reto 2</h3>
+      <p class="texto">
+         En este nuevo reto vamos a simular el sensor de una puerta de acceso. 
+         <br><br>
+         Monteremos un motor paso a paso para que haga de barrera cerrada. Además, montaremos otro sensor para que al 
+         acercar la mano a una corta distancia, accione el motor paso a paso para que levante la barrera y podamos 
+         pasar. 
+         <br><br>
+         Una vez ayamos pasado, el motor volverá a poner la barrera en su posición original.
+      </p>
+      <p class="img_centrada"><img src="img/tema20/20-14.gif" width="60%" alt=""></p>
+      <p class="texto">
+         <a class="link_b" href="scripts_arduino/tema20reto2.ino" target="_blank">
             Ejemplo de Solución
          </a>
       </p>

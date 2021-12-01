@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 22: Display De 7 Segmentos</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Display De 7 Segmentos</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         En este tema aprenderemos a conectar y desplegar una secuencia de números en nuestro Display de 7 segmentos 
+         de ánodo común.
+      </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Protoboard<br>
+         &emsp;&emsp;(1) x Registro De Turnos 74HC595<br>
+         &emsp;&emsp;(1) x Pantalla de 7 segmentos<br>
+         &emsp;&emsp;(8) x Resistencia de 220 Ohm<br>
+         &emsp;&emsp;(x) x M M cables (cables de macho a macho)
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Display De 7 Segmentos</h3>
+      <p class="texto">
+         Cuando creamos un proyecto con Arduino, normalmente mostramos los datos a través del monitor serie. Es una 
+         manera rápida de poder comprobar los valores de variables y entradas, tanto digitales como analógicas. 
+         <br><br>
+         Existen diferentes interfaces de hardware que permiten que las máquinas se comuniquen con nosotros. Una de 
+         ellas es el display 7 segmentos, un componente muy típico. 
+      </p>
+      <p class="img_centrada"><img src="img/tema22/22-1.png" width="30%"></p>
+      <p class="texto">
+         Un display 7 segmentos es un componente que tiene 7 segementos LEDs que se encienden y se apagan, más un LED 
+         que hará de punto. Este punto nos indica cómo hay que colocar el display, y siempre irá hacia abajo. 
+         <br><br>
+         Por lo tanto, debemos trabajar como si tuviéramos 7 LEDs conectados a nuestro Arduino.
+      </p>
+      <p class="img_centrada"><img src="img/tema22/22-2.png" width="40%"></p>
+      <p class="texto">
+         Los displays de siete segmentos se emplean ampliamente en relojes digitales, medidores electrónicos, 
+         calculadoras básicas, pantallas de electrodomésticos, coches, y muchos otros dispositivos que muestran 
+         información numérica.
+         <br><br>
+         En la siguiente imagen mostramos el diagrama de pines del display.
+      </p>
+      <p class="img_centrada"><img src="img/tema22/22-3.png" width="30%"></p>
+      <p class="texto">
+      <h3>Tipos de Registro De Turnos</h3>
+      <p class="texto">
+         Existen dos tipos diferentes de displays de 7 segmentos:
+         <br><br>
+         &emsp;- <strong>De Ánodo Común</strong>: Todos los ánodos del display están conectados a un pin común, 
+                 generalmente la fuente de alimentación, y los LED se controlan mediante los cátodos con la conexión 
+                 a tierra encendida y la potencia pagada. 
+         <br><br>
+         &emsp;- <strong>De Cátodo Común</strong>: Todos los cátodos están conectados a un pin común, en este caso 
+                 generalmente la conexión a tierra, y los LED los controla el estado de los ánodos con la conexión a 
+                 tierra apagada y la potencia encendida. 
+         <br><br>
+         Por consiguiente, un display de siete segmentos más punto decimal solo requiere nueve pines, aunque los 
+         productos comerciales generalmente contienen más pines para corresponderse con el estándar industrial de 
+         distribución de pines.
+      </p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema22/22-4.png" width="80%" alt=""></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema22/22-5.png" width="80%" alt=""></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema22/22-6.png" width="70%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="scripts_arduino/tema22.ino" target="_blank">enlace</a> y lo cargaremos como hemos 
+         aprendido.
+         <br><br>
+         En el ejemplo veremos como iremos escribiendo los números del 1 al 9 y el 0.
+      </p>
+      <h3>Entendiendo el Código</h3>
+      <p class="texto">
+         La base del ejemplo será el ejercicio del tema 19 del registro de turnos.
+         <br><br>
+         La diferencia es que en este ejemplo haremos una nueva función que escribirá el número dependiendo de los 
+         pines que se le indiquen que tiene que encender.
+      </p>
+      <p class="codigo">
+         void EscribeNumero(int pin_0, int pin_1, int pin_2, int pin_4, int pin_5, int pin_6, int pin_7)
+      </p>
+      <p class="texto">
+         <br>
+         A esta función la llamaremos "EscribeNumero" y tendrá como parámetros los 7 pines del display.
+         <br><br>
+         A continuación, evaluaremos cada uno de los pines a encender y si el valor del parámetro es 1, indicará que 
+         hay que encenderlo
+      </p>
+      <p class="codigo">
+         if (pin_0 == 1)<br>
+         {<br>
+         &emsp;led = 0;<br>
+         &emsp;bitSet(leds, led);<br>
+         }
+      </p>
+      <p class="texto">
+         <br>
+         Después actualizaremos nuestra variable "leds" con los LEDs a encender y llamaremos a nuestra función 
+         "ActualizarRegistroTurnos".
+      </p>
+      <p class="codigo">
+         bitSet(leds, led);<br>
+         ActualizarRegistroTurnos();<br>
+      </p>
+      <p class="texto">
+         En la función "loop", lo que tendremos será  la llamada a "EscribeNumero" con los segmentos a encender para 
+         escribir cada uno de los números.
+         <br><br>
+         Después haremos una espera de 1 segundo para que se vea bien el número y posteriormente apagaremos nuestro 
+         display para poder escribir el siguiente número. 
+      </p>
+      <p class="codigo">
+         EscribeNumero(0,0,1,1,0,0,0);<br>
+         delay (1000);  <br>
+         leds = 0;<br>
+         ActualizarRegistroTurnos();
+      </p>
+      <p class="texto">
+         <br>
+         Repetiremos esta operación por cada número que queramos escribir.
+      </p>
+      <h2>Retos</h2>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Ya sabemos como escribir números en nuestro display de 7 segmentos con el registro de turnos. Ahora vamos a 
+         implementar un dado electrónico.
+      </p>
+      <p class="img_centrada"><img src="img/tema22/22-7.gif" width="30%" alt=""></p>
+      <p class="texto">
+         Para ello, añadiremos a nuestro circuito un botón para lanzar el dado y cada vez que lo presionemos, nos 
+         escribirá un número de forma aleatoria.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/95GwNvgnOmD-tema-22-ej-1-dado" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>
