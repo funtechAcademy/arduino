@@ -9,11 +9,11 @@
    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
    <script src="js/scripts.js"></script>
-   <title>Tema 18: Circuitos de Interface con Arduino</title>
+   <title>Tema 19: Agregar Librerías</title>
 </head>
 <body>
    <div id="cabecera">
-      <h1>Circuitos de Interface con Arduino</h1>
+      <h1>Agregar Librerías</h1>
    </div>
    <!-- INICIO_LOADER -->
    <div id="pageloader">
@@ -21,35 +21,96 @@
    </div>
    <!-- FIN_LOADER -->
    <div id="contenido">
-      <h2>Circuitos de Interface con Arduino</h2>
-      <h3>Conexión de un Diodo LED a una Salida de Arduino</h3>
-         <p class="img_centrada"><img src="img/progtema18/18-1.png" width="60%" alt=""></p>
-      <h3>Conexión de un Pulsador/Interruptor</h3>
-         <p class="img_centrada"><img src="img/progtema18/18-2.png" width="60%" alt=""></p>
-      <h3>Conexión de una Carga Inductiva de Alto Consumo Mediante un MOSFET</h3>
-         <p class="img_centrada"><img src="img/progtema18/18-3.png" width="80%" alt=""></p>
-      <h3>Conexión de una Salida Analógica a un LED</h3>
-         <p class="img_centrada"><img src="img/progtema18/18-4.png" width="60%" alt=""></p>
-      <h3>Entrada Analógica Mediante un Potenciómetro</h3>
-         <p class="img_centrada"><img src="img/progtema18/18-5.png" width="60%" alt=""></p>
-      <h3>Conexión de un Sensor de Tipo Resistivo (LRD, NTC, PTC..) a una Entrada Analógica</h3>
-         <p class="img_centrada"><img src="img/progtema18/18-6.png" width="60%" alt=""></p>
-      <h3>Conexión de un Servo a una Salida Analógica</h3>
-         <p class="img_centrada"><img src="img/progtema18/18-7.png" width="60%" alt=""></p>
-      <h3>Gobierno de un Relé Mediante una Salida Digital de Arduino</h3>
-         <p class="img_centrada"><img src="img/progtema18/18-8.png" width="80%" alt=""></p>
-      <h3>Gobierno de un Motor de CC Mediante una Salida Analógica de Arduino Controlando la Velocidad del Motor</h3>
-         <p class="img_centrada"><img src="img/progtema18/18-9.png" width="85%" alt=""></p>
-      <h3>Control de un Motor de CC Mediante el CI L293</h3>
-         <p class="img_centrada"><img src="img/progtema18/18-10.png" width="85%" alt=""></p>
-      <h3>Control de un Motor Paso a Paso Unipolar</h3>
-         <p class="img_centrada"><img src="img/progtema18/18-11.png" width="80%" alt=""></p>
-      <h3>Control Mediante Transistor TIP120</h3>
-         <p class="img_centrada"><img src="img/progtema18/18-12.png" width="80%" alt=""></p>
+      <h2>¿Qué Son Las Librerías?</h2>
+      <p class="texto">
+         Las librerías son una colección de códigos que te facilitan conectarte a sensores, displays, módulos, etc. 
+         <br><br>
+         Por ejemplo, la librería integrada de Cristal Líquido te permite comunicarte en forma sencilla con los 
+         displays de LCD.
+         <br><br>
+         Hay cientos de librerías adicionales disponibles para descargar en internet.
+         <br><br>
+         Las librerías integradas y algunas de estas librerías adicionales pueden verse en las referencias. 
+         <br><br>
+         Para utilizarlas, es necesario instalarlas primero.
+      </p>
+      <h2>Como Instalar Una Librería</h2>
+      <p class="texto">
+         Los dos métodos más comunes para instalar librerías son:
+         <br><br>
+         &emsp;- Utilizando el Library Manager
+         <br><br>
+         &emsp;- Importando una librería .zip
+      </p>
+      <h3>Utilizando El Library Manager</h3>
+      <p class="texto">
+         Para instalar una nueva librería en tu IDE de Arduino, puedes usar el Library Manager (disponible desde la 
+         versión 1.8.5 del IDE).
+         <br><br>
+         Abre el IDE y haz clic en el menú "Programa" y luego incluye las librerías en "Incluir Librería > 
+         Administrar Bibliotecas".
+      </p>
+      <p class="img_centrada"><img src="img/progtema18/18-1.png" width="70%" alt=""></p>
+      <p class="texto">
+         El Gestor de Bibliotecas (o Library Manager) se abrirá y en podrás ver la lista de librerías instaladas o 
+         listas para instalar. 
+         <br><br>
+         En el ejemplo instalaremos la librería Bridge. Desplázate a lo largo de la lista para encontrarla y 
+         selecciona la versión de la librería a instalar, Algunas veces solo encontrarás una versión disponible. No 
+         te preocupes si el menú de selección de versiones no aparece, es normal que eso pase algunas veces.
+      </p>
+      <p class="nota">
+         Trata de tener paciencia que se toma su tiempo; tal como aparece en la imagen, refresca y espera un poco.
+      </p>
+      <p class="img_centrada"><img src="img/progtema18/18-2.png" width="80%" alt=""></p>
+      <p class="texto">
+         Para finalizar, haz clic en <strong>Instalar</strong> y espera que se incluya la nueva librería en el IDE. 
+         <br><br>
+         Descargarlo se toma cierto tiempo y depende de la velocidad de tu conexión a internet. Cuando se complete la 
+         instalación, una etiqueta de instalado aparecerá junto a la librería Bridge. Ya puedes cerrar el Library 
+         Manager.
+         <br><br>
+         Ya tienes una nueva librería disponible en el menú incluir librerías.
+      </p>
+      <p class="img_centrada"><img src="img/progtema18/18-3.png" width="70%" alt=""></p>
+      <h3>Importando Una Librería .zip</h3>
+      <p class="texto">
+         Las librerías se distribuyen normalmente mediante archivos o carpetas zip. 
+         <br><br>
+         El nombre de la carpeta casi siempre es el nombre de la propia librería. Dentro de la carpeta encontrarás un 
+         archivo .cpp, un .h, por lo general también uno llamado keywords.txt, una carpeta de ejemplos y otros 
+         archivos requeridos por la librería.
+         <br><br>
+         A partir de la versión 1.0.5, puedes instalar librerías de terceros en el IDE. No descomprimas las librerías 
+         descargadas, déjalas tal como están.
+         <br><br>
+         Entraremos en la opción "Programa > Incluir Librería". En la parte superior de la lista desplegable, selecciona 
+         la opción "Añadir Biblioteca .ZIP...".
+      </p>
+      <p class="img_centrada"><img src="img/progtema18/18-4.png" width="70%" alt=""></p>
+      <p class="texto">
+         El sistema te solicitará seleccionar la librería que quieres agregar. Navega hasta la ubicación del archivo
+         .zip y ábrelo.
+      </p>
+      <p class="img_centrada"><img src="img/progtema18/18-5.png" width="70%" alt=""></p>
+      <p class="texto">
+         Le damos a "Seleccionar" y esperamos a que la instale. Para saber si la ha instalado correctamente, nos debe 
+         aparecer el siguiente mensaje en la parte de abajo de nuestro programa:
+      </p>
+      <p class="img_centrada"><img src="img/progtema18/18-6.png" width="50%" alt=""></p>
+      <p class="texto">
+         Vuelve al menú "Programa > Incluir Librería". Deberías poder ver la librería al final de la lista desplegable.
+         <br><br>
+         Ya está lista para usarse en tu Programa. El archivo .zip ya se habrá expandido en la carpeta librerías del 
+         directorio de tus programas de Arduino.
+      </p>
+      <p class="img_centrada"><img src="img/progtema18/18-7.png" width="70%" alt=""></p>
+      <p class="nota">
+         Importante: La librería estará disponible para ser usada en los programas pero no se expondrá en la carpeta 
+         "Archivo > Ejemplos" hasta que no se haya reiniciado el IDE de Arduino.
+      </p>
       <br><br>
-<!--
-      <a class="texto volver" href="indexpro.html">Volver al índice</a>
--->
+      <a class="texto volver" href="indexprog.html">Volver al índice</a>
    </div>
    <div id="pie">
       <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>

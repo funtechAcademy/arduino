@@ -9,11 +9,11 @@
    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
    <script src="js/scripts.js"></script>
-   <title>Tema 15: Señales Analógicas de Salida (PWM)</title>
+   <title>Tema 15: Cálculo de Tonos</title>
 </head>
 <body>
    <div id="cabecera">
-      <h1>Señales Analógicas de Salida (PWM)</h1>
+      <h1>Cálculo de Tonos</h1>
    </div>
    <!-- INICIO_LOADER -->
    <div id="pageloader">
@@ -21,85 +21,99 @@
    </div>
    <!-- FIN_LOADER -->
    <div id="contenido">
-      <h2>Señales Analógicas de Salida (PWM)</h2>
+      <h2>Cálculo de Tonos</h2>
       <p class="texto">
-         En este tema vamos a ver los fundamentos en los que se basa la generación de salidas analógicas en Arduino. 
-         El procedimiento para generar una señal analógica es el llamado PWM.
+         Aprovechando lo que ya sabemos de las señales analógicas PWM, vamos a usar el zumbador para emitir notas.
          <br><br>
-         Señal PWM (Pulse-Width Modulation) señal de modulación por ancho de pulso.
+         Recordemos como funcionan este tipo de señales:
       </p>
       <p class="img_centrada"><img src="img/progtema15/15-1.png" width="60%" alt=""></p>
       <p class="texto">
-         Donde:
-         <br><br>
-         - PW (Pulse Width) o ancho del pulso, representa al ancho (en tiempo) del pulso.
-         <br><br>
-         - Periodo del oulso, o ciclo , es el tiempo total que dura la señal.
-         <br><br>
-         La frecuencia se define como la cantidad de pulsos (estado on/off)por segundo y su expresión matemática es 
-         la inversa del periodo, como muestra la siguiente ecuación.
+         Y también como se calcula la frecuencia.
       </p>
       <p class="img_centrada"><img src="img/progtema15/15-2.png" width="40%" alt=""></p>
       <p class="texto">
-         El periodo se mide en segundos, de este modo la unidad en la cual se mide la frecuencia (hertz) es la 
-         inversa a la unidad de tiempo (segundos).
-         <br><br>
-         Existe otro parámetro asociado o que define a la señal PWM, denominado "Duty cycle" (ciclo de trabajo), el 
-         cual determina el porcentaje de tiempo que el pulso (o voltaje aplicado) está en estado activo (ON) durante 
-         un ciclo.
-         <br><br>
-         Por ejemplo, si una señal tiene un periodo de 10 ms y sus pulsos son de ancho (PW) 2ms, dicha señal tiene un 
-         ciclo de trabajo de 20% (20% ON y 80% OFF). El siguiente gráfico muestra tres señales PWM con diferentes 
-         "ciclos de trabajo".
+         Si el "ciclo de trabajo"=50%, es decir, el ancho de los pulsos activos (ON) e inactivos (OFF) son iguales, 
+         entonces:
       </p>
-      <p class="img_centrada"><img src="img/progtema15/15-3.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/progtema15/15-3.png" width="35%" alt=""></p>
       <p class="texto">
-         La señal PWM se utiliza como técnica para controlar circuitos analógicos. El periodo y la frecuencia del 
-         tren de pulsos puede determinar la potencia entregada a dicho circuito. Si, por ejemplo, tenemos un voltaje 
-         de 9v y lo modulamos con un ciclo de trabajo del 10%, obtenemos 0.9V de señal analógica de salida.
-         <br><br>
-         Las señales PWM son comúnmente usadas para el control de motores DC (si decrementas la frecuencia, la 
-         inercia del motor es más pequeña y el motor se mueve más lentamente), ajustar la intensidad de brillo de un 
-         LED, etc.
-         <br><br>
-         En Arduino, la señal de salida PWM (pines 9,10) es una señal de frecuencia constante (30769 Hz) y que sólo 
-         nos permite cambiar el "ciclo de trabajo" o el tiempo que el pulso está activo (ON) o inactivo (OFF), 
-         utilizando la función analogWrite().
-         <br><br>
-         Otra forma de generar señales PWM es utilizando la capacidad del microprocesador. La señal de salida 
-         obtenida de un microprocesador es una señal digital de 0 voltios (LOW) y de 5 voltios (HIGH).
-         <br><br>
-         Con el siguiente código y con sólo realizar modificaciones en los intervalos de tiempo que el pin 
-         seleccionado tenga valor HIGH o LOW, a través de la función digitalWrite(), generamos la señal PWM.
+         Obteniéndo la siguiente fórmula matemática:
       </p>
-     <p class="codigo">
-         /* Señal PWM */<br><br>
-         int digPin = 10; // Pin digital 10<br><br>
+      <p class="img_centrada"><img src="img/progtema15/15-4.png" width="75%" alt=""></p>
+      <p class="texto">
+         De forma que a una frecuencia o periodo dados, podemos obtener la siguiente tabla:
+      </p>
+      <p class="img_centrada"><img src="img/progtema15/15-5.png" width="75%" alt=""></p>
+      <p class="texto">
+         Con Arduino, tenemos dos formas de generar tonos. Con el primer ejemplo construiremos y enviaremos una señal 
+         cuadrada de salida al zumbador (o piezo), mientras que con el segundo haremos uso de la señal de modulación 
+         por ancho de pulso o PWM de salida en Arduino.
+      </p>
+      <h3>Ejemplo 1</h3>
+      <p class="texto">
+         Con el siguiente código y con sólo realizar modificaciones en los intervalos de tiempo que el pin 
+         seleccionado tenga valor HIGH o LOW, a través de la función digitalWrite(), generamos la señal PWM a una 
+         determinada frecuencia de salida igual a 261 Hercios (Hz).
+      </p>
+      <p class="codigop">
+         int digPin = 10; // Pin digital 10<br>
+         int PW = 1915; // Valor que determina el tiempo que el pulso va a estar en ON/OFF<br><br>
          void setup()<br>
          {<br>
-         &emsp;pinMode(digPin, OUTPUT); // Pin en modo salida<br>
+         &emsp;pinMode(digPin, OUTPUT); // Pin digital en modo salida<br>
          }<br><br>
          void loop()<br>
          {<br>
-         &emsp;digitalWrite(digPin, HIGH); // Asigna el valor HIGH al pin<br>
-         &emsp;delay(500); // Espera medio segundo<br>
+         &emsp;delayMicroseconds(PW); // Espera el valor de PW<br>
          &emsp;digitalWrite(digPin, LOW); // Asigna el valor LOW al pin<br>
-         &emsp;delay(500); // Espera medio segundo<br>
-         }
+         &emsp;delayMicroseconds(PW); // Espera el valor de PW<br>
+         &emsp;digitalWrite(digPin, HIGH); // Asigna el valor HIGH al pin<br>
+         } 
+      </p>
+      <h3>Ejemplo 2</h3>
+      <p class="texto">
+         En Arduino, la señal de salida PWM (pines 9,10) es una señal de frecuencia constante (30.769 Hz) y que sólo 
+         nos permite cambiar el "ciclo de trabajo" o el tiempo que el pulso está activo (ON) o inactivo (OFF), 
+         utilizando la función <strong>analogWrite()</strong>.
+         <br><br>
+         Usaremos la característica “Ancho de Pulso” (PW) con <strong>analogWrite</strong> para cambiar el volumen. 
+      </p>
+      <p class="codigo">
+         analogWrite(pin, valor)
       </p>
       <p class="texto">
          <br>
-         El programa pone el pin a HIGH una vez por segundo, la frecuencia que se genera en dicho pin es de 1 pulso 
-         por segundo o 1 Hertz de pulso de frecuencia (periodo de 1 segundo). Cambiando la temporización del 
-         programa, podremos cambiar la frecuencia de la señal. 
+         <strong>Valor</strong> representa al parámetro "ciclo de trabajo" (PWM) y puede tomar valores entre 0 y 255.
          <br><br>
-         Por ejemplo, si cambiamos las dos líneas con delay(500) a delay(250), multiplicaremos la frecuencia por dos, 
-         de forma que estamos enviando el doble de la cantidad de pulsos por segundo que antes.
+         - 0 corresponde a una señal de salida de valor constante de 0 v (LOW) o 0% de "ciclo de trabajo".
+         <br><br>
+         - 255 es una señal de salida de valor constante de 5 v (HIGH) o 100% de "ciclo de trabajo".
+         <br><br>
+         Para valores intermedios, el pin rápidamente alterna entre 0 y 5 voltios - el valor más alto, lo usual es 
+         que el pin esté en HIGH (5 voltios).
+         <br><br>
+         La frecuencia de la señal PWM es constante y aproximadamente de 30.769 Hz.
+      </p>
+      <p class="codigo">
+         int digPin = 9;<br>
+         int volumen = 300; // Máximo volumen es 1000<br>
+         int PW = 1915;<br><br>
+         void setup()<br>
+         {<br>
+         &emsp;pinMode(digPin, OUTPUT); // Pin digital en modo salida<br>
+         }<br><br>
+         void loop()<br>
+         {<br>
+         &emsp;analogWrite(digPin,0);<br>
+         &emsp;analogWrite(digPin,volume);<br>
+         &emsp;delayMicroseconds(PW);<br>
+         &emsp;analogWrite(digPin,0);<br>
+         &emsp;delayMicroseconds(PW);<br>
+         }
       </p>
       <br><br>
-<!--
-      <a class="texto volver" href="indexpro.html">Volver al índice</a>
--->
+      <a class="texto volver" href="indexprog.html">Volver al índice</a>
    </div>
    <div id="pie">
       <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
