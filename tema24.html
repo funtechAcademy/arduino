@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 24: Emisor de Láser</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Emisor de Láser</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         En este tema aprenderemos a utilizar el módulo láser.
+      </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Módulo Láser<br>
+         &emsp;&emsp;(3) x M H cables (cables de macho a hembra)
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Diodo Láser </h3>
+      <p class="texto">
+         Un diodo láser es un dispositivo similar a un LED convencional, pero que en lugar de emitir luz convencional 
+         emite un haz de láser.
+      </p>
+      <p class="img_centrada"><img src="img/tema24/24-1.png" width="30%"></p>
+      <p class="texto">
+         Como sabemos, a diferencia de un haz de luz convencional un haz de láser avanza en línea recta. Si el 
+         generador láser fuera perfecto y el haz estuviera en el vacío, la luz seguiría su camino hasta que 
+         encontrara un obstáculo.
+         <br><br>
+         Sin embargo al avanzar en un medio gaseoso (como el aire) o líquido, el choque con sus moléculas provoca la 
+         dispersión del haz haciendo que este se debilite progresivamente.
+      </p>
+      <p class="nota">
+         En el vacío el haz no es visible. Si lo vemos es, precisamente, porque colisiona con las moléculas del gas 
+         dispersando parte de la luz. El efecto es mayor, por ejemplo, en humo, lo que produce un efecto espectacular 
+         al hacer muy visible el haz.
+      </p>
+      <p class="texto"> 
+         Por otro lado ningún generador láser es perfecto, y menos aún los diodos baratos que usaremos en nuestros 
+         proyecto caseros, por lo que en realidad el haz deja de ser visible a los pocos metros en función de la 
+         calidad y la potencia del láser.
+      </p>
+      <p class="texto">
+         Los diodos láser son ampliamente empleados para la fabricación de punteros para presentaciones y efectos de 
+         luz en animaciones y espectáculos. También son componentes fundamentales de impresoras láser, escáneres y 
+         grabadores/reproductores de CD, DVD y Blu-Ray, entre otros.
+      </p>
+      <h3>Tipos de Diodos Láser</h3>
+      <p class="texto">
+         Existen unas placas con un diodo láser rojo de 1mW, adecuadas para conectar directamente a Arduino. Son una 
+         buena opción para montajes pequeños y rápidos por su sencillez de uso. Podemos encontrar este tipo de placas 
+         por menos de 1€.
+      </p>
+      <p class="img_centrada"><img src="img/tema24/24-2.png" width="50%"></p>
+      <p class="texto">
+         También podemos comprar directamente el diodo láser. Hay un abanico enorme de precios en función de las 
+         características del diodo. Los diodos más pequeños, de 1mW (similares a los de la placa anterior) cuestan en 
+         torno a 0.15€. Por otro lado, a grandes rasgos y generalizando mucho, los diodos láser de potencia median 
+         cuestan en torno a 1€, y los de alta potencia de 10€ en adelante.
+      </p>
+      <p class="img_centrada"><img src="img/tema24/24-3.png" width="40%"></p>
+      <p class="nota">
+         Como consejo, no compréis láser caros (digamos más, de 10€) a fabricantes desconocidos y sin tener muy clara 
+         la calidad del diodo. Lo normal es que acabéis tirando el dinero.
+      </p>
+      <h3>Cómo Funciona Un Diodo Láser</h3>
+      <p class="texto">
+         De forma resumida, un láser utiliza emisión inducida para generar un haz de luz coherente espacial y 
+         temporalmente. La coherencia espacial corresponde con la capacidad de la luz para viajar con poca 
+         divergencia, mientras que la coherencia temporal indica la emisión en un rango espectral estrecho.
+      </p>
+      <p class="img_centrada"><img src="img/tema24/24-4.png" width="60%"></p>
+      <p class="texto">
+         Para conseguir la emisión láser un diodo cuenta con una unión PN de grandes dimensiones que favorece la 
+         emisión estimulada. Uno de las caras del cristal semiconductor es casi totalmente reflectante, mientras que 
+         la otra deja pasar la luz parcialmente. Esto constituye una guía de ondas que amplifica la luz, que sale por 
+         la cara parcialmente reflectante.
+         <br><br>
+         Adicionalmente los diodos láser disponen de una lente, o colimador, que rectifica la divergencia de la luz. 
+         Unido al hecho de que la luz tiene un alto grado de coherencia espacial, hace que el haz sea capaz de 
+         recorrer grandes distancias manteniendo un haz pequeño.
+      </p>
+      <p class="img_centrada"><img src="img/tema24/24-5.png" width="60%"></p>
+      <p class="texto">
+         Existen diodos láser de todo tipo de potencia, desde los más pequeños de 1mW empleados en punteros, de 1W 
+         utilizados, por ejemplo, para realizar grabados en madera o plástico.
+         <br><br>
+         Los diodos de mayor potencia necesitan un disipador de calor para que no se rompan en su funcionamiento. Aún 
+         con disipador, normalmente no pueden estar encendidos continuamente, y hay que encenderos y apagarlos en 
+         ciclos de unos pocos segundos.
+      </p>
+      <p class="nota">
+         Cuidado con los diodos de alta potencia. Con potencias superiores de 50mW es obligatorio el uso de gafas 
+         protectoras. El simple reflejo en cualquier superficie que provoque el contacto con la retina puede causar 
+         una pérdida permanente de visión.
+      </p>
+      <p class="texto">
+         Los diodos láser disponen de un alto grado de monocromaticidad, existiendo diodos que emiten luz en diversos 
+         colores, rojo, verde, azul y violeta.
+      </p>
+      <p class="img_centrada"><img src="img/tema24/24-6.png" width="40%"></p>
+      <p class="texto">
+         También encontramos diodos láser con distintas formas de haz en función de la óptica que integran. Lo más 
+         habitual es un haz de tipo puntero, pero también podemos lineales o de múltiples puntos simultáneos.
+      </p>
+      <p class="img_centrada"><img src="img/tema24/24-7.png" width="60%"></p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema24/24-8.png" width="60%"></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema24/24-9.png" width="70%"></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema24/24-10.png" width="60%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="scripts_arduino/tema24.ino" target="_blank">enlace</a> y lo cargaremos como hemos 
+         aprendido.
+         <br><br>
+         En el ejemplo veremos como hacer funcionar un diodo láser.
+      </p>
+      <h2>Retos</h2>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Ahora vamos a montar nuestro diodo láser sobre un motor de cualquier tipo (servo, paso a paso, etc) para 
+         hacer un faro.
+      </p>
+      <p class="img_centrada"><img src="img/tema24/24-11.gif" width="50%" alt=""></p>
+      <p class="texto">
+         Para ello, programaremos nuestro faro para que cada 30 segundos realice un barrido sobre un ángulo de 90º y
+         cada vez que llegue a uno de los extremos se apagará el laser hasta que tenga que volver a encenderse para 
+         hacer el siguiente barrido.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/gom4Q1at2M9-tema-24-ej-1-servomotor-con-laser" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>
