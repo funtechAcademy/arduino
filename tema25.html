@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 25: Módulos de Interruptor</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Módulos de Interruptor</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         En este tema, aprenderemos como utilizar módulos de interruptor. Los módulos de interruptor que veremos son 
+         el de choque, el de inclinación y el de golpe o vibración. 
+      </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Módulo Interruptor de Choque<br>
+         &emsp;&emsp;(1) x Módulo Interruptor de Inclinación<br>
+         &emsp;&emsp;(1) x Módulo Interruptor de Golpe o Vibración<br>
+         &emsp;&emsp;(3) x M H cables (cables de macho a hembra)
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Módulo Interruptor de Choque</h3>
+      <p class="texto">
+         El componente que presentamos a continuación es sensible a impactos mecánicos, el módulo interruptor de 
+         choque.
+      </p>
+      <p class="img_centrada"><img src="img/tema25/25-1.png" width="30%"></p>
+      <p class="texto">
+         Sus fundamentos nos permitirán implementar a nuestro robot de capacidad de evaluar terremotos, el oleaje que 
+         soporta nuestra embarcación, o simplemente las vibraciones que soportamos cada vez que pasa un maquinaria 
+         pesada cerca nuestra.
+         <br><br>
+         Este tipo de sensores fundamentalmente montan un sensor mecánico de muelle. Su interior básicamente consiste 
+         en un muelle basculante, como podemos ver en la siguiente imagen.
+      </p>
+      <p class="img_centrada"><img src="img/tema25/25-2.png" width="10%"></p>
+      <p class="texto">
+         Al montarse en el módulo y recibe un impacto mecánico, cierra un circuito de alimentación que es capaz de
+         detectar nuestro Arduino.
+         <br><br>
+         El funcionamiento es bien sencillo, tan pronto se ejerce una fuerza sobre el dispositivo, los dos 
+         terminales, el interior y el muelle exterior, se unen cerrando el circuito, volviendo a su posición de 
+         reposo tan pronto la fuerza haya desaparecido, dejando de nuevo los dos terminales sin tocarse en circuito 
+         abierto.
+      </p>
+      <p class="img_centrada"><img src="img/tema25/25-3.png" width="60%"></p>
+      <p class="texto">
+         Al ser un mecanismo simétrico responde igual a la vibración independientemente de la dirección de la que 
+         provenga.
+         <br><br>
+         En otras configuraciones, podemos encontrarnos que la caña central se sustituye por un tubo exterior, de 
+         modo que el circuito se cierra cuando el muelle choca contra la pared interior del tubo.
+      </p>
+      <p class="img_centrada"><img src="img/tema25/25-4.png" width="20%"></p>
+      <h3>Módulo Interruptor de Inclinación</h3>
+      <p class="texto">
+         El módulo interruptor de inclinación es un interruptor que reacciona al movimiento. Cierra el circuito 
+         cuando se inclina hacia un lado siempre y cuando se mueva con suficiente fuerza y grado de inclinación 
+         para activar el interruptor de bola del interior.
+      </p>
+      <p class="img_centrada"><img src="img/tema25/25-5.png" width="30%"></p>
+      <p class="texto">
+         El funcionamiento del sensor de <a class="link_s" href="tema7.html" target="_blank">inclinación</a> lo 
+         vimos en uno de los temas anteriores.
+      </p>
+      <h3>Módulo Interruptor de Golpe o Vibración</h3>
+      <p class="texto">
+         El módulo interruptor de golpe es un sensor de vibración que envía una señal cuando se detecta un golpe. 
+      </p>
+      <p class="img_centrada"><img src="img/tema25/25-6.png" width="30%"></p>
+      <p class="texto">
+         Este módulo consta de un sensor con resorte. El resorte emite una señal alta cuando se detecta una vibración.
+      </p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema25/25-7.png" width="50%"></p>
+      <h3>Diagramas Ilustrativos</h3>
+      <p class="img_centrada"><img src="img/tema25/25-8.png" width="70%"></p>
+      <p class="img_centrada"><img src="img/tema25/25-9.png" width="70%"></p>
+      <p class="img_centrada"><img src="img/tema25/25-10.png" width="70%"></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema25/25-11.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema25/25-12.png" width="60%" alt=""></p>
+      <p class="img_centrada"><img src="img/tema25/25-13.png" width="60%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Vamos a realizar el mismo ejemplo con los tres módulos.
+         <br><br>
+         Una vez efectuado todo el cableado, descargaremos el <strong>script</strong> del siguiente
+         <a class="link_s" href="scripts_arduino/tema25.ino" target="_blank">enlace</a> y lo cargaremos como hemos 
+         aprendido.
+         <br><br>
+         En el ejemplo vemos cómo al accionar cada uno de los módulos de interruptor, nuestro led de la placa se 
+         enciende.
+      </p>
+      <h2>Retos</h2>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Para nuestro reto, lo que vamos a simular es un cofre que se abrirá con una contraseña. 
+      </p>
+      <p class="img_centrada"><img src="img/tema25/25-14.gif" width="40%" alt=""></p>
+      <p class="texto">
+         Esta contraseña la introduciremos mediante golpecitos en la mesa. Al generar la secuencia correcta de golpes,
+         nuestro cofre se abrirá.
+         <br><br>
+         El cofre podemos simularlo con un motor o servo que girará hacia un sentido, esperará un tiempo y volverá 
+         a girar en sentido contrario hasta la posición inicial. Podemos elegir el módulo que mejor se adapte al reto 
+         de los tres vistos.
+      </p>
+         <!--
+      <p class="texto">
+         <a class="link_b" href="https://www.tinkercad.com/things/gom4Q1at2M9-tema-24-ej-1-servomotor-con-laser" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+         -->
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>
