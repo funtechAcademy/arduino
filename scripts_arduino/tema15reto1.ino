@@ -20,47 +20,47 @@ void setup()
 void traducirIR()
 {
    Serial.print("(");
-   Serial.print(resultados->bits, DEC);
+   Serial.print(resultados.bits, DEC);
    Serial.print(" bits)");
    
    // Evaluamos y mostramos de qué marca es el mando a distancia
-   if (resultados->decode_type == UNKNOWN) {
+   if (resultados.decode_type == UNKNOWN) {
       Serial.print("Unknown encoding: ");
    }
-   else if (resultados->decode_type == NEC) {
+   else if (resultados.decode_type == NEC) {
       Serial.print("Decoded NEC: ");
    }
-   else if (resultados->decode_type == SONY) {
+   else if (resultados.decode_type == SONY) {
       Serial.print("Decoded SONY: ");
    }
-   else if (resultados->decode_type == RC5) {
+   else if (resultados.decode_type == RC5) {
       Serial.print("Decoded RC5: ");
    }
-   else if (resultados->decode_type == RC6) {
+   else if (resultados.decode_type == RC6) {
       Serial.print("Decoded RC6: ");
    }
-   else if (resultados->decode_type == PANASONIC) {
+   else if (resultados.decode_type == PANASONIC) {
       Serial.print("Decoded PANASONIC - Address: ");
-      Serial.print(resultados->address, HEX);
+      Serial.print(resultados.address, HEX);
       Serial.print(" Value: ");
    }
-   else if (resultados->decode_type == LG) {
+   else if (resultados.decode_type == LG) {
       Serial.print("Decoded LG ");
    }
-   else if (resultados->decode_type == JVC) {
+   else if (resultados.decode_type == JVC) {
       Serial.print("Decoded JVC ");
    }
-   else if (resultados->decode_type == AIWA_RC_T501) {
+   else if (resultados.decode_type == AIWA_RC_T501) {
       Serial.print("Decoded AIWA RC T501 ");
    }
-   else if (resultados->decode_type == WHYNTER) {
+   else if (resultados.decode_type == WHYNTER) {
       Serial.print("Decoded Whynter ");
    }
 
    // Mostramos los datos del botón pulsado
-   Serial.print(resultados->value, HEX);
+   Serial.print(resultados.value, HEX);
    Serial.print(" (HEX) , ");
-   Serial.print(resultados->value, BIN);
+   Serial.print(resultados.value, BIN);
    Serial.println(" (BIN)");
 }
 

@@ -179,14 +179,14 @@
          mostraremos como un número decimal. Lo extraemos del valor de la estructura:
       </p>
       <p class="codigo">
-         Serial.print(resultados->bits, DEC);
+         Serial.print(resultados.bits, DEC);
        </p>
       <br><br>
       <p class="texto">
          A continuación mostraremos el tipo de mando a distancia. Este dato lo extraemos del valor de la estructura:
       </p>
       <p class="codigo">
-         resultados->decode_type
+         resultados.decode_type
       </p>
       <br><br>
       <p class="texto">
@@ -194,8 +194,8 @@
          lo extraemos del valor de la estructura:
       </p>
       <p class="codigo">
-         Serial.print(resultados->value, HEX);<br>
-         Serial.print(resultados->value, BIN);
+         Serial.print(resultados.value, HEX);<br>
+         Serial.print(resultados.value, BIN);
       </p>
       <br><br>
       <p class="texto">
