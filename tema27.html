@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 27: Teclado De Membrana</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Teclado De Membrana</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         El propósito de este proyecto es diseñar y programar un temporizador digital interactivo con Arduino, 
+         aprendiendo a gestionar entradas matriciales, tipos de datos y señales de salida visuales y sonoras.
+         <br><br>
+         &emsp;&emsp;• Comprender el funcionamiento de una matriz de botones. Aprender cómo se ahorran pines digitales 
+                       leyendo filas y columnas en lugar de conectar 16 pulsadores independientes.<br>
+         &emsp;&emsp;• Dominar la conversión de tipos de datos. Transformar caracteres individuales (char) recibidos 
+                       del teclado en cadenas de texto (String) y, finalmente, en números enteros (int) para operar 
+                       matemáticamente con ellos.<br>
+         &emsp;&emsp;• Controlar el flujo de un programa. Utilizar bucles condicionales (while) y temporizaciones 
+                       (delay) para ejecutar una cuenta atrás precisa.<br>
+         &emsp;&emsp;• Generar alertas físicas. Combinar señales luminosas (LED) y acústicas (zumbador) para 
+                       comunicarse con el usuario sin necesidad de usar una pantalla.<br>
+     </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Protoboard<br>
+         &emsp;&emsp;(1) x Teclado matricial de membrana 4x4.<br>
+         &emsp;&emsp;(1) x Zumbador<br>
+         &emsp;&emsp;(1) x LED<br>
+         &emsp;&emsp;(1) x Resistencia de 220 Ohm<br>
+         &emsp;&emsp;(x) x M M cables (cables de macho a macho)
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Teclado De Membrana</h3>
+      <p class="texto">
+         El teclado de membrana 4x4 está formado por tres capas de plástico flexible. La capa superior y la inferior 
+         tienen pistas conductoras impresas (filas y columnas), mientras que la capa intermedia actúa como aislante 
+         con agujeros debajo de cada tecla.
+      </p>
+      <p class="img_centrada"><img src="img/tema27/27-1.png" width="50%" alt=""></p>
+      <p class="texto">
+         Efecto interruptor. Al presionar una tecla, las dos láminas conductoras se tocan a través del hueco de la capa 
+         intermedia y cierran el circuito en ese cruce exacto.
+         <br><br>
+         Identificación de pines. Mirando el teclado de frente, los 4 primeros pines de la izquierda corresponden a las 
+         filas (F1–F4) y los 4 de la derecha a las columnas (C1–C4).
+      </p>
+      <p class="img_centrada"><img src="img/tema27/27-2.png" width="50%" alt=""></p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema27/27-3.png" width="70%" alt=""></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema27/27-4.png" width="60%" alt=""></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema27/27-5.png" width="70%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         Para no tener que programar a mano el barrido eléctrico de filas y columnas, utilizamos la librería Keypad.h. 
+         <br><br>
+         A continuación se detallan sus funciones clave y pistas para montar tu propio código.
+      </p>
+      <h3>Entendiendo el Código</h3>
+      <p class="texto">
+      <h4>Declaración y mapeo del teclado</h4>
+      <p class="texto">
+         Antes del setup(), debes indicarle a Arduino qué carácter corresponde a cada cruce de fila y columna mediante 
+         una matriz bidimensional.
+      </p>
+      <p class="codigo">
+         #include <Keypad.h><br>
+         const byte FILAS = 4;<br>
+         const byte COLUMNAS = 4;<br>
+         // 1. Mapa físico de las teclas<br>
+         char teclas[FILAS][COLUMNAS] = {<br>
+         &emsp;{'1','2','3','A'},<br>
+         &emsp;{'4','5','6','B'},<br>
+         &emsp;{'7','8','9','C'},<br>
+         &emsp;{'*','0','#','D'}<br>
+         };<br>
+         // 2. Pines conectados en Arduino<br>
+         byte pinesFilas[FILAS] = {9, 8, 7, 6};<br>
+         byte pinesColumnas[COLUMNAS] = {5, 4, 3, 2};<br>
+         // 3. Llamada al constructor para crear el objeto "teclado"<br>
+         Keypad teclado = Keypad(makeKeymap(teclas), pinesFilas, pinesColumnas, FILAS, COLUMNAS);
+      </p>
+      <p class="texto">
+         <br>
+         makeKeymap(teclas): Traduce tu tabla de caracteres al formato interno que entiende la librería.
+         <br><br>
+         Keypad(...): Crea el objeto teclado configurando internamente los pines de fila como salidas y los de columna 
+         con resistencias pull-up internas.
+         En la función "loop" es donde sucede toda la acción:
+      </p>
+      <h4>Lectura de teclas en el loop()</h4>
+      <p class="texto">
+         Dentro del bucle principal, la función más importante es getKey()
+      </p>
+      <p class="codigo">
+         char tecla = teclado.getKey(); // Revisa si se ha pulsado alguna tecla<br>
+         if (tecla != NO_KEY) <br>
+         {                                  // Si se ha pulsado algo...<br>
+         &emsp;Serial.println(tecla);       // ...lo muestra en pantalla<br>
+         }<br>
+      </p>
+      <p class="texto">
+         <br>
+         Vamos a dar una serie de pistas para que la programacvioón sea más sencilla.
+      </p>
+      <p class="nota">
+         Pista de programación 1 (Acumular cifras). La función getKey() devuelve un solo carácter (char) cada vez. 
+         <br><br>
+         Si quieres escribir 25 segundos, crea una variable de texto String tiempoTexto = ""; y ve sumando cada dígito 
+         pulsado con tiempoTexto += tecla;.
+      </p>
+      <p class="nota">
+         Pista de programación 2 (Filtrar botones). Usa estructuras if / else if para separar qué hace cada tipo de 
+         tecla:
+         <br><br>
+         &emsp;Si tecla >= '0' && tecla <= '9': es un número, añádelo a tu texto.
+         <br><br>
+	      &emsp;Si tecla == '*': borra el texto poniendo tiempoTexto = "";.
+         <br><br>
+	      &emsp;Si tecla == '#': convierte el texto a número con int segundos = tiempoTexto.toInt(); y arranca la cuenta 
+         atrás.
+      </p>
+      <p class="nota">
+         Pista de programación 3 (La cuenta atrás). Crea un bucle while (segundos > 0) que encienda el LED durante 200 
+         ms, lo apague durante 800 ms (sumando 1 segundo exacto) y reste uno a la variable con segundos.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="img/tema27/27-6.png" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <h2>Retos</h2>
+      <p class="texto">
+         Una vez que el temporizador básico funcione, intenta superar estas mejoras de nivel progresivo:
+      </p>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Aviso de últimos segundos (Nivel Fácil). Haz que, cuando queden menos de 5 segundos para terminar, el zumbador 
+         emita un pitido corto (tone(10, 800, 100)) en cada parpadeo del LED para avisar de que el tiempo está a punto 
+         de agotarse.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="img/tema27/27-7.png" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <h3>Reto 2</h3>
+      <p class="texto">
+         Botón de cancelación en marcha (Nivel Medio). Dentro del bucle while de la cuenta atrás, añade una lectura con 
+         teclado.getKey(). 
+         <br><br>
+         Si el usuario pulsa la tecla 'C' mientras el tiempo está corriendo, usa la instrucción break; para abortar el 
+         temporizador al instante.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="img/tema27/27-8.png" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <h3>Reto 3</h3>
+      <p class="texto">
+         Selector de minutos o segundos (Nivel Avanzado). Programa las teclas laterales 'A' y 'B' para elegir la unidad 
+         de tiempo antes de pulsar '#'. 
+         <br><br>
+         Si se pulsa 'A', el número introducido se multiplica por 60 para contar minutos; si se pulsa 'B', cuenta segundos 
+         directamente.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="img/tema27/27-9.png" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <br><br>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>
