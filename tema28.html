@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="styles/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+   <script src="js/scripts.js"></script>
+   <title>Tema 28: Detector De Presencia</title>
+</head>
+<body>
+   <div id="cabecera">
+      <h1>Detector De Presencia</h1>
+   </div>
+   <!-- INICIO_LOADER -->
+   <div id="pageloader">
+      <img src="img/LogoOjo_FTA.png" class="spining" width="100px">
+   </div>
+   <!-- FIN_LOADER -->
+   <div id="contenido">
+      <h2>Objetivos</h2>
+      <p class="texto">
+         El propósito de este proyecto es diseñar y programar un sistema domótico de iluminación automática para una 
+         habitación, capaz de encender una luz al detectar presencia y apagarla automáticamente tras un tiempo para 
+         ahorrar energía.
+         <br><br>
+         &emsp;&emsp;• Comprender el funcionamiento de un sensor PIR. Entender cómo un detector infrarrojo pasivo 
+                       percibe el calor corporal en movimiento sin emitir radiación.<br>
+         &emsp;&emsp;• Gestionar entradas y salidas digitales. Utilizar digitalRead() para leer el estado del sensor y 
+                       digitalWrite() para controlar el encendido de la luz (LED).<br>
+         &emsp;&emsp;• Controlar tiempos de encendido. Programar retardos temporales mediante código para mantener la 
+                       luz activa tras la detección.<br>
+         &emsp;&emsp;• Optimizar la eficiencia energética. Aplicar lógica condicional para evitar el consumo eléctrico 
+                       innecesario en estancias vacías.
+     </p>
+      <h2>Materiales</h2>
+      <p class="texto">
+         &emsp;&emsp;(1) x Placa Arduino<br>
+         &emsp;&emsp;(1) x Protoboard<br>
+         &emsp;&emsp;(1) x Sensor de movimiento PIR HC-SR501<br>
+         &emsp;&emsp;(1) x LED<br>
+         &emsp;&emsp;(1) x Resistencia de 220 Ohm<br>
+         &emsp;&emsp;(x) x M M cables (cables de macho a macho)
+         &emsp;&emsp;(x) x M H cables (cables de macho a hembra)
+         &emsp;&emsp;(1) x Zumbador activo o pasivo<br>
+         &emsp;&emsp;(1) x Fotorresistencia LDR<br>
+         &emsp;&emsp;(1) x Resistencia de 10 KOhm<br>
+      </p>
+      <h2>Introducción a los Componentes</h2>
+      <h3>Detector De Presencia</h3>
+      <p class="texto">
+         El sensor de movimiento PIR HC-SR501 o detector de presencia, es el mismo tipo de detector que llevan las 
+         luces automáticas de portales, garajes y baños públicos.
+      </p>
+      <p class="img_centrada"><img src="img/tema28/28-1.png" width="50%" alt=""></p>
+      <p class="texto">
+         La lente de Fresnel (cúpula blanca). Su superficie facetada concentra los rayos infrarrojos (calor del cuerpo 
+         humano) desde distintos ángulos hacia el sensor piroeléctrico central.
+      </p>
+      <p class="img_centrada"><img src="img/tema28/28-2.png" width="50%" alt=""></p>
+      <p class="texto">
+         Pines de conexión. Mirando la placa por detrás (o quitando la cúpula blanca), encontrarás tres pines: <br>
+         &emsp;&emsp;VCC (alimentación a 5V)<br>
+         &emsp;&emsp;OUT (señal de salida: HIGH si hay movimiento, LOW si no lo hay)<br>
+         &emsp;&emsp;GND (tierra)
+         <br><br>
+         Ajuste de potenciómetros. Incluye dos reguladores naranjas: <br>
+         &emsp;&emsp;Uno ajusta la distancia de detección (de 3 a 7 metros)<br>
+         &emsp;&emsp;El otro, el tiempo interno que el sensor mantiene su salida en HIGH. 
+         <br><br>
+         Para que nuestro programa controle el tiempo exacto, giraremos el potenciómetro de tiempo al mínimo (tope 
+         hacia la izquierda).
+      </p>
+      <p class="img_centrada"><img src="img/tema28/28-3.png" width="50%" alt=""></p>
+      <h2>Esquemas de Conexión</h2>
+      <h3>Esquema Eléctrico</h3>
+      <p class="img_centrada"><img src="img/tema28/28-4.png" width="70%" alt=""></p>
+      <h3>Diagrama Ilustrativo</h3>
+      <p class="img_centrada"><img src="img/tema27/27-5.png" width="60%" alt=""></p>
+      <h3>Imagen de Ejemplo</h3>
+      <p class="img_centrada"><img src="img/tema27/27-6.png" width="70%" alt=""></p>
+      <h2>Código</h2>
+      <p class="texto">
+         El sensor HC-SR501 no necesita librerías. Funciona como un interruptor inteligente: cuando alguien entra en su 
+         campo de visión envía 5V (HIGH) por su pin OUT; cuando todo está quieto envía 0V (LOW).
+      </p>
+      <h3>Entendiendo el Código</h3>
+      <h4>Preparación y calibración en el setup()</h4>
+      <p class="texto">
+         Al darle corriente, el sensor PIR necesita unos segundos para medir la temperatura ambiente de la habitación. 
+         Si no pones este delay(10000) inicial, la luz se encenderá sola nada más conectar el cable USB.
+      </p>
+      <p class="codigo">
+         const int pinPIR = 2;   // Pin de señal del sensor PIR<br>
+         const int pinLuz = 11;  // Pin del LED (luz de la habitación)<br>
+         void setup() <br>
+         {<br>
+         &emsp;pinMode(pinPIR, INPUT);   // El sensor envía datos hacia Arduino<br>
+         &emsp;pinMode(pinLuz, OUTPUT);  // Arduino envía corriente al LED<br>
+         &emsp;Serial.begin(9600); <br>
+         &emsp;// Calibración inicial de 10 segundos<br>
+         &emsp;Serial.println("Calibrando sensor de la habitación...");<br>
+         &emsp;delay(10000);<br>
+         &emsp;Serial.println("Sistema listo.");<br>
+         }
+      </p>
+      <h4>Lectura y encendido temporizado en el loop()</h4>
+      <p class="texto">
+         En una habitación real pondríamos delay(60000) (1 minuto), pero en clase es mejor usar 5000 (5 segundos) para 
+         no perder tiempo esperando en cada prueba.
+         <br><br>
+         Fíjate en qué ocurre si entras a la habitación y sigues moviéndote a los 4 segundos: como Arduino está 
+         "congelado" dentro del delay(5000), la luz se apagará a los 5 segundos igualmente y tardará un instante en 
+         volver a encenderse. Esto lo solucionaremos en el Reto 2.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="img/tema28/28-7.png" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <h2>Retos</h2>
+      <p class="texto">
+         Una vez que la luz automática básica funcione en tu mesa, supera estas tres mejoras progresivas:
+      </p>
+      <h3>Reto 1</h3>
+      <p class="texto">
+         Aviso sonoro antes de quedarse a oscuras. 
+         <br><br>
+         Conecta un zumbador (buzzer) al pin 10. Haz que la luz esté encendida durante 4 segundos normales y, justo 1 
+         segundo antes de apagarse, emita un pitido corto (tone(10, 1000, 150);) seguido de delay(1000) antes de apagar 
+         el LED. Así avisa al usuario de que la luz se va a cortar.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="img/tema28/28-8.png" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <h3>Reto 2</h3>
+      <p class="texto">
+         Luz inteligente que nunca se apaga mientras te mueves.
+         <br><br>
+         Sustituye el delay() bloqueante por la función millis(). Guarda en una variable unsigned long 
+         UltimoMovimiento = millis(); cada vez que digitalRead(pinPIR) == HIGH. Apaga el LED únicamente cuando se 
+         cumpla la condición millis() - ultimoMovimiento >= 5000. 
+         <br><br>
+         De este modo, mientras sigas moviéndote dentro de la habitación, el contador se reiniciará continuamente y nunca te 
+         quedarás a oscuras.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="img/tema28/28-9.png" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <h3>Reto 3</h3>
+      <p class="texto">
+         Ahorro energético con sensor de luz LDR.
+         <br><br>
+         Añade una fotorresistencia (LDR) con una resistencia de 10 kΩ al pin analógico A0. 
+         <br><br>
+         Programa el sistema para que la luz de la habitación solo se encienda si hay movimiento Y además es de noche 
+         (digitalRead(pinPIR) == HIGH && analogRead(A0) < 400). 
+         <br><br>
+         Si entra luz natural por la ventana de la habitación, la bombilla permanecerá apagada aunque entre alguien.
+      </p>
+      <p class="texto">
+         <a class="link_b" href="img/tema28/28-10.png" target="_blank">
+            Ejemplo de Solución
+         </a>
+      </p>
+      <br><br>
+      <a class="texto volver" href="index.html">Volver al índice</a>
+   </div>
+   <div id="pie">
+      <h1> Fun Tech Academy - Calle Alcobendas, 23 Leganés 28914 Madrid - www.funtech.academy </h1>
+	</div>
+</body>
+</html>
